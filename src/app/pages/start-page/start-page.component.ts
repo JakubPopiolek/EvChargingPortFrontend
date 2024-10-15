@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SERVICE_NAME } from '../../config';
+import { SERVICE_NAME } from '../../consts/config';
 
 @Component({
   selector: 'app-start-page',

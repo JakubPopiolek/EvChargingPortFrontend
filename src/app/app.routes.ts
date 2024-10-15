@@ -9,24 +9,17 @@ import { AddressPageComponent } from './pages/address-page/address-page.componen
 import { CheckAnswersPageComponent } from './pages/check-answers-page/check-answers-page.component';
 import { SubmittedPageComponent } from './pages/submitted-page/submitted-page.component';
 import { ServiceUnavailablePageComponent } from './pages/service-unavailable-page/service-unavailable-page.component';
-import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/start', pathMatch: 'full' },
     { path: 'start', component: StartPageComponent },
-    { path: 'vrn', component: VrnPageComponent },
-    { path: 'confirmVehicleDetails', component: ConfirmVehicleDetailsPageComponent },
-    { path: 'notElectricVehicle', component: NotElectricVehiclePageComponent },
-    { path: 'name', component: NamePageComponent },
-    { path: 'email', component: EmailPageComponent },
-    { path: 'address', component: AddressPageComponent },
-    { path: 'checkAnswers', component: CheckAnswersPageComponent },
-    { path: 'submitted', component: SubmittedPageComponent },
-    { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent }
+    // { path: 'vrn', component: VrnPageComponent },
+    // { path: 'confirmVehicleDetails', component: ConfirmVehicleDetailsPageComponent },
+    // { path: 'notElectricVehicle', component: NotElectricVehiclePageComponent },
+    // { path: 'name', component: NamePageComponent },
+    // { path: 'email', component: EmailPageComponent },
+    // { path: 'address', component: AddressPageComponent },
+    // { path: 'checkAnswers', component: CheckAnswersPageComponent },
+    // { path: 'submitted', component: SubmittedPageComponent },
+    // { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent }
 ];
-
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-})
-export class AppRoutingModule { }
