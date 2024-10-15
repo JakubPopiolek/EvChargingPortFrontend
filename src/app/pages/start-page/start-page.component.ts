@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { SERVICE_NAME } from '../../consts/config';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-start-page',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './start-page.component.html',
   styleUrl: './start-page.component.scss'
 })

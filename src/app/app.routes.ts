@@ -13,7 +13,7 @@ import { ServiceUnavailablePageComponent } from './pages/service-unavailable-pag
 export const routes: Routes = [
     { path: '', redirectTo: '/start', pathMatch: 'full' },
     { path: 'start', component: StartPageComponent },
-    // { path: 'vrn', component: VrnPageComponent },
+    { path: 'vrn', component: VrnPageComponent },
     // { path: 'confirmVehicleDetails', component: ConfirmVehicleDetailsPageComponent },
     // { path: 'notElectricVehicle', component: NotElectricVehiclePageComponent },
     // { path: 'name', component: NamePageComponent },
