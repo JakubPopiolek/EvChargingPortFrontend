@@ -1,9 +1,10 @@
 import { Component, Renderer2 } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { AppHeaderComponent } from './shared/app-header/app-header.component';
 import { AppFooterComponent } from './shared/app-footer/app-footer.component';
 import { AppContentWrapperComponent } from './shared/app-content-wrapper/app-content-wrapper.component';
 import { StartPageComponent } from './pages/start-page/start-page.component';
+import { StoreModule } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',

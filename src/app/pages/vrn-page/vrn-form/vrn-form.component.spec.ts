@@ -10,8 +10,8 @@ describe('VrnFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [VrnFormComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(VrnFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +20,8 @@ describe('VrnFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should error when VRN is empty', () => {
+
+  })
 });
