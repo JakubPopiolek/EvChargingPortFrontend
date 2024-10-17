@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
 import { SERVICE_NAME } from '../../consts/config';
-import { RouterSelector } from '../../core/state/store/selectors/router.selector';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-start-page',
-  providers: [RouterSelector],
+  providers: [],
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './start-page.component.html',
   styleUrl: './start-page.component.scss'
 })
 export class StartPageComponent {
   serviceName: string = SERVICE_NAME;
 
-  constructor(private readonly routerSelector: RouterSelector) { }
+  constructor() { }
 
-  public continueClick() {
-    this.routerSelector.Vrn();
-  }
 }
