@@ -36,7 +36,9 @@ export function storageSyncReducer(
   reducer: ActionReducer<State>
 ): ActionReducer<State> {
   const metaReducer = storageSync<State>({
-    features: [{ stateKey: 'user', storageForFeature: window.sessionStorage }],
+    features: [
+      { stateKey: 'vehicleDetails', storageForFeature: window.sessionStorage },
+    ],
     storage: window.localStorage,
   });
 

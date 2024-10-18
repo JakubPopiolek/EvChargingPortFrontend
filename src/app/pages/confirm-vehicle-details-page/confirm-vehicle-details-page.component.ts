@@ -21,6 +21,5 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
     this.store.select(getVehicleDetails).subscribe((vehicleDetailsState) => {
       this.vehicleDetails = vehicleDetailsState.vehicleDetails;
     });
-    console.log(this.vehicleDetails);
   }
 }
