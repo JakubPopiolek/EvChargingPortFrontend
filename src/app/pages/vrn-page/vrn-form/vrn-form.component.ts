@@ -2,6 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { getVehicleDetails } from '../../../core/state/store/selectors/vehicleEnquiryService.selector';
+import { vehicleDetailsState } from '../../../core/state/store/reducers/vehicleEnquiryService.reducer';
+import { VehicleEnquiryServiceResponse } from '../../../core/interfaces/VehicleEnquiryServiceResponse.interface';
+import * as fromVehicleEnquiryServiceActions from '../../../core/state/store/actions/vehicleEnquiryService.actions';
+import { ApiVehicleEnquiryService } from '../../../core/services/api/vehicle-enquiry-service';
 
 @Component({
   selector: 'app-vrn-form',
@@ -11,12 +17,18 @@ import { Router } from '@angular/router';
   styleUrl: './vrn-form.component.scss',
 })
 export class VrnFormComponent {
-  vrn = new FormControl('', [Validators.required]);
-  isValid = true;
+  public vrn = new FormControl('', [Validators.required]);
+  public isValid = true;
+  public vehicleDetails?: vehicleDetailsState;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private readonly store: Store) {}
 
   public onClick() {
+    this.store.dispatch(
+      fromVehicleEnquiryServiceActions.GetVehicleDetails({
+        vehicleRegistrationNumber: this.vrn.value!,
+      })
+    );
     if (this.vrn.valid) {
       this.router.navigate(['/confirmVehicleDetails']);
     } else {
