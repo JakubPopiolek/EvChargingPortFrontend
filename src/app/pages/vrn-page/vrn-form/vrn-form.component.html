@@ -1,20 +1,37 @@
 <form name="vrnForm">
-    <fieldset class="govuk-fieldset">
-        <div [ngClass]="{'govuk-form-group--error': !isValid}" class="govuk-form-group">
-            <label class="govuk-label" for="vehicle_reg_number">
-                Registration number (number plate)
-            </label>
-            <div id="input-hint" class="govuk-hint">
-                For example, CU57ABC
-            </div>
-            <p [style.display]="isValid? 'none' : 'block'" id="address-postcode-error" class="govuk-error-message">
-                Enter vehicle registration number
-            </p>
-            <input [ngClass]="{'govuk-input--error': !isValid}" [formControl]="vrn" name="vehicle-reg-number"
-                class="govuk-input govuk-input--width-10" maxlength="8" autocomplete="off" type="text" />
-        </div>
-    </fieldset>
-    <button (click)="onClick()" type="button" class="govuk-button" data-module="govuk-button">
-        Continue
-    </button>
+  <fieldset class="govuk-fieldset">
+    <div
+      [ngClass]="{ 'govuk-form-group--error': !isValid }"
+      class="govuk-form-group"
+    >
+      <label class="govuk-label" for="vehicle_reg_number">
+        Registration number (number plate)
+      </label>
+      <div id="input-hint" class="govuk-hint">For example, CU57ABC</div>
+      <p
+        [style.display]="isValid ? 'none' : 'block'"
+        id="address-postcode-error"
+        class="govuk-error-message"
+      >
+        Enter vehicle registration number
+      </p>
+      <input
+        [ngClass]="{ 'govuk-input--error': !isValid }"
+        [formControl]="vrn"
+        name="vehicle-reg-number"
+        class="govuk-input govuk-input--width-10"
+        maxlength="8"
+        autocomplete="off"
+        type="text"
+      />
+    </div>
+  </fieldset>
+  <button
+    (click)="onClick()"
+    type="button"
+    class="govuk-button"
+    data-module="govuk-button"
+  >
+    Continue
+  </button>
 </form>

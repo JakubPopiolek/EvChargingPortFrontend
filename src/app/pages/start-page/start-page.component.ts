@@ -8,11 +8,10 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './start-page.component.html',
-  styleUrl: './start-page.component.scss'
+  styleUrl: './start-page.component.scss',
 })
 export class StartPageComponent {
   serviceName: string = SERVICE_NAME;
 
-  constructor() { }
-
+  constructor() {}
 }

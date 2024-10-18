@@ -8,24 +8,19 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './vrn-form.component.html',
-  styleUrl: './vrn-form.component.scss'
+  styleUrl: './vrn-form.component.scss',
 })
-
-
 export class VrnFormComponent {
-
   vrn = new FormControl('', [Validators.required]);
   isValid = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   public onClick() {
     if (this.vrn.valid) {
       this.router.navigate(['/confirmVehicleDetails']);
-    }
-    else {
+    } else {
       this.isValid = false;
     }
   }
 }
-
