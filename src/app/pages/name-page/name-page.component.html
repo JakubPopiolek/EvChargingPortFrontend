@@ -1,1 +1,65 @@
-<p>name-page works!</p>
+<a routerLink="/confirmVehicleDetails" class="govuk-back-link">Back</a>
+<legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+  <h1 class="govuk-fieldset__heading">What is your name?</h1>
+</legend>
+<form [formGroup]="nameForm" class="form">
+  <div
+    [ngClass]="{ 'govuk-form-group--error': !firstNameValid }"
+    id="first-name-input"
+    class="govuk-form-group"
+  >
+    <label class="govuk-label" for="first-name"> First name </label>
+    <p
+      [style.display]="firstNameValid ? 'none' : 'block'"
+      id="first-name-error"
+      class="govuk-error-message"
+    >
+      <span class="govuk-visually-hidden">Error:</span> Enter your first name
+    </p>
+    <input
+      [ngClass]="{ 'govuk-input--error': !firstNameValid }"
+      formControlName="firstName"
+      class="govuk-input govuk-input--width-10"
+      id="first-name"
+      name="firstName"
+      type="text"
+      spellcheck="false"
+      autocomplete="given-name"
+    />
+    <br />
+  </div>
+  <div
+    [ngClass]="{ 'govuk-form-group--error': !lastNameValid }"
+    id="last-name-input"
+    class="govuk-form-group"
+  >
+    <label class="govuk-label" for="last-name"> Last name </label>
+    <p
+      [style.display]="lastNameValid ? 'none' : 'block'"
+      style="display: none"
+      id="last-name-error"
+      class="govuk-error-message"
+    >
+      <span class="govuk-visually-hidden">Error:</span> Enter your last name
+    </p>
+    <input
+      [ngClass]="{ 'govuk-input--error': !lastNameValid }"
+      formControlName="lastName"
+      class="govuk-input govuk-input--width-10"
+      id="last-name"
+      name="lastName"
+      type="text"
+      spellcheck="false"
+      autocomplete="family-name"
+    />
+  </div>
+
+  <button
+    (click)="onClick()"
+    type="button"
+    class="govuk-button"
+    data-module="govuk-button"
+  >
+    Continue
+  </button>
+</form>

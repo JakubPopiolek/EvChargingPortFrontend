@@ -14,12 +14,12 @@ export class ApiVehicleEnquiryService {
     registrationNumber: string
   ): Observable<VehicleEnquiryServiceResponse> {
     //ELECTRIC
-    // const mockResponse: VehicleEnquiryServiceResponse =
-    //   ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
+    const mockResponse: VehicleEnquiryServiceResponse =
+      ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
 
     //PETROL
-    const mockResponse: VehicleEnquiryServiceResponse =
-      ApiVehicleDetailsResponseDouble.prepareSuccessfulResultPetrol();
+    // const mockResponse: VehicleEnquiryServiceResponse =
+    //   ApiVehicleDetailsResponseDouble.prepareSuccessfulResultPetrol();
 
     return of(mockResponse);
 

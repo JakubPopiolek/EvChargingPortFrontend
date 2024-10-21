@@ -8,3 +8,5 @@ export const getVehicleDetails = createSelector(
   getVehicleDetailsState,
   (store: vehicleDetailsState) => store
 );
+
+// export const select

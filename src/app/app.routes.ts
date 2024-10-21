@@ -20,7 +20,7 @@ export const routes: Routes = [
   },
   { path: 'notElectricVehicle', component: NotElectricVehiclePageComponent },
   { path: 'name', component: NamePageComponent },
-  // { path: 'email', component: EmailPageComponent },
+  { path: 'email', component: EmailPageComponent },
   // { path: 'address', component: AddressPageComponent },
   // { path: 'checkAnswers', component: CheckAnswersPageComponent },
   // { path: 'submitted', component: SubmittedPageComponent },

@@ -16,7 +16,7 @@ import { getVehicleDetails } from '../../../core/state/store/selectors/api/vehic
 })
 export class VrnFormComponent implements OnInit {
   public vrn = new FormControl('', [Validators.required]);
-  public isValid = true;
+  public isValid: boolean = true;
   public vehicleDetailsState?: vehicleDetailsState;
 
   constructor(private router: Router, private readonly store: Store) {}
