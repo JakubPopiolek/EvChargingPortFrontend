@@ -1,53 +1,58 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ModuleWithProviders } from '@angular/core';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { storageSync } from '@larscom/ngrx-store-storagesync';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { MetaReducer, StoreModule, ActionReducer } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../../environments/environment';
-import { RouterEffects } from './store/effects/router.effects';
-import { AppState, reducers } from './store/reducers/app.reducer';
+import * as fromVehicleEnquiryServiceReducer from './store/reducers/api/vehicleEnquiryService.reducer';
+
+export interface State {
+  vehicleDetails: fromVehicleEnquiryServiceReducer.vehicleDetailsState;
+}
+
+export const reducers: ActionReducerMap<State> = {
+  vehicleDetails: fromVehicleEnquiryServiceReducer.vehicleEnquiryServiceReducer,
+};
 
 const devTools: ModuleWithProviders<any>[] = [
-    StoreDevtoolsModule.instrument({
-        maxAge: 10,
-        logOnly: environment.production,
-    }),
+  StoreDevtoolsModule.instrument({
+    maxAge: 10,
+    logOnly: environment.production,
+  }),
 ];
 
 export function storageSyncReducer(
-    reducer: ActionReducer<AppState>
-): ActionReducer<AppState> {
-    const metaReducer = storageSync<AppState>({
-        features: [{ stateKey: 'user', storageForFeature: window.sessionStorage }],
-        storage: window.localStorage,
-    });
+  reducer: ActionReducer<State>
+): ActionReducer<State> {
+  const metaReducer = storageSync<State>({
+    features: [
+      { stateKey: 'vehicleDetails', storageForFeature: window.localStorage },
+    ],
+    storage: window.localStorage,
+  });
 
-    return metaReducer(reducer);
+  return metaReducer(reducer);
 }
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
-    ? [storeFreeze, storageSyncReducer]
-    : [storageSyncReducer];
+  ? [storeFreeze, storageSyncReducer]
+  : [storageSyncReducer];
 
 export const StoreDevTools: ModuleWithProviders<any>[] = !environment.production
-    ? devTools
-    : [];
+  ? devTools
+  : [];
 
 @NgModule({
-    declarations: [],
-    imports: [
-        CommonModule,
-        HttpClientModule,
-        StoreRouterConnectingModule.forRoot(),
-        StoreModule.forRoot(reducers, { metaReducers }),
-        EffectsModule.forRoot([RouterEffects]),
-        ...StoreDevTools,
-    ],
-    providers: [],
+  declarations: [],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    StoreRouterConnectingModule.forRoot(),
+    ...StoreDevTools,
+  ],
+  providers: [],
 })
-export class StateModule { }
+export class StateModule {}

@@ -1,16 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterSelector } from './state/store/selectors/router.selector';
+import { NgModule } from '@angular/core';
 import { RoutingService } from './services/routing';
 import { StateModule } from './state/state.module';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule, StateModule],
-  providers: [
-    RouterSelector,
-    RoutingService,
-  ],
+  providers: [RoutingService],
   exports: [],
 })
-export class CoreModule { }
+export class CoreModule {}

@@ -11,15 +11,18 @@ import { SubmittedPageComponent } from './pages/submitted-page/submitted-page.co
 import { ServiceUnavailablePageComponent } from './pages/service-unavailable-page/service-unavailable-page.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/start', pathMatch: 'full' },
-    { path: 'start', component: StartPageComponent },
-    { path: 'vrn', component: VrnPageComponent },
-    { path: 'confirmVehicleDetails', component: ConfirmVehicleDetailsPageComponent },
-    // { path: 'notElectricVehicle', component: NotElectricVehiclePageComponent },
-    // { path: 'name', component: NamePageComponent },
-    // { path: 'email', component: EmailPageComponent },
-    // { path: 'address', component: AddressPageComponent },
-    // { path: 'checkAnswers', component: CheckAnswersPageComponent },
-    // { path: 'submitted', component: SubmittedPageComponent },
-    // { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent }
+  { path: '', redirectTo: '/start', pathMatch: 'full' },
+  { path: 'start', component: StartPageComponent },
+  { path: 'vrn', component: VrnPageComponent },
+  {
+    path: 'confirmVehicleDetails',
+    component: ConfirmVehicleDetailsPageComponent,
+  },
+  { path: 'notElectricVehicle', component: NotElectricVehiclePageComponent },
+  { path: 'name', component: NamePageComponent },
+  // { path: 'email', component: EmailPageComponent },
+  // { path: 'address', component: AddressPageComponent },
+  // { path: 'checkAnswers', component: CheckAnswersPageComponent },
+  // { path: 'submitted', component: SubmittedPageComponent },
+  // { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent }
 ];
