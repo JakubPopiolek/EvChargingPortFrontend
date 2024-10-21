@@ -6,6 +6,7 @@ import { vehicleDetailsState } from '../../core/state/store/reducers/api/vehicle
 import { getVehicleDetails } from '../../core/state/store/selectors/api/vehicleEnquiryService.selector';
 import { ApiVehicleDetailsResponseDouble } from '../../core/testing/doubles/api/vehicle-details-result.double';
 import { ConfirmVehicleDetailsPageComponent } from './confirm-vehicle-details-page.component';
+import { fuelType } from '../../core/enums/fuelType.enum';
 
 describe('ConfirmVehicleDetailsPageComponent', () => {
   let component: ConfirmVehicleDetailsPageComponent;
@@ -80,7 +81,10 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
   it('should route to not electric vehicle page when continue button is clicked, yes is selected and vehicle is not electric', () => {
     const petrolVehicleMock = {
       ...mockState,
-      vehicleDetails: { ...mockState.vehicleDetails!, fuelType: 'petrol' },
+      vehicleDetails: {
+        ...mockState.vehicleDetails!,
+        fuelType: fuelType.PETROL,
+      },
     };
     mockVehicleDetailsSelector.setResult(petrolVehicleMock);
     store.refreshState();
