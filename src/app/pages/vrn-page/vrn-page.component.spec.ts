@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { VrnPageComponent } from './vrn-page.component';
 import { Router, RouterModule } from '@angular/router';
 import { ApiVehicleDetailsResponseDouble } from '../../core/testing/doubles/api/vehicle-details-result.double';
-import { SessionUtils } from '../../core/state/utils/session.utils';
 import { provideMockStore } from '@ngrx/store/testing';
 
 describe('VrnPageComponent', () => {
@@ -15,9 +14,6 @@ describe('VrnPageComponent', () => {
     ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
 
   beforeEach(async () => {
-    spyOn(SessionUtils, 'getVehicleDetails').and.returnValue(() => {
-      vehicleDetails;
-    });
     await TestBed.configureTestingModule({
       imports: [VrnPageComponent, RouterModule.forRoot([])],
       providers: [provideMockStore()],
