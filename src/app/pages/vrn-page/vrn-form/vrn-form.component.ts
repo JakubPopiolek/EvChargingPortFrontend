@@ -30,7 +30,7 @@ export class VrnFormComponent implements OnInit {
   public onClick() {
     this.store.dispatch(
       fromVehicleEnquiryServiceActions.GetVehicleDetails({
-        vehicleRegistrationNumber: this.vrn.value!,
+        vehicleRegistrationNumber: this.vrn.value ? this.vrn.value : '',
       })
     );
     if (this.vrn.valid) {
