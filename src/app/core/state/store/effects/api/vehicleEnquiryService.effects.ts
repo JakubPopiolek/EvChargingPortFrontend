@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ApiVehicleEnquiryService } from '../../../services/api/vehicle-enquiry-service';
-import * as fromVehicleEnquiryServiceActions from '../actions/vehicleEnquiryService.actions';
-import { VehicleEnquiryServiceResponse } from '../../../interfaces/VehicleEnquiryServiceResponse.interface';
+import * as fromVehicleEnquiryServiceActions from '../../actions/api/vehicleEnquiryService.actions';
 import { catchError, exhaustMap, map, of } from 'rxjs';
+import { ApiVehicleEnquiryService } from '../../../../services/api/vehicle-enquiry-service';
+import { VehicleEnquiryServiceResponse } from '../../../../interfaces/VehicleEnquiryServiceResponse.interface';
 
 @Injectable()
 export class VehicleEnquiryServiceEffects {

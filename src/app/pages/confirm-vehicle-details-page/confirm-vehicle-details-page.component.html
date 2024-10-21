@@ -6,9 +6,8 @@
         Is this the vehicle you are applying for?
       </h1>
     </legend>
-    <form class="form" method="post" action="confirmVehicleDetails">
+    <form class="form">
       <table class="govuk-table">
-        <!-- <caption class="govuk-table__caption govuk-table__caption--m">Registration number</caption> -->
         <tbody class="govuk-table__body">
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header">Registration number</th>
@@ -33,11 +32,20 @@
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
           <div
+            [ngClass]="{ 'govuk-form-group--error': !isValid }"
             class="govuk-radios govuk-radios--inline"
             data-module="govuk-radios"
           >
+            <p
+              [style.display]="isValid ? 'none' : 'block'"
+              id="address-postcode-error"
+              class="govuk-error-message"
+            >
+              Confirm if your vehicle details are correct
+            </p>
             <div class="govuk-radios__item">
               <input
+                [formControl]="confirmVehicleDetails"
                 class="govuk-radios__input"
                 id="yesVehicleConfirm"
                 name="vehicleConfirm"
@@ -53,6 +61,7 @@
             </div>
             <div class="govuk-radios__item">
               <input
+                [formControl]="confirmVehicleDetails"
                 class="govuk-radios__input"
                 id="noVehicleConfirm"
                 name="vehicleConfirm"
@@ -69,7 +78,12 @@
           </div>
         </fieldset>
       </div>
-      <button type="submit" class="govuk-button" data-module="govuk-button">
+      <button
+        (click)="onClick()"
+        type="button"
+        class="govuk-button"
+        data-module="govuk-button"
+      >
         Continue
       </button>
     </form>

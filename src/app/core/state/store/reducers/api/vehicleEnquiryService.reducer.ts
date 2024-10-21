@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { VehicleEnquiryServiceResponse } from '../../../interfaces/VehicleEnquiryServiceResponse.interface';
-import * as fromVehicleEnquiryServiceActions from '../actions/vehicleEnquiryService.actions';
+import { VehicleEnquiryServiceResponse } from '../../../../interfaces/VehicleEnquiryServiceResponse.interface';
+import * as fromVehicleEnquiryServiceActions from '../../actions/api/vehicleEnquiryService.actions';
 
 export interface vehicleDetailsState {
   vehicleDetails?: VehicleEnquiryServiceResponse;

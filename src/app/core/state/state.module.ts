@@ -1,21 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ModuleWithProviders } from '@angular/core';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { storageSync } from '@larscom/ngrx-store-storagesync';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import {
-  MetaReducer,
-  StoreModule,
-  ActionReducer,
-  ActionReducerMap,
-} from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../../environments/environment';
-import * as fromVehicleEnquiryServiceReducer from './store/reducers/vehicleEnquiryService.reducer';
-import { VehicleEnquiryServiceEffects } from './store/effects/vehicleEnquiryService.effects';
+import * as fromVehicleEnquiryServiceReducer from './store/reducers/api/vehicleEnquiryService.reducer';
 
 export interface State {
   vehicleDetails: fromVehicleEnquiryServiceReducer.vehicleDetailsState;
@@ -37,7 +29,7 @@ export function storageSyncReducer(
 ): ActionReducer<State> {
   const metaReducer = storageSync<State>({
     features: [
-      { stateKey: 'vehicleDetails', storageForFeature: window.sessionStorage },
+      { stateKey: 'vehicleDetails', storageForFeature: window.localStorage },
     ],
     storage: window.localStorage,
   });
@@ -59,8 +51,6 @@ export const StoreDevTools: ModuleWithProviders<any>[] = !environment.production
     CommonModule,
     HttpClientModule,
     StoreRouterConnectingModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([VehicleEnquiryServiceEffects]),
     ...StoreDevTools,
   ],
   providers: [],

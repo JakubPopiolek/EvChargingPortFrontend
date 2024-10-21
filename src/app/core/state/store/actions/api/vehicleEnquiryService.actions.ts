@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { VehicleEnquiryServiceResponse } from '../../../interfaces/VehicleEnquiryServiceResponse.interface';
+import { VehicleEnquiryServiceResponse } from '../../../../interfaces/VehicleEnquiryServiceResponse.interface';
 
 export enum ActionType {
   GET_VEHICLE_DETAILS = '[VehicleEnquiryService] Get vehicle details',
