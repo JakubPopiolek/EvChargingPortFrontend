@@ -13,9 +13,16 @@ export class ApiVehicleEnquiryService {
   public getByRegNumber(
     registrationNumber: string
   ): Observable<VehicleEnquiryServiceResponse> {
+    //ELECTRIC
+    // const mockResponse: VehicleEnquiryServiceResponse =
+    //   ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
+
+    //PETROL
     const mockResponse: VehicleEnquiryServiceResponse =
-      ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
+      ApiVehicleDetailsResponseDouble.prepareSuccessfulResultPetrol();
+
     return of(mockResponse);
+
     // return this.http.get<VehicleEnquiryServiceResponse>(
     //   'api/VehicleEnquiryService/',
     //   { params: { registrationNumber: registrationNumber } }

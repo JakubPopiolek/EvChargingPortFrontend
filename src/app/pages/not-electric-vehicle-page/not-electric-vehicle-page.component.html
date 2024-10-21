@@ -1,1 +1,19 @@
-<p>not-electric-vehicle-page works!</p>
+<a routerLink="/confirmVehicleDetails" class="govuk-back-link">Back</a>
+<legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+  <h1 class="govuk-fieldset__heading">
+    The vehicle you have entered is not an electric vehicle
+  </h1>
+</legend>
+<p class="govuk-body">
+  You must provide a valid vehicle registration number of an electric vehicle.
+</p>
+<form class="form">
+  <button
+    (click)="onClick()"
+    type="button"
+    class="govuk-button"
+    data-module="govuk-button"
+  >
+    Continue
+  </button>
+</form>

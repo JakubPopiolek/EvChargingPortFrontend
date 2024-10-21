@@ -31,5 +31,9 @@ export const vehicleEnquiryServiceReducer = createReducer(
       isLoadingSuccess: true,
       isLoadingFailure: false,
     })
-  )
+  ),
+  on(fromVehicleEnquiryServiceActions.ClearVehicleDetails, (state) => ({
+    ...state,
+    vehicleDetails: undefined,
+  }))
 );
