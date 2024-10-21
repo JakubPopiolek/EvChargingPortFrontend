@@ -30,7 +30,7 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ConfirmVehicleDetailsPageComponent, RouterModule.forRoot([])],
-      providers: [provideMockStore({ initialState: mockState })],
+      providers: [provideMockStore({})],
     }).compileComponents();
 
     router = TestBed.inject(Router);

@@ -29,7 +29,7 @@ export function storageSyncReducer(
 ): ActionReducer<State> {
   const metaReducer = storageSync<State>({
     features: [
-      { stateKey: 'vehicleDetails', storageForFeature: window.localStorage },
+      { stateKey: 'vehicleDetails', storageForFeature: window.sessionStorage },
     ],
     storage: window.localStorage,
   });
