@@ -1,17 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VrnPageComponent } from './vrn-page.component';
 import { Router, RouterModule } from '@angular/router';
-import { ApiVehicleDetailsResponseDouble } from '../../core/testing/doubles/api/vehicle-details-result.double';
 import { provideMockStore } from '@ngrx/store/testing';
+import { VrnPageComponent } from './vrn-page.component';
 
 describe('VrnPageComponent', () => {
   let component: VrnPageComponent;
   let fixture: ComponentFixture<VrnPageComponent>;
   let router: Router;
-
-  const vehicleDetails =
-    ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

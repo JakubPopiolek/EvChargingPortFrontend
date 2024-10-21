@@ -3,15 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { VrnFormComponent } from './vrn-form.component';
 import { Router } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
-import { ApiVehicleDetailsResponseDouble } from '../../../core/testing/doubles/api/vehicle-details-result.double';
 
 describe('VrnFormComponent', () => {
   let component: VrnFormComponent;
   let fixture: ComponentFixture<VrnFormComponent>;
   let router: Router;
-
-  const vehicleDetails =
-    ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -34,14 +30,17 @@ describe('VrnFormComponent', () => {
   });
 
   it('should display error when vrn input is empty', () => {
+    component.vrn.setValue('');
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const inputBox =
       fixture.debugElement.nativeElement.querySelector('.govuk-input');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
       '.govuk-error-message'
     );
+
     btn.click();
     fixture.detectChanges();
+
     expect(component.isValid).toBe(false);
     expect(inputBox).toHaveClass('govuk-input--error');
     expect(errorMessage.style.display).toBe('block');
@@ -52,7 +51,9 @@ describe('VrnFormComponent', () => {
     const spy = spyOn(router, 'navigate');
     component.vrn.setValue('test');
     fixture.detectChanges();
+
     btn.click();
+
     expect(component.isValid).toBe(true);
     expect(spy).toHaveBeenCalledWith(['/confirmVehicleDetails']);
   });
