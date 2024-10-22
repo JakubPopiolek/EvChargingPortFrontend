@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { StartPageComponent } from './pages/start-page/start-page.component';
 import { VrnPageComponent } from './pages/vrn-page/vrn-page.component';
 import { ConfirmVehicleDetailsPageComponent } from './pages/confirm-vehicle-details-page/confirm-vehicle-details-page.component';
@@ -11,7 +11,7 @@ import { SubmittedPageComponent } from './pages/submitted-page/submitted-page.co
 import { ServiceUnavailablePageComponent } from './pages/service-unavailable-page/service-unavailable-page.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/start', pathMatch: 'full' },
+  { path: '', redirectTo: 'start', pathMatch: 'full' },
   { path: 'start', component: StartPageComponent },
   { path: 'vrn', component: VrnPageComponent },
   {

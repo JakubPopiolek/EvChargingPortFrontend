@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +9,11 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromPersonalDetailsActions from '../../core/state/store/actions/personalDetails.actions';
+import {
+  selectFirstName,
+  selectLastName,
+  selectPersonalDetailsState,
+} from '../../core/state/store/reducers/personalDetails.reducer';
 
 @Component({
   selector: 'app-name-page',
@@ -17,16 +22,22 @@ import * as fromPersonalDetailsActions from '../../core/state/store/actions/pers
   templateUrl: './name-page.component.html',
   styleUrl: './name-page.component.scss',
 })
-export class NamePageComponent {
+export class NamePageComponent implements OnInit {
   constructor(private readonly router: Router, private readonly store: Store) {}
 
-  public formIsValid: boolean = true;
   public firstNameValid?: boolean = true;
   public lastNameValid?: boolean = true;
   public nameForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
   });
+
+  public ngOnInit(): void {
+    this.store.select(selectPersonalDetailsState).subscribe((details) => {
+      this.nameForm.get('firstName')?.patchValue(details.firstName);
+      this.nameForm.get('lastName')?.patchValue(details.lastName);
+    });
+  }
 
   public onClick() {
     if (this.nameForm.valid) {

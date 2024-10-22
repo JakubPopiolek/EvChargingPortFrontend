@@ -2,12 +2,23 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VrnFormComponent } from './vrn-form.component';
 import { Router } from '@angular/router';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { MemoizedSelector } from '@ngrx/store';
+import { VehicleDetails } from '../../../core/interfaces/VehicleDetails.interface';
+import { selectVehicleDetails } from '../../../core/state/store/reducers/api/vehicleDetailsService.reducer';
+import { ApiVehicleDetailsDouble } from '../../../core/testing/doubles/api/vehicle-details-result.double';
 
 describe('VrnFormComponent', () => {
   let component: VrnFormComponent;
   let fixture: ComponentFixture<VrnFormComponent>;
   let router: Router;
+  let mockVehicleDetailsSelector: MemoizedSelector<
+    VehicleDetails,
+    VehicleDetails | undefined
+  >;
+  let store: MockStore;
+  const mockVehiceDetails =
+    ApiVehicleDetailsDouble.prepareSuccessfulResultElectric();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -15,9 +26,14 @@ describe('VrnFormComponent', () => {
       providers: [provideMockStore()],
     }).compileComponents();
 
+    router = TestBed.inject(Router);
+    store = TestBed.inject(MockStore);
+    mockVehicleDetailsSelector = store.overrideSelector(
+      selectVehicleDetails,
+      mockVehiceDetails
+    );
     fixture = TestBed.createComponent(VrnFormComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -55,6 +71,13 @@ describe('VrnFormComponent', () => {
     btn.click();
 
     expect(component.isValid).toBe(true);
-    expect(spy).toHaveBeenCalledWith(['/confirmVehicleDetails']);
+    expect(spy).toHaveBeenCalledWith(['confirmVehicleDetails']);
+  });
+
+  it('should fill vrn box when values are present in store', () => {
+    const vrnInputBox =
+      fixture.debugElement.nativeElement.querySelector('.govuk-input');
+
+    expect(vrnInputBox.value).toBe(mockVehiceDetails.registrationNumber);
   });
 });

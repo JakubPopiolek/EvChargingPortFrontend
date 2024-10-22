@@ -1,7 +1,7 @@
 import { fuelType } from '../../../enums/fuelType.enum';
 import { VehicleDetails } from '../../../interfaces/VehicleDetails.interface';
 
-export class ApiVehicleDetailsResponseDouble {
+export class ApiVehicleDetailsDouble {
   public static prepareSuccessfulResultElectric(): VehicleDetails {
     return {
       colour: 'grey',

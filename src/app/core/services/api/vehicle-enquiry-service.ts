@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ApiVehicleDetailsResponseDouble } from '../../testing/doubles/api/vehicle-details-result.double';
 import { VehicleDetails } from '../../interfaces/VehicleDetails.interface';
+import { ApiVehicleDetailsDouble } from '../../testing/doubles/api/vehicle-details-result.double';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class ApiVehicleEnquiryService {
   ): Observable<VehicleDetails> {
     //ELECTRIC
     const mockResponse: VehicleDetails =
-      ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
+      ApiVehicleDetailsDouble.prepareSuccessfulResultElectric();
 
     //PETROL
     // const mockResponse: VehicleEnquiryServiceResponse =

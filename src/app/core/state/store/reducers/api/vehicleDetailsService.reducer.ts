@@ -9,14 +9,14 @@ export interface VehicleDetailsState {
   isLoadingFailure: boolean;
 }
 
-const initialVehicleDetailsState: VehicleDetailsState = {
+export const initialVehicleDetailsState: VehicleDetailsState = {
   vehicleDetails: undefined,
   isLoading: false,
   isLoadingSuccess: false,
   isLoadingFailure: false,
 };
 
-export const vehicleDetailsReducer = createReducer(
+const vehicleDetailsReducer = createReducer(
   initialVehicleDetailsState,
   on(fromVehicleEnquiryServiceActions.GetVehicleDetails, (state) => ({
     ...state,

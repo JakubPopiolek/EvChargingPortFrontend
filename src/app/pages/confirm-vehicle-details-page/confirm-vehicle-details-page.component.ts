@@ -24,7 +24,6 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.store.select(selectVehicleDetails).subscribe((vehicleDetails) => {
-      console.log(vehicleDetails);
       this.vehicleDetails = vehicleDetails;
     });
   }

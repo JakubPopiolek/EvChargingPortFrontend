@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, RouterModule } from '@angular/router';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { ApiVehicleDetailsResponseDouble } from '../../core/testing/doubles/api/vehicle-details-result.double';
 import { ConfirmVehicleDetailsPageComponent } from './confirm-vehicle-details-page.component';
 import { fuelType } from '../../core/enums/fuelType.enum';
 import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
+import { ApiVehicleDetailsDouble } from '../../core/testing/doubles/api/vehicle-details-result.double';
 
 describe('ConfirmVehicleDetailsPageComponent', () => {
   let component: ConfirmVehicleDetailsPageComponent;
@@ -20,7 +20,7 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
   >;
   beforeEach(async () => {
     (mockVehiceDetails =
-      ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric()),
+      ApiVehicleDetailsDouble.prepareSuccessfulResultElectric()),
       await TestBed.configureTestingModule({
         imports: [ConfirmVehicleDetailsPageComponent, RouterModule.forRoot([])],
         providers: [provideMockStore({})],

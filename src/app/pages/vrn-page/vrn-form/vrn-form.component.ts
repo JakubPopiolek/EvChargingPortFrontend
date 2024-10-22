@@ -44,7 +44,7 @@ export class VrnFormComponent implements OnInit {
       })
     );
     if (this.vrn.valid) {
-      this.router.navigate(['/confirmVehicleDetails']);
+      this.router.navigate(['confirmVehicleDetails']);
     } else {
       this.isValid = false;
     }
