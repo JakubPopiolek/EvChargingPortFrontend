@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotElectricVehiclePageComponent } from './not-electric-vehicle-page.component';
 import { Store, StoreModule } from '@ngrx/store';
 import { Router, RouterModule } from '@angular/router';
-import { ClearVehicleDetails } from '../../core/state/store/actions/api/vehicleEnquiryService.actions';
+import { ClearVehicleDetails } from '../../core/state/store/actions/api/vehicleDetailsService.actions';
 
 describe('NotElectricVehiclePageComponent', () => {
   let component: NotElectricVehiclePageComponent;

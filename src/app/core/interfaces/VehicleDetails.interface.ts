@@ -1,4 +1,4 @@
-export interface VehicleEnquiryServiceResponse {
+export interface VehicleDetails {
   colour: string;
   fuelType: string;
   make: string;

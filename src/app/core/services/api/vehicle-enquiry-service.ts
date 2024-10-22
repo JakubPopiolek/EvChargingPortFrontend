@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { VehicleEnquiryServiceResponse } from '../../interfaces/VehicleEnquiryServiceResponse.interface';
-import { ApiVehicleDetailsResponseDouble } from '../../testing/doubles/api/vehicle-details-result.double';
+import { VehicleDetails } from '../../interfaces/VehicleDetails.interface';
+import { ApiVehicleDetailsDouble } from '../../testing/doubles/api/vehicle-details-result.double';
 
 @Injectable({
   providedIn: 'root',
@@ -12,14 +12,14 @@ export class ApiVehicleEnquiryService {
 
   public getByRegNumber(
     registrationNumber: string
-  ): Observable<VehicleEnquiryServiceResponse> {
+  ): Observable<VehicleDetails> {
     //ELECTRIC
-    // const mockResponse: VehicleEnquiryServiceResponse =
-    //   ApiVehicleDetailsResponseDouble.prepareSuccessfulResultElectric();
+    const mockResponse: VehicleDetails =
+      ApiVehicleDetailsDouble.prepareSuccessfulResultElectric();
 
     //PETROL
-    const mockResponse: VehicleEnquiryServiceResponse =
-      ApiVehicleDetailsResponseDouble.prepareSuccessfulResultPetrol();
+    // const mockResponse: VehicleEnquiryServiceResponse =
+    //   ApiVehicleDetailsResponseDouble.prepareSuccessfulResultPetrol();
 
     return of(mockResponse);
 

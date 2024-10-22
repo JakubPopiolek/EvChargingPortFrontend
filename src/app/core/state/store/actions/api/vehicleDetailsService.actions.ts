@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { VehicleEnquiryServiceResponse } from '../../../../interfaces/VehicleEnquiryServiceResponse.interface';
+import { VehicleDetails } from '../../../../interfaces/VehicleDetails.interface';
 
 export enum ActionType {
   GET_VEHICLE_DETAILS = '[VehicleEnquiryService] Get vehicle details',
@@ -15,7 +15,7 @@ export const GetVehicleDetails = createAction(
 
 export const GetVehicleDetailsSuccess = createAction(
   ActionType.GET_VEHICLE_DETAILS_SUCCESS,
-  props<{ vehicleDetails: VehicleEnquiryServiceResponse }>()
+  props<{ vehicleDetails: VehicleDetails }>()
 );
 
 export const GetVehicleDetailsFailure = createAction(

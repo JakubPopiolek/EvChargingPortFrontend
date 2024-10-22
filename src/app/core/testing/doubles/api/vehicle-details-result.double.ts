@@ -1,8 +1,8 @@
 import { fuelType } from '../../../enums/fuelType.enum';
-import { VehicleEnquiryServiceResponse } from '../../../interfaces/VehicleEnquiryServiceResponse.interface';
+import { VehicleDetails } from '../../../interfaces/VehicleDetails.interface';
 
-export class ApiVehicleDetailsResponseDouble {
-  public static prepareSuccessfulResultElectric(): VehicleEnquiryServiceResponse {
+export class ApiVehicleDetailsDouble {
+  public static prepareSuccessfulResultElectric(): VehicleDetails {
     return {
       colour: 'grey',
       fuelType: fuelType.ELECTRICITY,
@@ -11,7 +11,7 @@ export class ApiVehicleDetailsResponseDouble {
     };
   }
 
-  public static prepareSuccessfulResultPetrol(): VehicleEnquiryServiceResponse {
+  public static prepareSuccessfulResultPetrol(): VehicleDetails {
     return {
       colour: 'grey',
       fuelType: fuelType.PETROL,

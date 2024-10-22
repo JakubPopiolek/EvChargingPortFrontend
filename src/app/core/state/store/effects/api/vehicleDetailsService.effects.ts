@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as fromVehicleEnquiryServiceActions from '../../actions/api/vehicleEnquiryService.actions';
+import * as fromVehicleEnquiryServiceActions from '../../actions/api/vehicleDetailsService.actions';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { ApiVehicleEnquiryService } from '../../../../services/api/vehicle-enquiry-service';
-import { VehicleEnquiryServiceResponse } from '../../../../interfaces/VehicleEnquiryServiceResponse.interface';
+import { VehicleDetails } from '../../../../interfaces/VehicleDetails.interface';
 
 @Injectable()
-export class VehicleEnquiryServiceEffects {
+export class VehicleDetailsServiceEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly vehicleEnquiryService: ApiVehicleEnquiryService
@@ -20,7 +20,7 @@ export class VehicleEnquiryServiceEffects {
           this.vehicleEnquiryService
             .getByRegNumber(action.vehicleRegistrationNumber)
             .pipe(
-              map((response: VehicleEnquiryServiceResponse) => {
+              map((response: VehicleDetails) => {
                 return fromVehicleEnquiryServiceActions.GetVehicleDetailsSuccess(
                   {
                     vehicleDetails: response,
