@@ -33,4 +33,21 @@ describe('personalDetailsReducer', () => {
       expect(state).toEqual(newState);
     });
   });
+
+  describe('SaveInitialAddress', () => {
+    it('should return correct state', () => {
+      const { initialState } = fromPersonalDetailsReducer;
+      const newState = {
+        ...initialState,
+        postcode: 'testPostcode',
+        buildingNumberName: 'testBuildingNumberName',
+      };
+      const action = fromPersonalDetailsActions.saveInitialAddress({
+        postcode: 'testPostcode',
+        buildingNumberName: 'testBuildingNumberName',
+      });
+      const state = fromPersonalDetailsReducer.reducer(initialState, action);
+      expect(state).toEqual(newState);
+    });
+  });
 });

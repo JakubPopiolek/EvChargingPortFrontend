@@ -9,11 +9,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromPersonalDetailsActions from '../../core/state/store/actions/personalDetails.actions';
-import {
-  selectFirstName,
-  selectLastName,
-  selectPersonalDetailsState,
-} from '../../core/state/store/reducers/personalDetails.reducer';
+import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
 
 @Component({
   selector: 'app-name-page',
@@ -26,8 +22,8 @@ export class NamePageComponent implements OnInit {
   public firstNameValid?: boolean = true;
   public lastNameValid?: boolean = true;
   public nameForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
   });
 
   constructor(private readonly router: Router, private readonly store: Store) {}

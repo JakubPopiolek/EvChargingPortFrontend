@@ -41,7 +41,7 @@ export class EmailPageComponent implements OnInit {
           email: this.email.value,
         })
       );
-      this.router.navigate(['address']);
+      this.router.navigate(['addressLookup']);
       this.isValid = true;
     } else if (this.email.value) {
       this.errorMessage = 'Enter a valid email address';

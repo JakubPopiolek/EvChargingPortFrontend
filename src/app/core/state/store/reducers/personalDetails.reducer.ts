@@ -5,12 +5,18 @@ export interface personalDetailsState {
   firstName: string | null;
   lastName: string | null;
   email: string | null;
+  postcode: string | null;
+  buildingNumberName: string | null;
+  fullAddress: string | null;
 }
 
 export const initialState: personalDetailsState = {
   firstName: null,
   lastName: null,
   email: null,
+  postcode: null,
+  buildingNumberName: null,
+  fullAddress: null,
 };
 
 export const personalDetailsReducer = createReducer(
@@ -20,10 +26,20 @@ export const personalDetailsReducer = createReducer(
     firstName,
     lastName,
   })),
+
   on(fromPersonalDetailsActions.saveEmail, (state, { email }) => ({
     ...state,
     email,
-  }))
+  })),
+
+  on(
+    fromPersonalDetailsActions.saveInitialAddress,
+    (state, { postcode, buildingNumberName }) => ({
+      ...state,
+      postcode,
+      buildingNumberName,
+    })
+  )
 );
 
 export const personalDetailsFeature = createFeature({
@@ -37,4 +53,6 @@ export const {
   selectFirstName,
   selectLastName,
   selectEmail,
+  selectBuildingNumberName,
+  selectPostcode,
 } = personalDetailsFeature;
