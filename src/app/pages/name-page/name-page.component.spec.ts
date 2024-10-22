@@ -96,11 +96,8 @@ describe('NamePageComponent', () => {
       fixture.debugElement.nativeElement.querySelector('#first-name');
     const lastNameInputBox =
       fixture.debugElement.nativeElement.querySelector('#last-name');
-    mockPersonalDetailsSelector.setResult({
-      firstName: 'testFirstName',
-      lastName: 'testLastName',
-      email: 'testEmail',
-    });
+    const mockPersonalDetails = PersonalDetailsDouble.preparePersonalDetails();
+    mockPersonalDetailsSelector.setResult(mockPersonalDetails);
 
     expect(firstNameInputBox.value).toBe(initialState.firstName);
     expect(lastNameInputBox.value).toBe(initialState.lastName);

@@ -64,7 +64,7 @@ describe('EmailPageComponent', () => {
     expect(errorMessage.innerText).toBe('Enter a valid email address');
   });
 
-  it('should route to address page when form is valid', () => {
+  it('should route to address lookup page when form is valid', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     component.email.setValue('test@email.com');
@@ -73,6 +73,6 @@ describe('EmailPageComponent', () => {
     btn.click();
 
     expect(component.email.valid).toBe(true);
-    expect(spy).toHaveBeenCalledWith(['address']);
+    expect(spy).toHaveBeenCalledWith(['addressLookup']);
   });
 });
