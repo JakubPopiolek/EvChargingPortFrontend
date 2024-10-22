@@ -1,1 +1,44 @@
-<p>email-page works!</p>
+<div class="govuk-form-group">
+  <a routerLink="/name" class="govuk-back-link">Back</a>
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+    <h1 class="govuk-fieldset__heading">What is your email address?</h1>
+  </legend>
+  <label class="govuk-label" for="email"> Email address </label>
+  <div id="email-hint" class="govuk-hint">
+    We’ll only use this to send you a confirmation of your application
+  </div>
+  <form class="form">
+    <div
+      [ngClass]="{ 'govuk-form-group--error': !isValid }"
+      class="govuk-form-group"
+    >
+      <p
+        [style.display]="isValid ? 'none' : 'block'"
+        id="address-postcode-error"
+        class="govuk-error-message"
+      >
+        {{ this.errorMessage }}
+      </p>
+      <input
+        [formControl]="email"
+        [ngClass]="{ 'govuk-input--error': !isValid }"
+        class="govuk-input govuk-input--width-20"
+        id="email"
+        name="email"
+        type="email"
+        spellcheck="false"
+        aria-describedby="email-hint"
+        autocomplete="email"
+      />
+    </div>
+    <br />
+    <button
+      (click)="onClick()"
+      type="button"
+      class="govuk-button"
+      data-module="govuk-button"
+    >
+      Continue
+    </button>
+  </form>
+</div>
