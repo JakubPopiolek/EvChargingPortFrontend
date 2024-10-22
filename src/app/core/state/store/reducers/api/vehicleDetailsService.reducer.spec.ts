@@ -1,5 +1,6 @@
 import * as fromVehicleDetailsReducer from './vehicleDetailsService.reducer';
 import * as fromVehicleDetailsActions from '../../actions/api/vehicleDetailsService.actions';
+import { ApiVehicleDetailsDouble } from '../../../../testing/doubles/api/vehicle-details-result.double';
 
 describe('vehicleDetailsServiceReducer', () => {
   describe('GetVehicleDetails', () => {
@@ -15,13 +16,18 @@ describe('vehicleDetailsServiceReducer', () => {
   describe('GetVehicleDetailsSuccess', () => {
     it('should return correct state', () => {
       const { initialVehicleDetailsState } = fromVehicleDetailsReducer;
+      const mockVehicleDetails =
+        ApiVehicleDetailsDouble.prepareSuccessfulResultElectric();
       const newState = {
         ...initialVehicleDetailsState,
+        vehicleDetails: mockVehicleDetails,
         isLoading: false,
         isLoadingSuccess: true,
         isLoadingFailure: false,
       };
-      const action = fromVehicleDetailsActions.GetVehicleDetailsSuccess;
+      const action = fromVehicleDetailsActions.GetVehicleDetailsSuccess({
+        vehicleDetails: mockVehicleDetails,
+      });
       const state = fromVehicleDetailsReducer.reducer(undefined, action);
       expect(state).toEqual(newState);
     });
