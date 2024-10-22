@@ -18,7 +18,7 @@ import { VehicleDetails } from '../../../core/interfaces/VehicleDetails.interfac
   styleUrl: './vrn-form.component.scss',
 })
 export class VrnFormComponent implements OnInit {
-  public vrn = new FormControl('', [Validators.required]);
+  public vrn: FormControl = new FormControl('', [Validators.required]);
   public isValid: boolean = true;
   public vehicleDetails?: VehicleDetails;
 

@@ -5,6 +5,7 @@ export class PersonalDetailsDouble {
     return {
       firstName: 'testFirstName',
       lastName: 'testLastName',
+      email: 'testEmail',
     };
   }
 }

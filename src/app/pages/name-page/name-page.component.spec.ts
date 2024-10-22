@@ -99,6 +99,7 @@ describe('NamePageComponent', () => {
     mockPersonalDetailsSelector.setResult({
       firstName: 'testFirstName',
       lastName: 'testLastName',
+      email: 'testEmail',
     });
 
     expect(firstNameInputBox.value).toBe(initialState.firstName);

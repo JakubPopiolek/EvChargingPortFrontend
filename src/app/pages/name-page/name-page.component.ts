@@ -23,14 +23,14 @@ import {
   styleUrl: './name-page.component.scss',
 })
 export class NamePageComponent implements OnInit {
-  constructor(private readonly router: Router, private readonly store: Store) {}
-
   public firstNameValid?: boolean = true;
   public lastNameValid?: boolean = true;
   public nameForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
   });
+
+  constructor(private readonly router: Router, private readonly store: Store) {}
 
   public ngOnInit(): void {
     this.store.select(selectPersonalDetailsState).subscribe((details) => {

@@ -4,19 +4,25 @@ import * as fromPersonalDetailsActions from '../actions/personalDetails.actions'
 export interface personalDetailsState {
   firstName: string | null;
   lastName: string | null;
+  email: string | null;
 }
 
 export const initialState: personalDetailsState = {
   firstName: null,
   lastName: null,
+  email: null,
 };
 
 export const personalDetailsReducer = createReducer(
   initialState,
   on(fromPersonalDetailsActions.saveName, (state, { firstName, lastName }) => ({
     ...state,
-    firstName: firstName,
-    lastName: lastName,
+    firstName,
+    lastName,
+  })),
+  on(fromPersonalDetailsActions.saveEmail, (state, { email }) => ({
+    ...state,
+    email,
   }))
 );
 
@@ -30,4 +36,5 @@ export const {
   selectPersonalDetailsState,
   selectFirstName,
   selectLastName,
+  selectEmail,
 } = personalDetailsFeature;
