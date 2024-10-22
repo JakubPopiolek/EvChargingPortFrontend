@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, RouterModule } from '@angular/router';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { vehicleDetailsState } from '../../core/state/store/reducers/api/vehicleEnquiryService.reducer';
+import { vehicleDetailsState } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { getVehicleDetails } from '../../core/state/store/selectors/api/vehicleEnquiryService.selector';
 import { ApiVehicleDetailsResponseDouble } from '../../core/testing/doubles/api/vehicle-details-result.double';
 import { ConfirmVehicleDetailsPageComponent } from './confirm-vehicle-details-page.component';

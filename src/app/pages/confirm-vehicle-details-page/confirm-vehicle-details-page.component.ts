@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { VehicleEnquiryServiceResponse } from '../../core/interfaces/VehicleEnquiryServiceResponse.interface';
-import { getVehicleDetails } from '../../core/state/store/selectors/api/vehicleEnquiryService.selector';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { fuelType } from '../../core/enums/fuelType.enum';
+import * as fromVehicleEnquiryServiceActions from '../../core/state/store/actions/api/vehicleDetailsService.actions';
+import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
+import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
 
 @Component({
   selector: 'app-confirm-vehicle-details-page',
@@ -15,15 +16,16 @@ import { fuelType } from '../../core/enums/fuelType.enum';
   styleUrl: './confirm-vehicle-details-page.component.scss',
 })
 export class ConfirmVehicleDetailsPageComponent implements OnInit {
-  public vehicleDetails?: VehicleEnquiryServiceResponse;
+  public vehicleDetails?: VehicleDetails;
   public confirmVehicleDetails = new FormControl('', Validators.required);
   public isValid = true;
 
   constructor(private readonly store: Store, private readonly router: Router) {}
 
   public ngOnInit(): void {
-    this.store.select(getVehicleDetails).subscribe((vehicleDetailsState) => {
-      this.vehicleDetails = vehicleDetailsState.vehicleDetails;
+    this.store.select(selectVehicleDetails).subscribe((vehicleDetails) => {
+      console.log(vehicleDetails);
+      this.vehicleDetails = vehicleDetails;
     });
   }
 
@@ -37,7 +39,7 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
       this.confirmVehicleDetails.valid &&
       this.confirmVehicleDetails.value == 'no'
     ) {
-      this.router.navigate(['vrn']);
+      this.handleNoPath();
     } else {
       this.isValid = false;
     }
@@ -49,5 +51,10 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
     } else {
       this.router.navigate(['notElectricVehicle']);
     }
+  }
+
+  private handleNoPath() {
+    this.store.dispatch(fromVehicleEnquiryServiceActions.ClearVehicleDetails());
+    this.router.navigate(['vrn']);
   }
 }

@@ -1,12 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { vehicleDetailsState } from '../../reducers/api/vehicleEnquiryService.reducer';
+import { VehicleDetailsState } from '../../reducers/api/vehicleDetailsService.reducer';
 
-export const getVehicleDetailsState =
-  createFeatureSelector<vehicleDetailsState>('vehicleDetails');
+// export const getVehicleDetailsState =
+//   createFeatureSelector<VehicleDetailsState>('vehicleDetails');
 
-export const getVehicleDetails = createSelector(
-  getVehicleDetailsState,
-  (store: vehicleDetailsState) => store
-);
-
-// export const select
+// export const getVehicleDetails = createSelector(
+//   getVehicleDetailsState,
+//   (store: VehicleDetailsState) => store
+// );

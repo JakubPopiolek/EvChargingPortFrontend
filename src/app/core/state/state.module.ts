@@ -7,16 +7,16 @@ import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../../environments/environment';
-import * as fromVehicleEnquiryServiceReducer from './store/reducers/api/vehicleEnquiryService.reducer';
+import * as fromVehicleEnquiryServiceReducer from './store/reducers/api/vehicleDetailsService.reducer';
 import * as fromPersonalDetailsReducer from './store/reducers/personalDetails.reducer';
 
 export interface State {
-  vehicleDetails: fromVehicleEnquiryServiceReducer.vehicleDetailsState;
+  vehicleDetails: fromVehicleEnquiryServiceReducer.VehicleDetailsState;
   personalDetails: fromPersonalDetailsReducer.personalDetailsState;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  vehicleDetails: fromVehicleEnquiryServiceReducer.vehicleEnquiryServiceReducer,
+  vehicleDetails: fromVehicleEnquiryServiceReducer.vehicleDetailsReducer,
   personalDetails: fromPersonalDetailsReducer.nameReducer,
 };
 
@@ -32,7 +32,7 @@ export function storageSyncReducer(
 ): ActionReducer<State> {
   const metaReducer = storageSync<State>({
     features: [
-      { stateKey: 'vehicleDetails', storageForFeature: window.sessionStorage },
+      { stateKey: 'details', storageForFeature: window.sessionStorage },
     ],
     storage: window.localStorage,
   });

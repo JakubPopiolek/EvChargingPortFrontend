@@ -3,9 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as fromVehicleEnquiryServiceActions from '../../../core/state/store/actions/api/vehicleEnquiryService.actions';
-import { vehicleDetailsState } from '../../../core/state/store/reducers/api/vehicleEnquiryService.reducer';
-import { getVehicleDetails } from '../../../core/state/store/selectors/api/vehicleEnquiryService.selector';
+import * as fromVehicleEnquiryServiceActions from '../../../core/state/store/actions/api/vehicleDetailsService.actions';
+import {
+  selectVehicleDetails,
+  VehicleDetailsState,
+} from '../../../core/state/store/reducers/api/vehicleDetailsService.reducer';
+import { VehicleDetails } from '../../../core/interfaces/VehicleDetails.interface';
 
 @Component({
   selector: 'app-vrn-form',
@@ -17,18 +20,17 @@ import { getVehicleDetails } from '../../../core/state/store/selectors/api/vehic
 export class VrnFormComponent implements OnInit {
   public vrn = new FormControl('', [Validators.required]);
   public isValid: boolean = true;
-  public vehicleDetailsState?: vehicleDetailsState;
+  public vehicleDetails?: VehicleDetails;
 
   constructor(private router: Router, private readonly store: Store) {}
 
   public ngOnInit(): void {
     this.store
-      .select(getVehicleDetails)
-      .subscribe((details) => {
-        this.vehicleDetailsState = details;
-        const vehicleReg = this.vehicleDetailsState.vehicleDetails
-          ?.registrationNumber
-          ? this.vehicleDetailsState.vehicleDetails.registrationNumber
+      .select(selectVehicleDetails)
+      .subscribe((vehicleDetails) => {
+        this.vehicleDetails = vehicleDetails;
+        const vehicleReg = this.vehicleDetails?.registrationNumber
+          ? this.vehicleDetails.registrationNumber
           : '';
         this.vrn.setValue(vehicleReg);
       })

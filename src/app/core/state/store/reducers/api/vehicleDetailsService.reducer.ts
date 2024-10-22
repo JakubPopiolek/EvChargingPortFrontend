@@ -1,9 +1,9 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { VehicleEnquiryServiceResponse } from '../../../../interfaces/VehicleEnquiryServiceResponse.interface';
-import * as fromVehicleEnquiryServiceActions from '../../actions/api/vehicleEnquiryService.actions';
+import * as fromVehicleEnquiryServiceActions from '../../actions/api/vehicleDetailsService.actions';
+import { VehicleDetails } from '../../../../interfaces/VehicleDetails.interface';
 
 export interface VehicleDetailsState {
-  vehicleDetails?: VehicleEnquiryServiceResponse;
+  vehicleDetails: VehicleDetails | undefined;
   isLoading: boolean;
   isLoadingSuccess: boolean;
   isLoadingFailure: boolean;
@@ -57,10 +57,10 @@ export const vehicleDetailsFeature = createFeature({
   reducer: vehicleDetailsReducer,
 });
 
-// export const {
-//   name,
-//   reducer,
-//   selectVehicleDetailsState,
-//   selectVehicleDetails,
-//   selectIsLoading,
-// } = vehicleEnquiryServiceFeature;
+export const {
+  name,
+  reducer,
+  selectVehicleDetails,
+  selectIsLoading,
+  selectVehicleDetailsState,
+} = vehicleDetailsFeature;

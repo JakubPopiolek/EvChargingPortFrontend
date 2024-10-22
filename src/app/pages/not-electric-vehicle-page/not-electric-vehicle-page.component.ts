@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import * as fromVehicleEnquiryServiceActions from '../../core/state/store/actions/api/vehicleEnquiryService.actions';
+import * as fromVehicleEnquiryServiceActions from '../../core/state/store/actions/api/vehicleDetailsService.actions';
 
 @Component({
   selector: 'app-not-electric-vehicle-page',
