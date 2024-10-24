@@ -52,13 +52,13 @@ describe('AddressLookupPageComponent', () => {
     expect(errorMessage.style.display).toBe('block');
   });
 
-  it('should error when buildingNumberName is empty', () => {
-    component.addressLookupForm.get('buildingNumberName')?.setValue('');
+  it('should error when addressLineOne is empty', () => {
+    component.addressLookupForm.get('addressLineOne')?.setValue('');
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const postcodeInput =
       fixture.debugElement.nativeElement.querySelector('#searchString');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '#buildingNumberName-error'
+      '#addressLineOne-error'
     );
 
     btn.click();
@@ -69,13 +69,13 @@ describe('AddressLookupPageComponent', () => {
     expect(errorMessage.style.display).toBe('block');
   });
 
-  it('should route to choose address page when form is valid and there is more than one address', () => {
+  it('should route to chooseAddressPage when form is valid and there is more than one address', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');
     component.addressLookupForm
-      .get('buildingNumberName')
-      ?.setValue('testBuildingNumberName');
+      .get('addressLineOne')
+      ?.setValue('testAddressLineOne');
     fixture.detectChanges();
 
     btn.click();
@@ -89,8 +89,8 @@ describe('AddressLookupPageComponent', () => {
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');
     component.addressLookupForm
-      .get('buildingNumberName')
-      ?.setValue('testBuildingNumberName');
+      .get('addressLineOne')
+      ?.setValue('testAddressLineOne');
     fixture.detectChanges();
 
     btn.click();
@@ -107,8 +107,8 @@ describe('AddressLookupPageComponent', () => {
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');
     component.addressLookupForm
-      .get('buildingNumberName')
-      ?.setValue('testBuildingNumberName');
+      .get('addressLineOne')
+      ?.setValue('testAddressLineOne');
     fixture.detectChanges();
 
     btn.click();

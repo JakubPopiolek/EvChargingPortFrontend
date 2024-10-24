@@ -8,11 +8,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../../environments/environment';
 import * as fromVehicleEnquiryServiceReducer from './store/reducers/api/vehicleDetailsService.reducer';
-import * as fromPersonalDetailsReducer from './store/reducers/personalDetails.reducer';
+import { PersonalDetails } from '../interfaces/PersonalDetails.interface';
 
 export interface State {
   vehicleDetails: fromVehicleEnquiryServiceReducer.VehicleDetailsState;
-  personalDetails: fromPersonalDetailsReducer.personalDetailsState;
+  personalDetails: PersonalDetails;
 }
 
 const devTools: ModuleWithProviders<any>[] = [

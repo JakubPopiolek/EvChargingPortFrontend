@@ -6,9 +6,13 @@ export class PersonalDetailsDouble {
       firstName: 'testFirstName',
       lastName: 'testLastName',
       email: 'testEmail',
-      postcode: 'testPostcode',
-      buildingNumberName: 'testBuildingNumberName',
-      fullAddress: 'testFullAddress',
+      address: {
+        postcode: 'testPostcode',
+        addressLineOne: 'testAddressLineOne',
+        addressLineTwo: 'testAddressLineTwo',
+        county: 'testCounty',
+        townOrCity: 'testTownOrCity',
+      },
     };
   }
 }

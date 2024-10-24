@@ -19,8 +19,21 @@ describe('vehicleDetailsService actions', () => {
   it('should create an action - [ saveInitialAddress ]', () => {
     const action = Actions.saveInitialAddress({
       postcode: 'testPostcode',
-      buildingNumberName: 'testBuildingNumberName',
+      addressLineOne: 'testAddressLineOne',
     });
     expect(action.type).toEqual(Actions.ActionType.SAVE_INITIAL_ADDRESS);
+  });
+
+  it('should create an action - [ saveAddress ]', () => {
+    const action = Actions.saveAddress({
+      address: {
+        postcode: 'testPostcode',
+        addressLineOne: 'testAddressLineOne',
+        addressLineTwo: 'testAddressLineTwo',
+        county: 'testCounty',
+        townOrCity: 'testTownOrCity',
+      },
+    });
+    expect(action.type).toEqual(Actions.ActionType.SAVE_ADDRESS);
   });
 });
