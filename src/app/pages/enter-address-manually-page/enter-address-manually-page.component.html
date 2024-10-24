@@ -1,1 +1,92 @@
-<p>enter-address-manually-page works!</p>
+<form [formGroup]="addressForm" class="form">
+  <a routerLink="/addressLookup" class="govuk-back-link">Back</a>
+  <fieldset class="govuk-fieldset">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">What is your address?</h1>
+    </legend>
+    <div
+      [ngClass]="{ 'govuk-form-group--error': !addressLineOneValid }"
+      class="govuk-form-group"
+    >
+      <label class="govuk-label" for="address-line-1"> Address line 1 </label>
+      <p
+        [style.display]="addressLineOneValid ? 'none' : 'block'"
+        id="addressLineOne-error"
+        class="govuk-error-message"
+      >
+        <span class="govuk-visually-hidden">Error:</span> Enter your first line
+        of address
+      </p>
+      <input
+        [ngClass]="{ 'govuk-input--error': !addressLineOneValid }"
+        formControlName="addressLineOne"
+        class="govuk-input"
+        id="address-line-1"
+        name="addressLine1"
+        type="text"
+        autocomplete="address-line1"
+      />
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="address-line-2">
+        Address line 2 (optional)
+      </label>
+      <input
+        class="govuk-input"
+        formControlName="addressLineTwo"
+        id="address-line-2"
+        name="addressLine2"
+        type="text"
+        autocomplete="address-line2"
+      />
+    </div>
+    <div
+      [ngClass]="{ 'govuk-form-group--error': !townOrCityValid }"
+      class="govuk-form-group"
+    >
+      <label class="govuk-label" for="address-town"> Town or city </label>
+      <p
+        [style.display]="townOrCityValid ? 'none' : 'block'"
+        id="townOrCity-error"
+        class="govuk-error-message"
+      >
+        <span class="govuk-visually-hidden">Error:</span> Enter your town or
+        city
+      </p>
+      <input
+        [ngClass]="{ 'govuk-input--error': !townOrCityValid }"
+        formControlName="townOrCity"
+        class="govuk-input govuk-!-width-two-thirds"
+        id="address-town"
+        name="addressTown"
+        type="text"
+        autocomplete="address-level2"
+      />
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="address-county">
+        County (optional)
+      </label>
+      <input
+        formControlName="county"
+        class="govuk-input govuk-!-width-two-thirds"
+        id="address-county"
+        name="addressCounty"
+        type="text"
+      />
+    </div>
+    <app-postcode-form
+      [addressForm]="addressForm"
+      [postcodeValid]="postcodeValid"
+    ></app-postcode-form>
+  </fieldset>
+
+  <button
+    (click)="onClick()"
+    type="button"
+    class="govuk-button"
+    data-module="govuk-button"
+  >
+    Continue
+  </button>
+</form>

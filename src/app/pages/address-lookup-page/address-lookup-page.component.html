@@ -2,41 +2,21 @@
   <a routerLink="/email" class="govuk-back-link">Back</a>
   <h1 class="govuk-heading-l">Find an address</h1>
   <form [formGroup]="addressLookupForm" class="form">
+    <app-postcode-form
+      [addressForm]="addressLookupForm"
+      [postcodeValid]="postcodeValid"
+    ></app-postcode-form>
     <div
-      [ngClass]="{ 'govuk-form-group--error': !postcodeValid }"
-      id="postcode-input"
-      class="govuk-form-group"
-    >
-      <label class="govuk-label" for="postcode"> Postcode </label>
-      <p
-        [style.display]="postcodeValid ? 'none' : 'block'"
-        id="postcode-error"
-        class="govuk-error-message"
-      >
-        <span class="govuk-visually-hidden">Error:</span> Enter your postcode
-      </p>
-      <div id="postcode-hint" class="govuk-hint">For example, AA3 1AB.</div>
-      <input
-        [ngClass]="{ 'govuk-input--error': !postcodeValid }"
-        formControlName="postcode"
-        class="govuk-input govuk-!-width-two-thirds"
-        id="postcode"
-        name="postcode"
-        type="text"
-        aria-describedby="postcode-hint"
-      />
-    </div>
-    <div
-      [ngClass]="{ 'govuk-form-group--error': !buildingNumberNameValid }"
-      id="building-number-name-input"
+      [ngClass]="{ 'govuk-form-group--error': !addressLineOneValid }"
+      id="addressLineOne-input"
       class="govuk-form-group"
     >
       <label class="govuk-label" for="searchString">
         Building number or name
       </label>
       <p
-        [style.display]="buildingNumberNameValid ? 'none' : 'block'"
-        id="buildingNumberName-error"
+        [style.display]="addressLineOneValid ? 'none' : 'block'"
+        id="addressLineOne-error"
         class="govuk-error-message"
       >
         <span class="govuk-visually-hidden">Error:</span> Enter the building
@@ -46,8 +26,8 @@
         For example, 15 or Prospect Cottage.
       </div>
       <input
-        [ngClass]="{ 'govuk-input--error': !buildingNumberNameValid }"
-        formControlName="buildingNumberName"
+        [ngClass]="{ 'govuk-input--error': !addressLineOneValid }"
+        formControlName="addressLineOne"
         class="govuk-input govuk-!-width-two-thirds"
         id="searchString"
         name="searchString"

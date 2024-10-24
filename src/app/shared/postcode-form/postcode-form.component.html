@@ -1,0 +1,26 @@
+<form [formGroup]="addressForm">
+  <div
+    [ngClass]="{ 'govuk-form-group--error': !postcodeValid }"
+    id="postcode-input"
+    class="govuk-form-group"
+  >
+    <label class="govuk-label" for="postcode"> Postcode </label>
+    <p
+      [style.display]="postcodeValid ? 'none' : 'block'"
+      id="postcode-error"
+      class="govuk-error-message"
+    >
+      <span class="govuk-visually-hidden">Error:</span> Enter your postcode
+    </p>
+    <div id="postcode-hint" class="govuk-hint">For example, AA3 1AB.</div>
+    <input
+      [ngClass]="{ 'govuk-input--error': !postcodeValid }"
+      class="govuk-input govuk-!-width-two-thirds"
+      formControlName="postcode"
+      id="postcode"
+      name="postcode"
+      type="text"
+      aria-describedby="postcode-hint"
+    />
+  </div>
+</form>

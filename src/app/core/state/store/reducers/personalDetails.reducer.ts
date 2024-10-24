@@ -1,22 +1,18 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as fromPersonalDetailsActions from '../actions/personalDetails.actions';
+import { PersonalDetails } from '../../../interfaces/PersonalDetails.interface';
 
-export interface personalDetailsState {
-  firstName: string | null;
-  lastName: string | null;
-  email: string | null;
-  postcode: string | null;
-  buildingNumberName: string | null;
-  fullAddress: string | null;
-}
-
-export const initialState: personalDetailsState = {
+export const initialState: PersonalDetails = {
   firstName: null,
   lastName: null,
   email: null,
-  postcode: null,
-  buildingNumberName: null,
-  fullAddress: null,
+  address: {
+    postcode: null,
+    addressLineOne: null,
+    addressLineTwo: null,
+    townOrCity: null,
+    county: null,
+  },
 };
 
 export const personalDetailsReducer = createReducer(
@@ -34,12 +30,20 @@ export const personalDetailsReducer = createReducer(
 
   on(
     fromPersonalDetailsActions.saveInitialAddress,
-    (state, { postcode, buildingNumberName }) => ({
+    (state, { postcode, addressLineOne }) => ({
       ...state,
-      postcode,
-      buildingNumberName,
+      address: {
+        ...state.address!,
+        postcode,
+        addressLineOne,
+      },
     })
-  )
+  ),
+
+  on(fromPersonalDetailsActions.saveAddress, (state, { address }) => ({
+    ...state,
+    address,
+  }))
 );
 
 export const personalDetailsFeature = createFeature({
@@ -53,6 +57,5 @@ export const {
   selectFirstName,
   selectLastName,
   selectEmail,
-  selectBuildingNumberName,
-  selectPostcode,
+  selectAddress,
 } = personalDetailsFeature;

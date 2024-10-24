@@ -1,10 +1,14 @@
 import { createAction, props } from '@ngrx/store';
-import { PersonalDetails } from '../../../interfaces/PersonalDetails.interface';
+import {
+  Address,
+  PersonalDetails,
+} from '../../../interfaces/PersonalDetails.interface';
 
 export enum ActionType {
   SAVE_NAME = '[Personal Details] Save name',
   SAVE_EMAIL = '[Personal Details] Save Email',
   SAVE_INITIAL_ADDRESS = '[Person Details] Save Initial Address',
+  SAVE_ADDRESS = '[Personal Details] Save address',
 }
 
 export const saveName = createAction(
@@ -23,7 +27,14 @@ export const saveEmail = createAction(
 export const saveInitialAddress = createAction(
   ActionType.SAVE_INITIAL_ADDRESS,
   props<{
-    postcode: PersonalDetails['postcode'];
-    buildingNumberName: PersonalDetails['buildingNumberName'];
+    postcode: Address['postcode'];
+    addressLineOne: Address['addressLineOne'];
+  }>()
+);
+
+export const saveAddress = createAction(
+  ActionType.SAVE_ADDRESS,
+  props<{
+    address: Address;
   }>()
 );

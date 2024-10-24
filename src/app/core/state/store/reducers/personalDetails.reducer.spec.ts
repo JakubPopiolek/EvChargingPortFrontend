@@ -1,3 +1,4 @@
+import { PersonalDetails } from '../../../interfaces/PersonalDetails.interface';
 import * as fromPersonalDetailsActions from '../actions/personalDetails.actions';
 import * as fromPersonalDetailsReducer from '../reducers/personalDetails.reducer';
 
@@ -37,16 +38,52 @@ describe('personalDetailsReducer', () => {
   describe('SaveInitialAddress', () => {
     it('should return correct state', () => {
       const { initialState } = fromPersonalDetailsReducer;
-      const newState = {
+      const newState: PersonalDetails = {
         ...initialState,
-        postcode: 'testPostcode',
-        buildingNumberName: 'testBuildingNumberName',
+        address: {
+          ...initialState.address!,
+          postcode: 'testPostcode',
+          addressLineOne: 'testAddressLineOne',
+        },
       };
       const action = fromPersonalDetailsActions.saveInitialAddress({
         postcode: 'testPostcode',
-        buildingNumberName: 'testBuildingNumberName',
+        addressLineOne: 'testAddressLineOne',
       });
-      const state = fromPersonalDetailsReducer.reducer(initialState, action);
+      const state: PersonalDetails = fromPersonalDetailsReducer.reducer(
+        initialState,
+        action
+      );
+      expect(state).toEqual(newState);
+    });
+  });
+
+  describe('SaveAddress', () => {
+    it('should return correct state', () => {
+      const { initialState } = fromPersonalDetailsReducer;
+      const newState: PersonalDetails = {
+        ...initialState,
+        address: {
+          postcode: 'testPostcode',
+          addressLineOne: 'testAddressLineOne',
+          addressLineTwo: 'testAddressLineTwo',
+          county: 'testCounty',
+          townOrCity: 'testTownOrCity',
+        },
+      };
+      const action = fromPersonalDetailsActions.saveAddress({
+        address: {
+          postcode: 'testPostcode',
+          addressLineOne: 'testAddressLineOne',
+          addressLineTwo: 'testAddressLineTwo',
+          county: 'testCounty',
+          townOrCity: 'testTownOrCity',
+        },
+      });
+      const state: PersonalDetails = fromPersonalDetailsReducer.reducer(
+        initialState,
+        action
+      );
       expect(state).toEqual(newState);
     });
   });

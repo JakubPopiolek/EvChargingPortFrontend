@@ -11,11 +11,11 @@ export class ApiAddressLookupService {
   constructor(public readonly http: HttpClient) {}
   public get(
     postcode: string | null | undefined,
-    buildingNumberName: string | null | undefined
+    addressLineOne: string | null | undefined
   ): Observable<AddressServiceResponse[]> {
     let mockResponse: AddressServiceResponse[];
 
-    if (buildingNumberName === 'testSingle') {
+    if (addressLineOne === 'testSingle') {
       mockResponse = AddressResultDouble.prepareSuccessfulResultOneAddress();
     } else {
       mockResponse = AddressResultDouble.prepareSuccessfulResultTwoAddresses();
@@ -25,7 +25,7 @@ export class ApiAddressLookupService {
 
     // return this.http.get<addressServiceResponse[]>(
     //   'api/AddressLookup/',
-    //   { params: { postcode, buildingNumberName } }
+    //   { params: { postcode, addressLineOne } }
     // );
   }
 }
