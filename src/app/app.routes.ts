@@ -6,8 +6,6 @@ import { NotElectricVehiclePageComponent } from './pages/not-electric-vehicle-pa
 import { NamePageComponent } from './pages/name-page/name-page.component';
 import { EmailPageComponent } from './pages/email-page/email-page.component';
 import { CheckAnswersPageComponent } from './pages/check-answers-page/check-answers-page.component';
-import { SubmittedPageComponent } from './pages/submitted-page/submitted-page.component';
-import { ServiceUnavailablePageComponent } from './pages/service-unavailable-page/service-unavailable-page.component';
 import { AddressLookupPageComponent } from './pages/address-lookup-page/address-lookup-page.component';
 import { ChooseAddressPageComponent } from './pages/choose-address-page/choose-address-page.component';
 import { ConfirmAddressPageComponent } from './pages/confirm-address-page/confirm-address-page.component';

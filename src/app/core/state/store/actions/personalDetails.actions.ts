@@ -9,6 +9,9 @@ export enum ActionType {
   SAVE_EMAIL = '[Personal Details] Save Email',
   SAVE_INITIAL_ADDRESS = '[Person Details] Save Initial Address',
   SAVE_ADDRESS = '[Personal Details] Save address',
+  GET_ADDRESSES = '[Personal Details] Get Addresses',
+  GET_ADDRESSES_SUCCESS = '[Personal Details] Get Addresses Success',
+  GET_ADDRESSES_FAILURE = '[Personal Details] Get Addresses Failure',
 }
 
 export const saveName = createAction(
@@ -36,5 +39,27 @@ export const saveAddress = createAction(
   ActionType.SAVE_ADDRESS,
   props<{
     address: Address;
+  }>()
+);
+
+export const getAddresses = createAction(
+  ActionType.GET_ADDRESSES,
+  props<{
+    postcode: string;
+    line1: string;
+  }>()
+);
+
+export const getAddressesSuccess = createAction(
+  ActionType.GET_ADDRESSES_SUCCESS,
+  props<{
+    addresses: Address[];
+  }>()
+);
+
+export const getAddressesFailure = createAction(
+  ActionType.GET_ADDRESSES_FAILURE,
+  props<{
+    error: any;
   }>()
 );
