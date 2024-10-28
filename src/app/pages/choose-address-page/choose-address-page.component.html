@@ -1,1 +1,68 @@
-<p>choose-address-page works!</p>
+<div class="govuk-width-container">
+  <a routerLink="/addressLookup" class="govuk-back-link">Back</a>
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <div
+        [ngClass]="{ 'govuk-form-group--error': !formValid }"
+        id="choose-address"
+        class="govuk-form-group"
+      >
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <h1 class="govuk-fieldset__heading">Select an address</h1>
+        </legend>
+        <div
+          class="govuk-radios govuk-radios--small"
+          data-module="govuk-radios"
+        >
+          <p class="govuk-body">
+            {{ this.addresses.length }} addresses found for
+            <b>{{ this.postcode }}</b> and <b>{{ this.line1 }}</b
+            >.
+            <a routerLink="/addressLookup">Search again</a>
+          </p>
+          <p
+            [style.display]="formValid ? 'none' : 'block'"
+            id="line1-error"
+            class="govuk-error-message"
+          >
+            <span class="govuk-visually-hidden">Error:</span> Choose an address
+          </p>
+          <form [formGroup]="addressSelectionForm">
+            @for (address of this.addresses; track address.id){
+            <div class="govuk-radios__item">
+              <input
+                formControlName="selectedAddress"
+                class="govuk-radios__input"
+                id="{{ address.id }}"
+                name="selectedAddress"
+                type="radio"
+                value="{{ $index }}"
+              />
+              <label
+                class="govuk-label govuk-radios__label"
+                for="select-an-address"
+              >
+                {{ address.line1 }}, {{ address.line2 }}, {{ address.city }},
+                {{ address.province }}, {{ address.postcode }}
+              </label>
+            </div>
+            }
+          </form>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <button
+    (click)="onClick()"
+    type="button"
+    class="govuk-button"
+    data-module="govuk-button"
+  >
+    Use this address
+  </button>
+  <p class="govuk-body govuk-!-margin-bottom-0">
+    <a routerLink="/enterAddressManually" class="govuk-link"
+      >Enter address manually</a
+    >
+  </p>
+</div>

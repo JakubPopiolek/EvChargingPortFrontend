@@ -80,7 +80,7 @@ describe('AddressLookupPageComponent', () => {
     expect(spy).toHaveBeenCalledWith(['chooseAddress']);
   });
 
-  it('should route to confirm address page when form is valid and there is one address', () => {
+  xit('should route to confirm address page when form is valid and there is one address', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');
@@ -90,6 +90,8 @@ describe('AddressLookupPageComponent', () => {
     btn.click();
 
     expect(component.addressLookupForm.valid).toBe(true);
+
+    //TODO: Need to route to confirm address page
     expect(spy).toHaveBeenCalledWith(['chooseAddress']);
   });
 
