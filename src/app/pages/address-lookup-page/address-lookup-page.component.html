@@ -8,7 +8,7 @@
     ></app-postcode-form>
     <div
       [ngClass]="{ 'govuk-form-group--error': !addressLineOneValid }"
-      id="addressLineOne-input"
+      id="line1-input"
       class="govuk-form-group"
     >
       <label class="govuk-label" for="searchString">
@@ -16,7 +16,7 @@
       </label>
       <p
         [style.display]="addressLineOneValid ? 'none' : 'block'"
-        id="addressLineOne-error"
+        id="line1-error"
         class="govuk-error-message"
       >
         <span class="govuk-visually-hidden">Error:</span> Enter the building
@@ -27,7 +27,7 @@
       </div>
       <input
         [ngClass]="{ 'govuk-input--error': !addressLineOneValid }"
-        formControlName="addressLineOne"
+        formControlName="line1"
         class="govuk-input govuk-!-width-two-thirds"
         id="searchString"
         name="searchString"

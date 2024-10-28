@@ -31,7 +31,7 @@ export const routes: Routes = [
     path: 'enterAddressManually',
     component: EnterAddressManuallyPageComponent,
   },
-  // { path: 'checkAnswers', component: CheckAnswersPageComponent },
+  { path: 'checkAnswers', component: CheckAnswersPageComponent },
   // { path: 'submitted', component: SubmittedPageComponent },
   // { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent }
 ];

@@ -5,35 +5,35 @@
       <h1 class="govuk-fieldset__heading">What is your address?</h1>
     </legend>
     <div
-      [ngClass]="{ 'govuk-form-group--error': !addressLineOneValid }"
+      [ngClass]="{ 'govuk-form-group--error': !line1Valid }"
       class="govuk-form-group"
     >
-      <label class="govuk-label" for="address-line-1"> Address line 1 </label>
+      <label class="govuk-label" for="line-1"> Address line 1 </label>
       <p
-        [style.display]="addressLineOneValid ? 'none' : 'block'"
-        id="addressLineOne-error"
+        [style.display]="line1Valid ? 'none' : 'block'"
+        id="line1-error"
         class="govuk-error-message"
       >
         <span class="govuk-visually-hidden">Error:</span> Enter your first line
         of address
       </p>
       <input
-        [ngClass]="{ 'govuk-input--error': !addressLineOneValid }"
-        formControlName="addressLineOne"
+        [ngClass]="{ 'govuk-input--error': !line1Valid }"
+        formControlName="line1"
         class="govuk-input"
-        id="address-line-1"
+        id="line-1"
         name="addressLine1"
         type="text"
         autocomplete="address-line1"
       />
     </div>
     <div class="govuk-form-group">
-      <label class="govuk-label" for="address-line-2">
+      <label class="govuk-label" for="line-2">
         Address line 2 (optional)
       </label>
       <input
         class="govuk-input"
-        formControlName="addressLineTwo"
+        formControlName="line2"
         id="address-line-2"
         name="addressLine2"
         type="text"
@@ -41,37 +41,37 @@
       />
     </div>
     <div
-      [ngClass]="{ 'govuk-form-group--error': !townOrCityValid }"
+      [ngClass]="{ 'govuk-form-group--error': !cityValid }"
       class="govuk-form-group"
     >
-      <label class="govuk-label" for="address-town"> Town or city </label>
+      <label class="govuk-label" for="address-city"> Town or city </label>
       <p
-        [style.display]="townOrCityValid ? 'none' : 'block'"
-        id="townOrCity-error"
+        [style.display]="cityValid ? 'none' : 'block'"
+        id="city-error"
         class="govuk-error-message"
       >
         <span class="govuk-visually-hidden">Error:</span> Enter your town or
         city
       </p>
       <input
-        [ngClass]="{ 'govuk-input--error': !townOrCityValid }"
-        formControlName="townOrCity"
+        [ngClass]="{ 'govuk-input--error': !cityValid }"
+        formControlName="city"
         class="govuk-input govuk-!-width-two-thirds"
-        id="address-town"
-        name="addressTown"
+        id="address-city"
+        name="addressCity"
         type="text"
         autocomplete="address-level2"
       />
     </div>
     <div class="govuk-form-group">
-      <label class="govuk-label" for="address-county">
+      <label class="govuk-label" for="address-province">
         County (optional)
       </label>
       <input
-        formControlName="county"
+        formControlName="province"
         class="govuk-input govuk-!-width-two-thirds"
-        id="address-county"
-        name="addressCounty"
+        id="address-province"
+        name="addressProvince"
         type="text"
       />
     </div>

@@ -1,1 +1,40 @@
-<p>confirm-address-page works!</p>
+<div class="govuk-width-container">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+    <h1 class="govuk-fieldset__heading">Confirm address</h1>
+  </legend>
+  <p>
+    6 addresses found for <b>wr11nl</b> and <b>1</b>.
+    <a id="searchAgainLink" routerLink="/addressLookup">Search again</a>
+  </p>
+  <div class="govuk-inset-text">
+    @if (displayAddress?.line1) {
+    {{ displayAddress?.line1 }} <br />
+    } @if (displayAddress?.line2) {
+    {{ displayAddress?.line2 }} <br />
+    } @if (displayAddress?.city) {
+    {{ displayAddress?.city }} <br />
+    } @if (displayAddress?.province) {
+    {{ displayAddress?.province }} <br />
+    }@if (displayAddress?.postcode) {
+    {{ displayAddress?.postcode }}
+    }
+  </div>
+  <button
+    (click)="onClick()"
+    type="button"
+    class="govuk-button"
+    data-module="govuk-button"
+  >
+    Use this address
+  </button>
+  <p class="govuk-body">
+    <a routerLink="/chooseAddress" class="govuk-link"
+      >Use a different address</a
+    >
+  </p>
+  <p class="govuk-body govuk-!-margin-bottom-0">
+    <a routerLink="/enterAddressManually" class="govuk-link"
+      >Enter address manually</a
+    >
+  </p>
+</div>

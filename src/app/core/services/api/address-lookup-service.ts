@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { AddressResultDouble } from '../../testing/doubles/api/address-result.double';
-import { AddressServiceResponse } from '../../interfaces/AddressServiceResponse.interface';
+import { Address } from '../../interfaces/PersonalDetails.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +12,8 @@ export class ApiAddressLookupService {
   public get(
     postcode: string | null | undefined,
     addressLineOne: string | null | undefined
-  ): Observable<AddressServiceResponse[]> {
-    let mockResponse: AddressServiceResponse[];
+  ): Observable<Address[]> {
+    let mockResponse: Address[];
 
     if (addressLineOne === 'testSingle') {
       mockResponse = AddressResultDouble.prepareSuccessfulResultOneAddress();

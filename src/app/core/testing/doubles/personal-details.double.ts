@@ -7,11 +7,12 @@ export class PersonalDetailsDouble {
       lastName: 'testLastName',
       email: 'testEmail',
       address: {
+        id: 'testId',
         postcode: 'testPostcode',
-        addressLineOne: 'testAddressLineOne',
-        addressLineTwo: 'testAddressLineTwo',
-        county: 'testCounty',
-        townOrCity: 'testTownOrCity',
+        line1: 'testAddressLineOne',
+        line2: 'testAddressLineTwo',
+        province: 'testCounty',
+        city: 'testTownOrCity',
       },
     };
   }

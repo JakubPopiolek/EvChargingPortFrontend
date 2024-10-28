@@ -29,7 +29,7 @@ import { PostcodeFormComponent } from '../../shared/postcode-form/postcode-form.
 export class AddressLookupPageComponent implements OnInit {
   public addressLookupForm = new FormGroup({
     postcode: new FormControl('', [Validators.required]),
-    addressLineOne: new FormControl('', [Validators.required]),
+    line1: new FormControl('', [Validators.required]),
   });
   public postcodeValid?: boolean = true;
   public addressLineOneValid?: boolean = true;
@@ -43,9 +43,7 @@ export class AddressLookupPageComponent implements OnInit {
   public ngOnInit(): void {
     this.store.select(selectPersonalDetailsState).subscribe((state) => {
       this.addressLookupForm.get('postcode')?.setValue(state.address!.postcode);
-      this.addressLookupForm
-        .get('addressLineOne')
-        ?.setValue(state.address!.addressLineOne);
+      this.addressLookupForm.get('line1')?.setValue(state.address!.line1);
     });
   }
 
@@ -54,25 +52,23 @@ export class AddressLookupPageComponent implements OnInit {
       this.addressLineOneValid = true;
       this.postcodeValid = true;
       const postcode = this.addressLookupForm.get('postcode')!.value;
-      const addressLineOne =
-        this.addressLookupForm.get('addressLineOne')!.value;
+      const line1 = this.addressLookupForm.get('line1')!.value;
       this.store.dispatch(
         fromPersonalDetailsActions.saveInitialAddress({
           postcode,
-          addressLineOne,
+          line1,
         })
       );
-      this.getAddresses(postcode, addressLineOne);
+      this.getAddresses(postcode, line1);
     } else {
       this.postcodeValid = this.addressLookupForm.get('postcode')?.valid;
-      this.addressLineOneValid =
-        this.addressLookupForm.get('addressLineOne')?.valid;
+      this.addressLineOneValid = this.addressLookupForm.get('line1')?.valid;
     }
   }
 
   private getAddresses(
     postcode: Address['postcode'],
-    addressLineOne: Address['addressLineOne']
+    addressLineOne: Address['line1']
   ) {
     this.apiAddressLookupService
       .get(postcode, addressLineOne)
