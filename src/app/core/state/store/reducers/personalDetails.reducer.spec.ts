@@ -43,12 +43,12 @@ describe('personalDetailsReducer', () => {
         address: {
           ...initialState.address!,
           postcode: 'testPostcode',
-          addressLineOne: 'testAddressLineOne',
+          line1: 'testAddressLineOne',
         },
       };
       const action = fromPersonalDetailsActions.saveInitialAddress({
         postcode: 'testPostcode',
-        addressLineOne: 'testAddressLineOne',
+        line1: 'testAddressLineOne',
       });
       const state: PersonalDetails = fromPersonalDetailsReducer.reducer(
         initialState,
@@ -64,20 +64,22 @@ describe('personalDetailsReducer', () => {
       const newState: PersonalDetails = {
         ...initialState,
         address: {
+          id: 'testId',
           postcode: 'testPostcode',
-          addressLineOne: 'testAddressLineOne',
-          addressLineTwo: 'testAddressLineTwo',
-          county: 'testCounty',
-          townOrCity: 'testTownOrCity',
+          line1: 'testAddressLineOne',
+          line2: 'testAddressLineTwo',
+          province: 'testCounty',
+          city: 'testTownOrCity',
         },
       };
       const action = fromPersonalDetailsActions.saveAddress({
         address: {
+          id: 'testId',
           postcode: 'testPostcode',
-          addressLineOne: 'testAddressLineOne',
-          addressLineTwo: 'testAddressLineTwo',
-          county: 'testCounty',
-          townOrCity: 'testTownOrCity',
+          line1: 'testAddressLineOne',
+          line2: 'testAddressLineTwo',
+          province: 'testCounty',
+          city: 'testTownOrCity',
         },
       });
       const state: PersonalDetails = fromPersonalDetailsReducer.reducer(

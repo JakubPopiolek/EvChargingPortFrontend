@@ -19,7 +19,7 @@ describe('vehicleDetailsService actions', () => {
   it('should create an action - [ saveInitialAddress ]', () => {
     const action = Actions.saveInitialAddress({
       postcode: 'testPostcode',
-      addressLineOne: 'testAddressLineOne',
+      line1: 'testAddressLineOne',
     });
     expect(action.type).toEqual(Actions.ActionType.SAVE_INITIAL_ADDRESS);
   });
@@ -27,11 +27,12 @@ describe('vehicleDetailsService actions', () => {
   it('should create an action - [ saveAddress ]', () => {
     const action = Actions.saveAddress({
       address: {
+        id: 'testId',
         postcode: 'testPostcode',
-        addressLineOne: 'testAddressLineOne',
-        addressLineTwo: 'testAddressLineTwo',
-        county: 'testCounty',
-        townOrCity: 'testTownOrCity',
+        line1: 'testAddressLineOne',
+        line2: 'testAddressLineTwo',
+        province: 'testCounty',
+        city: 'testTownOrCity',
       },
     });
     expect(action.type).toEqual(Actions.ActionType.SAVE_ADDRESS);

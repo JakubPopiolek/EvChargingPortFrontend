@@ -7,11 +7,12 @@ export const initialState: PersonalDetails = {
   lastName: null,
   email: null,
   address: {
+    id: null,
     postcode: null,
-    addressLineOne: null,
-    addressLineTwo: null,
-    townOrCity: null,
-    county: null,
+    line1: null,
+    line2: null,
+    city: null,
+    province: null,
   },
 };
 
@@ -30,12 +31,12 @@ export const personalDetailsReducer = createReducer(
 
   on(
     fromPersonalDetailsActions.saveInitialAddress,
-    (state, { postcode, addressLineOne }) => ({
+    (state, { postcode, line1 }) => ({
       ...state,
       address: {
         ...state.address!,
         postcode,
-        addressLineOne,
+        line1,
       },
     })
   ),

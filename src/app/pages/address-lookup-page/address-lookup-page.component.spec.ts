@@ -5,7 +5,6 @@ import { Router, RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { ApiAddressLookupService } from '../../core/services/api/address-lookup-service';
-import { ApiAddressLookupServiceStubFactory } from '../../core/testing/mocks/api/address-lookup-service-stub.factory';
 import { AddressResultDouble } from '../../core/testing/doubles/api/address-result.double';
 import { of } from 'rxjs';
 
@@ -53,13 +52,12 @@ describe('AddressLookupPageComponent', () => {
   });
 
   it('should error when addressLineOne is empty', () => {
-    component.addressLookupForm.get('addressLineOne')?.setValue('');
+    component.addressLookupForm.get('line1')?.setValue('');
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const postcodeInput =
       fixture.debugElement.nativeElement.querySelector('#searchString');
-    const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '#addressLineOne-error'
-    );
+    const errorMessage =
+      fixture.debugElement.nativeElement.querySelector('#line1-error');
 
     btn.click();
     fixture.detectChanges();
@@ -73,9 +71,7 @@ describe('AddressLookupPageComponent', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');
-    component.addressLookupForm
-      .get('addressLineOne')
-      ?.setValue('testAddressLineOne');
+    component.addressLookupForm.get('line1')?.setValue('testAddressLineOne');
     fixture.detectChanges();
 
     btn.click();
@@ -88,9 +84,7 @@ describe('AddressLookupPageComponent', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');
-    component.addressLookupForm
-      .get('addressLineOne')
-      ?.setValue('testAddressLineOne');
+    component.addressLookupForm.get('line1')?.setValue('testAddressLineOne');
     fixture.detectChanges();
 
     btn.click();
@@ -106,9 +100,7 @@ describe('AddressLookupPageComponent', () => {
     );
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');
-    component.addressLookupForm
-      .get('addressLineOne')
-      ?.setValue('testAddressLineOne');
+    component.addressLookupForm.get('line1')?.setValue('testAddressLineOne');
     fixture.detectChanges();
 
     btn.click();

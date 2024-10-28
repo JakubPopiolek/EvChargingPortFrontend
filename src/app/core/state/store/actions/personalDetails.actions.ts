@@ -28,7 +28,7 @@ export const saveInitialAddress = createAction(
   ActionType.SAVE_INITIAL_ADDRESS,
   props<{
     postcode: Address['postcode'];
-    addressLineOne: Address['addressLineOne'];
+    line1: Address['line1'];
   }>()
 );
 

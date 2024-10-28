@@ -27,21 +27,21 @@ describe('EnterAddressManuallyPageComponent', () => {
   });
 
   it('should error when required fields are empty', () => {
-    component.addressForm.get('addressLineOne')?.setValue('');
-    component.addressForm.get('townOrCity')?.setValue('');
+    component.addressForm.get('line1')?.setValue('');
+    component.addressForm.get('city')?.setValue('');
 
     const btn = fixture.debugElement.nativeElement.querySelector('button');
 
     const errorMessage_addressLineOne =
-      fixture.debugElement.nativeElement.querySelector('#addressLineOne-error');
+      fixture.debugElement.nativeElement.querySelector('#line1-error');
     const errorMessage_townOrCity =
-      fixture.debugElement.nativeElement.querySelector('#townOrCity-error');
+      fixture.debugElement.nativeElement.querySelector('#city-error');
 
     btn.click();
     fixture.detectChanges();
 
     expect(component.addressForm.valid).toBe(false);
-    // expect(errorMessage_addressLineOne.style.display).toBe('block');
+    expect(errorMessage_addressLineOne.style.display).toBe('block');
     expect(errorMessage_townOrCity.style.display).toBe('block');
   });
 });

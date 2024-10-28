@@ -1,24 +1,36 @@
-import { AddressServiceResponse } from '../../../interfaces/AddressServiceResponse.interface';
+import { Address } from '../../../interfaces/PersonalDetails.interface';
 
 export class AddressResultDouble {
-  public static prepareSuccessfulResultTwoAddresses(): AddressServiceResponse[] {
+  public static prepareSuccessfulResultTwoAddresses(): Address[] {
     return [
       {
-        Id: 'GB|RM|B|7423468|ENG',
-        Text: '42 someStreet someCounty AA1 2BB',
+        id: 'GB|RM|B|7423468|ENG',
+        line1: 'testLine1-1',
+        line2: 'testLine2-1',
+        city: 'testCity-1',
+        province: 'testProvince-1',
+        postcode: 'testPostcode-1',
       },
       {
-        Id: 'GB|RM|B|3456442|ENG',
-        Text: '90 otherStreet otherCounty CC3 4DD',
+        id: 'GB|RM|B|3423551|ENG',
+        line1: 'testLine1-2',
+        line2: 'testLine2-2',
+        city: 'testCity-2',
+        province: 'testProvince-2',
+        postcode: 'testPostcode-2',
       },
     ];
   }
 
-  public static prepareSuccessfulResultOneAddress(): AddressServiceResponse[] {
+  public static prepareSuccessfulResultOneAddress(): Address[] {
     return [
       {
-        Id: 'GB|RM|B|7421068|ENG',
-        Text: '42 singleAddress singleCounty EE5 6FF',
+        id: 'GB|RM|B|7423468|ENG',
+        line1: 'testLine1-1',
+        line2: 'testLine2-1',
+        city: 'testCity-1',
+        province: 'testProvince-1',
+        postcode: 'testPostcode-1',
       },
     ];
   }
