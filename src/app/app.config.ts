@@ -11,6 +11,7 @@ import { metaReducers } from './core/state/state.module';
 import { vehicleDetailsFeature } from './core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { VehicleDetailsServiceEffects } from './core/state/store/effects/api/vehicleDetailsService.effects';
 import { personalDetailsFeature } from './core/state/store/reducers/personalDetails.reducer';
+import { applicationSubmissionFeature } from './core/state/store/reducers/applicationSubmission.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +26,6 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideState(vehicleDetailsFeature),
     provideState(personalDetailsFeature),
+    provideState(applicationSubmissionFeature),
   ],
 };

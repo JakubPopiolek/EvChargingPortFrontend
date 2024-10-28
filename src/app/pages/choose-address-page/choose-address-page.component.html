@@ -28,12 +28,12 @@
             <span class="govuk-visually-hidden">Error:</span> Choose an address
           </p>
           <form [formGroup]="addressSelectionForm">
-            @for (address of this.addresses; track address.id){
+            @for (address of this.addresses; track address.line1){
             <div class="govuk-radios__item">
               <input
                 formControlName="selectedAddress"
                 class="govuk-radios__input"
-                id="{{ address.id }}"
+                id="{{ $index }}"
                 name="selectedAddress"
                 type="radio"
                 value="{{ $index }}"

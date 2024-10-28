@@ -54,7 +54,6 @@ export class EnterAddressManuallyPageComponent implements OnInit {
       this.store.dispatch(
         saveAddress({
           address: {
-            id: null,
             postcode: this.addressForm.get('postcode')!.value,
             line1: this.addressForm.get('line1')!.value,
             line2: this.addressForm.get('line2')!.value,

@@ -1,1 +1,84 @@
-<p>check-answers-page works!</p>
+<div class="govuk-width-container">
+  <a routerLink="/confirmAddress" class="govuk-back-link">Back</a>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <h1 class="govuk-heading-l">
+        Check your answers before sending your application
+      </h1>
+      <h2 class="govuk-heading-m">Your details</h2>
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Vehicle Registration Number</dt>
+          <dd class="govuk-summary-list__value">
+            <p class="govuk-body">
+              {{ this.vehicleDetails?.registrationNumber }}
+            </p>
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" routerLink="/vrn"
+              >Change<span class="govuk-visually-hidden">
+                vehicle registration number</span
+              ></a
+            >
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Name</dt>
+          <dd class="govuk-summary-list__value">
+            {{ this.personalDetails?.firstName }}
+            {{ this.personalDetails?.lastName }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" routerLink="/name"
+              >Change<span class="govuk-visually-hidden"> name</span></a
+            >
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Email address</dt>
+          <dd class="govuk-summary-list__value">
+            {{ this.personalDetails?.email }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" routerLink="/email"
+              >Change<span class="govuk-visually-hidden">
+                email address</span
+              ></a
+            >
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Address</dt>
+          <dd class="govuk-summary-list__value">
+            {{ this.personalDetails?.address?.line1 }} <br />
+            {{ this.personalDetails?.address?.line2 }} <br />
+            {{ this.personalDetails?.address?.city }} <br />
+            {{ this.personalDetails?.address?.province }} <br />
+            {{ this.personalDetails?.address?.postcode }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/addressLookup"
+              >Change<span class="govuk-visually-hidden"> address</span></a
+            >
+          </dd>
+        </div>
+      </dl>
+      <h2 class="govuk-heading-m">Now send your application</h2>
+      <p class="govuk-body">
+        By submitting this application you are confirming that, to the best of
+        your knowledge, the details you are providing are correct.
+      </p>
+      <form novalidate>
+        <input type="hidden" name="answers-checked" value="true" />
+        <button
+          (click)="onClick()"
+          type="button"
+          class="govuk-button"
+          data-module="govuk-button"
+        >
+          Accept and send
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

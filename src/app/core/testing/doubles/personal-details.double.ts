@@ -7,7 +7,6 @@ export class PersonalDetailsDouble {
       lastName: 'testLastName',
       email: 'testEmail',
       address: {
-        id: 'testId',
         postcode: 'testPostcode',
         line1: 'testAddressLineOne',
         line2: 'testAddressLineTwo',
