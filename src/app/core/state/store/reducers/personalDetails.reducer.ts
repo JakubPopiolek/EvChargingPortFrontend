@@ -7,7 +7,6 @@ export const initialState: PersonalDetails = {
   lastName: null,
   email: null,
   address: {
-    id: null,
     postcode: null,
     line1: null,
     line2: null,

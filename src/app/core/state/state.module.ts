@@ -9,10 +9,12 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../../environments/environment';
 import * as fromVehicleEnquiryServiceReducer from './store/reducers/api/vehicleDetailsService.reducer';
 import { PersonalDetails } from '../interfaces/PersonalDetails.interface';
+import { ApplicationSubmissionResponse } from '../interfaces/ApplicationSubmission.interface';
 
 export interface State {
   vehicleDetails: fromVehicleEnquiryServiceReducer.VehicleDetailsState;
   personalDetails: PersonalDetails;
+  applicationSubmission: ApplicationSubmissionResponse;
 }
 
 const devTools: ModuleWithProviders<any>[] = [
@@ -29,6 +31,10 @@ export function storageSyncReducer(
     features: [
       { stateKey: 'vehicleDetails', storageForFeature: window.sessionStorage },
       { stateKey: 'personalDetails', storageForFeature: window.sessionStorage },
+      {
+        stateKey: 'applicationSubmission',
+        storageForFeature: window.sessionStorage,
+      },
     ],
     storage: window.localStorage,
   });

@@ -64,7 +64,6 @@ describe('personalDetailsReducer', () => {
       const newState: PersonalDetails = {
         ...initialState,
         address: {
-          id: 'testId',
           postcode: 'testPostcode',
           line1: 'testAddressLineOne',
           line2: 'testAddressLineTwo',
@@ -74,7 +73,6 @@ describe('personalDetailsReducer', () => {
       };
       const action = fromPersonalDetailsActions.saveAddress({
         address: {
-          id: 'testId',
           postcode: 'testPostcode',
           line1: 'testAddressLineOne',
           line2: 'testAddressLineTwo',

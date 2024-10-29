@@ -1,8 +1,12 @@
-import { PersonalDetails } from '../../interfaces/PersonalDetails.interface';
+import {
+  ApplicationSubmission,
+  ApplicationSubmissionResponse,
+} from '../../../interfaces/ApplicationSubmission.interface';
 
-export class PersonalDetailsDouble {
-  public static preparePersonalDetails(): PersonalDetails {
+export class SubmitApplicationDouble {
+  public static prepareApplicationSubmission(): ApplicationSubmissionResponse {
     return {
+      id: 'testId',
       firstName: 'testFirstName',
       lastName: 'testLastName',
       email: 'testEmail',
@@ -13,6 +17,7 @@ export class PersonalDetailsDouble {
         province: 'testCounty',
         city: 'testTownOrCity',
       },
+      vrn: 'testVRN',
     };
   }
 }

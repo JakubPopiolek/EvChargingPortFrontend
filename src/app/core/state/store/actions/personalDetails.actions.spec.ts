@@ -27,7 +27,6 @@ describe('vehicleDetailsService actions', () => {
   it('should create an action - [ saveAddress ]', () => {
     const action = Actions.saveAddress({
       address: {
-        id: 'testId',
         postcode: 'testPostcode',
         line1: 'testAddressLineOne',
         line2: 'testAddressLineTwo',

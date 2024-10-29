@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmittedPageComponent } from './submitted-page.component';
+import { StoreModule } from '@ngrx/store';
 
 describe('SubmittedPageComponent', () => {
   let component: SubmittedPageComponent;
@@ -8,10 +9,9 @@ describe('SubmittedPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SubmittedPageComponent]
-    })
-    .compileComponents();
-    
+      imports: [SubmittedPageComponent, StoreModule.forRoot()],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(SubmittedPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -13,7 +13,6 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class ConfirmAddressPageComponent implements OnInit {
   public displayAddress?: Address = {
-    id: '',
     line1: '',
     line2: '',
     city: '',
