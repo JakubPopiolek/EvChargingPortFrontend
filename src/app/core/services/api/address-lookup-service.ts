@@ -13,15 +13,13 @@ export class ApiAddressLookupService {
     postcode: string | null | undefined,
     addressLineOne: string | null | undefined
   ): Observable<Address[]> {
-    let mockResponse: Address[];
-
     if (addressLineOne === 'testSingle') {
-      mockResponse = AddressResultDouble.prepareSuccessfulResultOneAddress();
+      return of(AddressResultDouble.prepareSuccessfulResultOneAddress());
+    } else if (addressLineOne === 'testNone') {
+      return of([]);
     } else {
-      mockResponse = AddressResultDouble.prepareSuccessfulResultTwoAddresses();
+      return of(AddressResultDouble.prepareSuccessfulResultTwoAddresses());
     }
-
-    return of(mockResponse);
 
     // return this.http.get<addressServiceResponse[]>(
     //   'api/AddressLookup/',

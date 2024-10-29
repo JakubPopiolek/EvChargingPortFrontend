@@ -21,4 +21,9 @@ export class ApiSubmitApplicationService {
       applicationData
     );
   }
+
+  public get() {
+    const apiUrl: string = `/api/ping`;
+    return this.http.get(apiUrl, { observe: 'response', responseType: 'text' });
+  }
 }

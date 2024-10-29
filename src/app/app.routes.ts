@@ -11,6 +11,8 @@ import { ChooseAddressPageComponent } from './pages/choose-address-page/choose-a
 import { ConfirmAddressPageComponent } from './pages/confirm-address-page/confirm-address-page.component';
 import { EnterAddressManuallyPageComponent } from './pages/enter-address-manually-page/enter-address-manually-page.component';
 import { SubmittedPageComponent } from './pages/submitted-page/submitted-page.component';
+import { ServiceUnavailablePageComponent } from './pages/service-unavailable-page/service-unavailable-page.component';
+import { NoAddressFoundPageComponent } from './pages/no-address-found-page/no-address-found-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'start', pathMatch: 'full' },
@@ -32,5 +34,6 @@ export const routes: Routes = [
   },
   { path: 'checkAnswers', component: CheckAnswersPageComponent },
   { path: 'submitted', component: SubmittedPageComponent },
-  // { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent }
+  { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent },
+  { path: 'noAddressFound', component: NoAddressFoundPageComponent },
 ];
