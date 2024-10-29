@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromVehicleEnquiryServiceActions from '../../../core/state/store/actions/api/vehicleDetailsService.actions';
 import {
   selectVehicleDetails,
-  VehicleDetailsState,
+  selectVehicleDetailsState,
 } from '../../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { VehicleDetails } from '../../../core/interfaces/VehicleDetails.interface';
 
@@ -21,6 +21,7 @@ export class VrnFormComponent implements OnInit {
   public vrn: FormControl = new FormControl('', [Validators.required]);
   public isValid: boolean = true;
   public vehicleDetails?: VehicleDetails;
+  public errorMessage: string = 'Enter vehicle registration number';
 
   constructor(private router: Router, private readonly store: Store) {}
 
@@ -44,9 +45,17 @@ export class VrnFormComponent implements OnInit {
       })
     );
     if (this.vrn.valid) {
-      this.router.navigate(['confirmVehicleDetails']);
+      this.store.select(selectVehicleDetailsState).subscribe((state) => {
+        if (state.isLoadingSuccess) {
+          this.router.navigate(['confirmVehicleDetails']);
+        } else if (state.isLoadingFailure) {
+          this.isValid = false;
+          this.errorMessage = 'Vehicle not found. Enter a valid VRN';
+        }
+      });
     } else {
       this.isValid = false;
+      this.errorMessage = 'Enter vehicle registration number';
     }
   }
 }

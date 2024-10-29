@@ -13,7 +13,7 @@
         id="address-postcode-error"
         class="govuk-error-message"
       >
-        Enter vehicle registration number
+        {{ this.errorMessage }}
       </p>
       <input
         [ngClass]="{ 'govuk-input--error': !isValid }"

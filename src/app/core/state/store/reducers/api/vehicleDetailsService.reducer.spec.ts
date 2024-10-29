@@ -1,6 +1,6 @@
 import * as fromVehicleDetailsReducer from './vehicleDetailsService.reducer';
 import * as fromVehicleDetailsActions from '../../actions/api/vehicleDetailsService.actions';
-import { ApiVehicleDetailsDouble } from '../../../../testing/doubles/api/vehicle-details-result.double';
+import { ApiVehicleDetailsDouble } from '../../../../testing/doubles/api/vehicle-details.double';
 
 describe('vehicleDetailsServiceReducer', () => {
   describe('GetVehicleDetails', () => {

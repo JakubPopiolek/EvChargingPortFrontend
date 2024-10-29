@@ -1,5 +1,6 @@
 import { fuelType } from '../../../enums/fuelType.enum';
 import { VehicleDetails } from '../../../interfaces/VehicleDetails.interface';
+import { VehicleDetailsState } from '../../../state/store/reducers/api/vehicleDetailsService.reducer';
 
 export class ApiVehicleDetailsDouble {
   public static prepareSuccessfulResultElectric(): VehicleDetails {
@@ -17,6 +18,15 @@ export class ApiVehicleDetailsDouble {
       fuelType: fuelType.PETROL,
       make: 'volkswagen',
       registrationNumber: 'AB12 ABC',
+    };
+  }
+
+  public static prepareVehicleDetailsState(): VehicleDetailsState {
+    return {
+      vehicleDetails: ApiVehicleDetailsDouble.prepareSuccessfulResultElectric(),
+      isLoading: false,
+      isLoadingSuccess: false,
+      isLoadingFailure: false,
     };
   }
 }

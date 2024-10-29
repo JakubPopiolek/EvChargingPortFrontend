@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { VehicleDetails } from '../../interfaces/VehicleDetails.interface';
-import { ApiVehicleDetailsDouble } from '../../testing/doubles/api/vehicle-details-result.double';
+import { ApiVehicleDetailsDouble } from '../../testing/doubles/api/vehicle-details.double';
 import { ApiVehicleEnquiryService } from './vehicle-enquiry-service';
 import {
   HttpClientTestingModule,
