@@ -75,8 +75,10 @@ export class AddressLookupPageComponent implements OnInit {
       .subscribe((res) => {
         if (res.length > 1) {
           this.router.navigate(['chooseAddress']);
-        } else {
+        } else if (res.length == 1) {
           this.router.navigate(['confirmAddress']);
+        } else {
+          this.router.navigate(['noAddressFound']);
         }
       });
   }

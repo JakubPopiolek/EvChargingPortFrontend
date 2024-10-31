@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { SERVICE_NAME } from '../../consts/config';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ApiSubmitApplicationService } from '../../core/services/api/submit-application-service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-start-page',
@@ -13,5 +15,19 @@ import { RouterLink } from '@angular/router';
 export class StartPageComponent {
   serviceName: string = SERVICE_NAME;
 
-  constructor() {}
+  constructor(
+    private readonly router: Router,
+    private readonly apiSubmitApplicationService: ApiSubmitApplicationService
+  ) {}
+
+  public onClick() {
+    this.apiSubmitApplicationService.get().subscribe({
+      next: () => {
+        this.router.navigate(['vrn']);
+      },
+      error: () => {
+        this.router.navigate(['serviceUnavailable']);
+      },
+    });
+  }
 }

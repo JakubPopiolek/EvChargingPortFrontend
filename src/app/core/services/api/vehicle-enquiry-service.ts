@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { VehicleDetails } from '../../interfaces/VehicleDetails.interface';
-import { ApiVehicleDetailsDouble } from '../../testing/doubles/api/vehicle-details-result.double';
+import { ApiVehicleDetailsDouble } from '../../testing/doubles/api/vehicle-details.double';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +23,8 @@ export class ApiVehicleEnquiryService {
 
     return of(mockResponse);
 
-    // return this.http.get<VehicleEnquiryServiceResponse>(
-    //   'api/VehicleEnquiryService/',
-    //   { params: { registrationNumber: registrationNumber } }
-    // );
+    return this.http.get<VehicleDetails>('api/VehicleEnquiryService/', {
+      params: { registrationNumber: registrationNumber },
+    });
   }
 }

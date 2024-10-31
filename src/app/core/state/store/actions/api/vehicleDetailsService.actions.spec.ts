@@ -1,4 +1,4 @@
-import { ApiVehicleDetailsDouble } from '../../../../testing/doubles/api/vehicle-details-result.double';
+import { ApiVehicleDetailsDouble } from '../../../../testing/doubles/api/vehicle-details.double';
 import * as Actions from './vehicleDetailsService.actions';
 
 describe('vehicleDetailsService actions', () => {

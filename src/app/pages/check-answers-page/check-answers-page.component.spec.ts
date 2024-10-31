@@ -8,7 +8,7 @@ import { By } from '@angular/platform-browser';
 import { PersonalDetails } from '../../core/interfaces/PersonalDetails.interface';
 import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
 import { PersonalDetailsDouble } from '../../core/testing/doubles/personal-details.double';
-import { ApiVehicleDetailsDouble } from '../../core/testing/doubles/api/vehicle-details-result.double';
+import { ApiVehicleDetailsDouble } from '../../core/testing/doubles/api/vehicle-details.double';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
 import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';

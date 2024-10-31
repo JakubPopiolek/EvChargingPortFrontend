@@ -1,1 +1,17 @@
-<p>no-address-found-page works!</p>
+<a routerLink="/addressLookup" class="govuk-back-link">Back</a>
+<div class="govuk-width-container">
+  <h1 class="govuk-heading-l">No address found</h1>
+  <p class="govuk-body">
+    We could not find an address that matches <b>{{ this.postcode }}</b> and
+    <b>{{ this.addressLine1 }}</b
+    >. You can search again or enter the address manually.
+  </p>
+  <p class="govuk-body">
+    <a routerLink="/addressLookup" class="govuk-link">Search again</a>
+  </p>
+  <p class="govuk-body govuk-!-margin-bottom-0">
+    <a routerLink="/enterAddressManually" class="govuk-link"
+      >Enter address manually</a
+    >
+  </p>
+</div>

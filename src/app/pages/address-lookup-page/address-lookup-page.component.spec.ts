@@ -80,22 +80,7 @@ describe('AddressLookupPageComponent', () => {
     expect(spy).toHaveBeenCalledWith(['chooseAddress']);
   });
 
-  xit('should route to confirm address page when form is valid and there is one address', () => {
-    const btn = fixture.debugElement.nativeElement.querySelector('button');
-    const spy = spyOn(router, 'navigate');
-    component.addressLookupForm.get('postcode')?.setValue('testPostcode');
-    component.addressLookupForm.get('line1')?.setValue('testAddressLineOne');
-    fixture.detectChanges();
-
-    btn.click();
-
-    expect(component.addressLookupForm.valid).toBe(true);
-
-    //TODO: Need to route to confirm address page
-    expect(spy).toHaveBeenCalledWith(['chooseAddress']);
-  });
-
-  it('should call [apiAddressLookupService -> get] when form is valid and continue button is clicked', () => {
+  it('should redurect to confirmAddress page when form is valid, continue button is clicked and there is only 1 address', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     spyOn(mockApiAddressLookupService, 'get').and.returnValue(
       of(AddressResultDouble.prepareSuccessfulResultOneAddress())

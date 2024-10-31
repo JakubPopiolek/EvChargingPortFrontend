@@ -6,7 +6,7 @@ import { ConfirmVehicleDetailsPageComponent } from './confirm-vehicle-details-pa
 import { fuelType } from '../../core/enums/fuelType.enum';
 import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
-import { ApiVehicleDetailsDouble } from '../../core/testing/doubles/api/vehicle-details-result.double';
+import { ApiVehicleDetailsDouble } from '../../core/testing/doubles/api/vehicle-details.double';
 
 describe('ConfirmVehicleDetailsPageComponent', () => {
   let component: ConfirmVehicleDetailsPageComponent;
