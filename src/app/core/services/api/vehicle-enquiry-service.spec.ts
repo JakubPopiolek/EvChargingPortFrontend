@@ -26,16 +26,16 @@ describe('ApiVehicleDetailsService', () => {
     expect(service).toBeTruthy();
   });
 
-  //   it('should return data from endpoint based on request', async () => {
-  //     service
-  //       .getByRegNumber(mockVehicleDetails.registrationNumber)
-  //       .subscribe((res) => {
-  //         expect(res).toEqual(mockVehicleDetails);
-  //       });
+  xit('should return data from endpoint based on request', async () => {
+    service
+      .getByRegNumber(mockVehicleDetails.registrationNumber)
+      .subscribe((res) => {
+        expect(res).toEqual(mockVehicleDetails);
+      });
 
-  //     const req = httpTestingController.expectOne({
-  //       method: 'GET',
-  //       url: `api/VehicleEnquiryService/`,
-  //     });
-  //   });
+    httpTestingController.expectOne({
+      method: 'GET',
+      url: `api/VehicleEnquiryService/`,
+    });
+  });
 });

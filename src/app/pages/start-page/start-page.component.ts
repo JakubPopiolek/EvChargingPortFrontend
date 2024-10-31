@@ -21,7 +21,7 @@ export class StartPageComponent {
   ) {}
 
   public onClick() {
-    this.apiSubmitApplicationService.get().subscribe({
+    this.apiSubmitApplicationService.ping().subscribe({
       next: () => {
         this.router.navigate(['vrn']);
       },
