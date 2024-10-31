@@ -21,7 +21,7 @@ export class ApiVehicleEnquiryService {
     // const mockResponse: VehicleEnquiryServiceResponse =
     //   ApiVehicleDetailsResponseDouble.prepareSuccessfulResultPetrol();
 
-    // return of(mockResponse);
+    return of(mockResponse);
     return of();
 
     return this.http.get<VehicleDetails>('api/VehicleEnquiryService/', {

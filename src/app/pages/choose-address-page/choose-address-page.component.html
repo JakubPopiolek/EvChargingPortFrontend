@@ -38,10 +38,7 @@
                 type="radio"
                 value="{{ $index }}"
               />
-              <label
-                class="govuk-label govuk-radios__label"
-                for="select-an-address"
-              >
+              <label class="govuk-label govuk-radios__label" for="{{ $index }}">
                 {{ address.line1 }}, {{ address.line2 }}, {{ address.city }},
                 {{ address.province }}, {{ address.postcode }}
               </label>
