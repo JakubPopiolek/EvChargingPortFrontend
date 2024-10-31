@@ -1,0 +1,38 @@
+<a routerLink="/vrn" class="govuk-back-link">Back</a>
+<h1 class="govuk-heading-l info-panel">Vehicle details could not be found</h1>
+<dl class="govuk-summary-list">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key you-searched-for">You searched for</dt>
+    <dd class="govuk-summary-list__value you-searched-for" id="searched-vrn">
+      <strong id="vehicleRegNumber">{{ this.vrn }}</strong>
+    </dd>
+  </div>
+</dl>
+<p class="govuk-body">
+  If you are sure that you entered the correct registration number please
+  contact DVLA.
+</p>
+<h2 class="govuk-heading-m" id="contact-dvla-by-phone">
+  Contact DVLA by phone
+</h2>
+<ul class="contact-details-list">
+  <li>
+    <p class="govuk-body">Telephone: 0300 790 6802</p>
+  </li>
+  <li>
+    <p class="govuk-body">Monday to Friday, 8am to 7pm</p>
+  </li>
+  <li>
+    <p class="govuk-body">Saturday, 8am to 2pm</p>
+  </li>
+  <li>
+    <a
+      class="govuk-body govuk-link"
+      href="https://www.gov.uk/call-charges"
+      id="call-charges-link"
+      rel="noopener noreferrer"
+      target="_blank"
+      >Find out about call charges</a
+    >
+  </li>
+</ul>

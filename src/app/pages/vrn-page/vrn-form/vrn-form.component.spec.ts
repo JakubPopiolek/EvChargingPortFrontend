@@ -84,7 +84,7 @@ describe('VrnFormComponent', () => {
   it('should route to confirm vehicle details when vrn is valid and continue button clicked', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
-    component.vrn.setValue('test');
+    component.vrn.setValue(mockVehiceDetails.registrationNumber);
     fixture.detectChanges();
 
     btn.click();
@@ -93,8 +93,9 @@ describe('VrnFormComponent', () => {
     expect(spy).toHaveBeenCalledWith(['confirmVehicleDetails']);
   });
 
-  it('should show error message when api call fails', () => {
+  it('should route to serviceUnavilable page when api call fails', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
+    const spy = spyOn(router, 'navigate');
     mockVehicleDetailsStateSelector.setResult({
       ...mockVehicleDetailsState,
       isLoadingSuccess: false,
@@ -102,19 +103,35 @@ describe('VrnFormComponent', () => {
     });
     store.refreshState();
 
-    const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message'
-    );
-    component.vrn.setValue('test');
+    component.vrn.setValue(mockVehiceDetails.registrationNumber);
     fixture.detectChanges();
 
     btn.click();
     fixture.detectChanges();
 
-    expect(component.isValid).toBe(false);
-    expect(errorMessage.innerText).toContain(
-      'Vehicle not found. Enter a valid VRN'
-    );
+    expect(spy).toHaveBeenCalledWith(['serviceUnavailable']);
+  });
+
+  it('should route to vehicleNotFound page when api returns empty', () => {
+    mockVehicleDetailsSelector.setResult(undefined);
+    store.refreshState();
+    const btn = fixture.debugElement.nativeElement.querySelector('button');
+    const spy = spyOn(router, 'navigate');
+    mockVehicleDetailsStateSelector.setResult({
+      ...mockVehicleDetailsState,
+      isLoadingSuccess: false,
+    });
+    store.refreshState();
+
+    component.vrn.setValue(mockVehiceDetails.registrationNumber);
+    fixture.detectChanges();
+
+    btn.click();
+    fixture.detectChanges();
+
+    expect(spy).toHaveBeenCalledWith(['vehicleNotFound'], {
+      queryParams: { vrn: mockVehiceDetails.registrationNumber },
+    });
   });
 
   it('should fill vrn box when values are present in store', () => {
