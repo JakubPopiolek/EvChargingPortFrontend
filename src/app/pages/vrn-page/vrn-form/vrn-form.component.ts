@@ -49,8 +49,11 @@ export class VrnFormComponent implements OnInit {
         if (state.isLoadingSuccess) {
           this.router.navigate(['confirmVehicleDetails']);
         } else if (state.isLoadingFailure) {
-          this.isValid = false;
-          this.errorMessage = 'Vehicle not found. Enter a valid VRN';
+          this.router.navigate(['serviceUnavailable']);
+        } else {
+          this.router.navigate(['vehicleNotFound'], {
+            queryParams: { vrn: this.vrn.value },
+          });
         }
       });
     } else {

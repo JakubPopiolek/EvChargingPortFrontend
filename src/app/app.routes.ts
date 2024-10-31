@@ -13,6 +13,7 @@ import { EnterAddressManuallyPageComponent } from './pages/enter-address-manuall
 import { SubmittedPageComponent } from './pages/submitted-page/submitted-page.component';
 import { ServiceUnavailablePageComponent } from './pages/service-unavailable-page/service-unavailable-page.component';
 import { NoAddressFoundPageComponent } from './pages/no-address-found-page/no-address-found-page.component';
+import { VehicleNotFoundPageComponent } from './pages/vehicle-not-found-page/vehicle-not-found-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'start', pathMatch: 'full' },
@@ -36,4 +37,5 @@ export const routes: Routes = [
   { path: 'submitted', component: SubmittedPageComponent },
   { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent },
   { path: 'noAddressFound', component: NoAddressFoundPageComponent },
+  { path: 'vehicleNotFound', component: VehicleNotFoundPageComponent },
 ];
