@@ -23,13 +23,9 @@ export class StartPageComponent {
   public onClick() {
     this.apiSubmitApplicationService.get().subscribe({
       next: () => {
-        console.log('here');
-
         this.router.navigate(['vrn']);
       },
       error: () => {
-        console.log('here2');
-
         this.router.navigate(['serviceUnavailable']);
       },
     });
