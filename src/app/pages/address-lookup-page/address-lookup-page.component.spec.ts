@@ -95,4 +95,18 @@ describe('AddressLookupPageComponent', () => {
     expect(component.addressLookupForm.valid).toBe(true);
     expect(spy).toHaveBeenCalledWith(['confirmAddress']);
   });
+
+  it('should route to noAddressFound when form is valid and there are no addresses found', () => {
+    const btn = fixture.debugElement.nativeElement.querySelector('button');
+    const spy = spyOn(router, 'navigate');
+    spyOn(mockApiAddressLookupService, 'get').and.returnValue(of([]));
+    component.addressLookupForm.get('postcode')?.setValue('testPostcode');
+    component.addressLookupForm.get('line1')?.setValue('testAddressLineOne');
+    fixture.detectChanges();
+
+    btn.click();
+
+    expect(component.addressLookupForm.valid).toBe(true);
+    expect(spy).toHaveBeenCalledWith(['noAddressFound']);
+  });
 });

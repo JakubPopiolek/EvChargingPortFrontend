@@ -43,7 +43,7 @@ describe('ConfirmAddressPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should route to {checkAnswers} page when {Use this address} button is clicked', () => {
+  it('should route to [checkAnswers] page when [Use this address] button is clicked', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     btn.click();

@@ -123,4 +123,15 @@ describe('VrnFormComponent', () => {
 
     expect(vrnInputBox.value).toBe(mockVehiceDetails.registrationNumber);
   });
+
+  it('should fill vrn box with empty string when values are not present in store', () => {
+    mockVehicleDetailsSelector.setResult(undefined);
+    store.refreshState();
+    component.ngOnInit();
+    fixture.detectChanges();
+    const vrnInputBox =
+      fixture.debugElement.nativeElement.querySelector('.govuk-input');
+
+    expect(vrnInputBox.value).toBe('');
+  });
 });

@@ -23,8 +23,8 @@ export class ApiVehicleEnquiryService {
 
     return of(mockResponse);
 
-    return this.http.get<VehicleDetails>('api/VehicleEnquiryService/', {
-      params: { registrationNumber: registrationNumber },
-    });
+    // return this.http.get<VehicleDetails>('api/VehicleEnquiryService/', {
+    //   params: { registrationNumber: registrationNumber },
+    // });
   }
 }
