@@ -21,7 +21,6 @@ export class StartPageComponent {
   ) {}
 
   public onClick() {
-    console.log('here3');
     this.apiSubmitApplicationService.get().subscribe({
       next: () => {
         console.log('here');
