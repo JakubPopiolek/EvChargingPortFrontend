@@ -42,8 +42,12 @@ export class AddressLookupPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.store.select(selectPersonalDetailsState).subscribe((state) => {
-      this.addressLookupForm.get('postcode')?.setValue(state.address!.postcode);
-      this.addressLookupForm.get('line1')?.setValue(state.address!.line1);
+      this.addressLookupForm
+        .get('postcode')
+        ?.setValue(state.address ? state.address.postcode : '');
+      this.addressLookupForm
+        .get('line1')
+        ?.setValue(state.address ? state.address.line1 : '');
     });
   }
 
