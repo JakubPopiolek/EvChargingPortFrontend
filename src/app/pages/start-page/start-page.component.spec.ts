@@ -25,7 +25,7 @@ describe('StartPageComponent', () => {
 
   beforeEach(async () => {
     apiSubmitApplicationServiceMock =
-      ApiSubmitApplicationServiceStubFactory.prepareWithMethods(['get']);
+      ApiSubmitApplicationServiceStubFactory.prepareWithMethods(['ping']);
     await TestBed.configureTestingModule({
       imports: [
         RouterModule.forRoot([]),
@@ -53,7 +53,7 @@ describe('StartPageComponent', () => {
     let mockApiResponse = new HttpResponse({
       body: '2024-10-29T13:23:47.143615+00:00',
     });
-    spyOn(apiSubmitApplicationServiceMock, 'get').and.returnValue(
+    spyOn(apiSubmitApplicationServiceMock, 'ping').and.returnValue(
       of(mockApiResponse)
     );
     const routerSpy = spyOn(router, 'navigate');
@@ -66,7 +66,7 @@ describe('StartPageComponent', () => {
   });
 
   it('should navigate to serviceUnavailable page when api returns error', () => {
-    spyOn(apiSubmitApplicationServiceMock, 'get').and.returnValue(
+    spyOn(apiSubmitApplicationServiceMock, 'ping').and.returnValue(
       throwError(() => 'error')
     );
     const routerSpy = spyOn(router, 'navigate');

@@ -1,10 +1,12 @@
-import { Observable, of } from 'rxjs';
+import { Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { VehicleDetailsServiceEffects } from './vehicleDetailsService.effects';
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { ApiVehicleEnquiryService } from '../../../../services/api/vehicle-enquiry-service';
 import { ApiVehicleDetailsServiceStubFactory } from '../../../../testing/mocks/api/vehicle-details-service-stub.factory';
 import * as fromVehicleDetailsServiceActions from '../../actions/api/vehicleDetailsService.actions';
+import { cold } from 'jasmine-marbles';
+import { Actions } from '@ngrx/effects';
 
 describe('vehicleDetailsServiceEffects', () => {
   let actions$: Observable<any>;

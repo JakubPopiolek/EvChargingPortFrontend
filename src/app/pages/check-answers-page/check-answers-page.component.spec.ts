@@ -47,7 +47,7 @@ describe('CheckAnswersPageComponent', () => {
     mockVehicleDetails =
       ApiVehicleDetailsDouble.prepareSuccessfulResultElectric();
     submitApplicationResponseMock =
-      SubmitApplicationDouble.prepareApplicationSubmission();
+      SubmitApplicationDouble.prepareApplicationSubmissionResponse();
     await TestBed.configureTestingModule({
       imports: [
         CheckAnswersPageComponent,

@@ -22,7 +22,7 @@ export class ApiSubmitApplicationService {
     );
   }
 
-  public get() {
+  public ping() {
     const apiUrl: string = `/api/ping`;
     return this.http.get(apiUrl, { observe: 'response', responseType: 'text' });
   }
