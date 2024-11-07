@@ -44,10 +44,15 @@ export class CheckAnswersPageComponent implements OnInit {
       vrn: this.vehicleDetails?.registrationNumber,
     };
 
-    this.apiSubmitApplicationService.post(submission).subscribe((res) => {
-      this.store.dispatch(
-        fromApplicationSubmissionActions.saveId({ id: res.id })
-      );
+    this.apiSubmitApplicationService.post(submission).subscribe({
+      next: (res) => {
+        this.store.dispatch(
+          fromApplicationSubmissionActions.saveId({ id: res.id })
+        );
+      },
+      error: () => {
+        this.router.navigate(['serviceUnavailable']);
+      }
     });
     this.router.navigate(['submitted']);
   }
