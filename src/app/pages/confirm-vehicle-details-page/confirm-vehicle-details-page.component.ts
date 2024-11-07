@@ -20,7 +20,10 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
   public confirmVehicleDetails = new FormControl('', Validators.required);
   public isValid = true;
 
-  constructor(private readonly store: Store, private readonly router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router,
+  ) {}
 
   public ngOnInit(): void {
     this.store.select(selectVehicleDetails).subscribe((vehicleDetails) => {

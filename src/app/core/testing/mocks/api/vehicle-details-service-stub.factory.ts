@@ -6,7 +6,7 @@ import { MethodsNames } from '../../../types/utility.types';
 
 export class ApiVehicleDetailsServiceStubFactory {
   public static prepareWithData(
-    result: VehicleDetails | undefined
+    result: VehicleDetails | undefined,
   ): VehicleDetails {
     const out: Partial<ApiVehicleEnquiryService> = {
       getByRegNumber: (): Observable<VehicleDetails> => {
@@ -20,7 +20,7 @@ export class ApiVehicleDetailsServiceStubFactory {
   }
 
   public static prepareWithMethods(
-    methods: MethodsNames<ApiVehicleEnquiryService>[]
+    methods: MethodsNames<ApiVehicleEnquiryService>[],
   ): ApiVehicleEnquiryService {
     const stub: Partial<ApiVehicleEnquiryService> = {};
 

@@ -24,7 +24,10 @@ export class EmailPageComponent implements OnInit {
   public isValid: boolean = true;
   public errorMessage: string = '';
 
-  constructor(private readonly router: Router, private readonly store: Store) {}
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store,
+  ) {}
 
   ngOnInit(): void {
     this.store
@@ -39,7 +42,7 @@ export class EmailPageComponent implements OnInit {
       this.store.dispatch(
         fromPersonalDetailsActions.saveEmail({
           email: this.email.value,
-        })
+        }),
       );
       this.router.navigate(['addressLookup']);
       this.isValid = true;

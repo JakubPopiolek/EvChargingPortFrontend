@@ -34,7 +34,7 @@ describe('vehicleDetailsServiceEffects', () => {
   it('should get vehicle details', () => {
     const spy = spyOn(
       vehicleDetailsServiceMock,
-      'getByRegNumber'
+      'getByRegNumber',
     ).and.callThrough();
 
     actions$ = of(fromVehicleDetailsServiceActions.GetVehicleDetails);

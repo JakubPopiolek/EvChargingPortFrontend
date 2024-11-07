@@ -11,7 +11,7 @@ export class ApiAddressLookupService {
   constructor(public readonly http: HttpClient) {}
   public get(
     postcode: string | null | undefined,
-    addressLineOne: string | null | undefined
+    addressLineOne: string | null | undefined,
   ): Observable<Address[]> {
     if (addressLineOne === 'testSingle') {
       return of(AddressResultDouble.prepareSuccessfulResultOneAddress());

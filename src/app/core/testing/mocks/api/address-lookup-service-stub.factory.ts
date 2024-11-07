@@ -6,7 +6,7 @@ import { Address } from '../../../interfaces/PersonalDetails.interface';
 
 export class ApiAddressLookupServiceStubFactory {
   public static prepareWithOneAddress(
-    result: Address[] | undefined
+    result: Address[] | undefined,
   ): Address[] {
     const out: Partial<ApiAddressLookupService> = {
       get: (): Observable<Address[]> => {
@@ -20,7 +20,7 @@ export class ApiAddressLookupServiceStubFactory {
   }
 
   public static prepareWithTwoAddresses(
-    result: Address[] | undefined
+    result: Address[] | undefined,
   ): Address[] {
     const out: Partial<ApiAddressLookupService> = {
       get: (): Observable<Address[]> => {
@@ -34,7 +34,7 @@ export class ApiAddressLookupServiceStubFactory {
   }
 
   public static prepareWithMethods(
-    methods: MethodsNames<ApiAddressLookupService>[]
+    methods: MethodsNames<ApiAddressLookupService>[],
   ): ApiAddressLookupService {
     const stub: Partial<ApiAddressLookupService> = {};
 

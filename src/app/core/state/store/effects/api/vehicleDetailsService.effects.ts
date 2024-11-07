@@ -9,7 +9,7 @@ import { VehicleDetails } from '../../../../interfaces/VehicleDetails.interface'
 export class VehicleDetailsServiceEffects {
   constructor(
     private readonly actions$: Actions,
-    private readonly vehicleEnquiryService: ApiVehicleEnquiryService
+    private readonly vehicleEnquiryService: ApiVehicleEnquiryService,
   ) {}
 
   getVehicleDetails$ = createEffect(
@@ -24,19 +24,19 @@ export class VehicleDetailsServiceEffects {
                 return fromVehicleEnquiryServiceActions.GetVehicleDetailsSuccess(
                   {
                     vehicleDetails: response,
-                  }
+                  },
                 );
               }),
               catchError((error) =>
                 of(
                   fromVehicleEnquiryServiceActions.GetVehicleDetailsFailure(
-                    error
-                  )
-                )
-              )
-            )
-        )
+                    error,
+                  ),
+                ),
+              ),
+            ),
+        ),
       ),
-    { dispatch: true }
+    { dispatch: true },
   );
 }

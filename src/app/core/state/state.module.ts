@@ -25,7 +25,7 @@ const devTools: ModuleWithProviders<any>[] = [
 ];
 
 export function storageSyncReducer(
-  reducer: ActionReducer<State>
+  reducer: ActionReducer<State>,
 ): ActionReducer<State> {
   const metaReducer = storageSync<State>({
     features: [

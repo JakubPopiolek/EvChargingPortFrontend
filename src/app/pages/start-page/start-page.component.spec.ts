@@ -38,7 +38,7 @@ describe('StartPageComponent', () => {
     router = TestBed.inject(Router);
     httpMock = TestBed.inject(HttpTestingController);
     apiSubmitApplicationServiceMock = TestBed.inject(
-      ApiSubmitApplicationService
+      ApiSubmitApplicationService,
     );
     fixture = TestBed.createComponent(StartPageComponent);
     component = fixture.componentInstance;
@@ -54,7 +54,7 @@ describe('StartPageComponent', () => {
       body: '2024-10-29T13:23:47.143615+00:00',
     });
     spyOn(apiSubmitApplicationServiceMock, 'ping').and.returnValue(
-      of(mockApiResponse)
+      of(mockApiResponse),
     );
     const routerSpy = spyOn(router, 'navigate');
 
@@ -67,7 +67,7 @@ describe('StartPageComponent', () => {
 
   it('should navigate to serviceUnavailable page when api returns error', () => {
     spyOn(apiSubmitApplicationServiceMock, 'ping').and.returnValue(
-      throwError(() => 'error')
+      throwError(() => 'error'),
     );
     const routerSpy = spyOn(router, 'navigate');
 

@@ -19,12 +19,12 @@ export const saveName = createAction(
   props<{
     firstName: PersonalDetails['firstName'];
     lastName: PersonalDetails['lastName'];
-  }>()
+  }>(),
 );
 
 export const saveEmail = createAction(
   ActionType.SAVE_EMAIL,
-  props<{ email: PersonalDetails['email'] }>()
+  props<{ email: PersonalDetails['email'] }>(),
 );
 
 export const saveInitialAddress = createAction(
@@ -32,14 +32,14 @@ export const saveInitialAddress = createAction(
   props<{
     postcode: Address['postcode'];
     line1: Address['line1'];
-  }>()
+  }>(),
 );
 
 export const saveAddress = createAction(
   ActionType.SAVE_ADDRESS,
   props<{
     address: Address;
-  }>()
+  }>(),
 );
 
 export const getAddresses = createAction(
@@ -47,19 +47,19 @@ export const getAddresses = createAction(
   props<{
     postcode: string;
     line1: string;
-  }>()
+  }>(),
 );
 
 export const getAddressesSuccess = createAction(
   ActionType.GET_ADDRESSES_SUCCESS,
   props<{
     addresses: Address[];
-  }>()
+  }>(),
 );
 
 export const getAddressesFailure = createAction(
   ActionType.GET_ADDRESSES_FAILURE,
   props<{
     error: any;
-  }>()
+  }>(),
 );

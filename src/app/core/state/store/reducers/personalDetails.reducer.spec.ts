@@ -52,7 +52,7 @@ describe('personalDetailsReducer', () => {
       });
       const state: PersonalDetails = fromPersonalDetailsReducer.reducer(
         initialState,
-        action
+        action,
       );
       expect(state).toEqual(newState);
     });
@@ -82,7 +82,7 @@ describe('personalDetailsReducer', () => {
       });
       const state: PersonalDetails = fromPersonalDetailsReducer.reducer(
         initialState,
-        action
+        action,
       );
       expect(state).toEqual(newState);
     });

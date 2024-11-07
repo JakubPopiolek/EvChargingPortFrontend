@@ -7,7 +7,6 @@ import { ApiSubmitApplicationService } from '../../core/services/api/submit-appl
   selector: 'app-start-page',
   providers: [],
   standalone: true,
-  imports: [],
   templateUrl: './start-page.component.html',
   styleUrl: './start-page.component.scss',
 })
@@ -16,7 +15,7 @@ export class StartPageComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly apiSubmitApplicationService: ApiSubmitApplicationService
+    private readonly apiSubmitApplicationService: ApiSubmitApplicationService,
   ) {}
 
   public onClick() {

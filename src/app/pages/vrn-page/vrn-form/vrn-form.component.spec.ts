@@ -42,11 +42,11 @@ describe('VrnFormComponent', () => {
     store = TestBed.inject(MockStore);
     mockVehicleDetailsSelector = store.overrideSelector(
       selectVehicleDetails,
-      mockVehiceDetails
+      mockVehiceDetails,
     );
     mockVehicleDetailsStateSelector = store.overrideSelector(
       selectVehicleDetailsState,
-      { ...mockVehicleDetailsState, isLoadingSuccess: true }
+      { ...mockVehicleDetailsState, isLoadingSuccess: true },
     );
     fixture = TestBed.createComponent(VrnFormComponent);
     component = fixture.componentInstance;
@@ -67,7 +67,7 @@ describe('VrnFormComponent', () => {
     const inputBox =
       fixture.debugElement.nativeElement.querySelector('.govuk-input');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message'
+      '.govuk-error-message',
     );
 
     btn.click();
@@ -77,7 +77,7 @@ describe('VrnFormComponent', () => {
     expect(inputBox).toHaveClass('govuk-input--error');
     expect(errorMessage.style.display).toBe('block');
     expect(errorMessage.innerText).toContain(
-      'Enter vehicle registration number'
+      'Enter vehicle registration number',
     );
   });
 

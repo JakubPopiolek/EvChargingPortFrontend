@@ -26,7 +26,10 @@ export class NamePageComponent implements OnInit {
     lastName: new FormControl('', [Validators.required]),
   });
 
-  constructor(private readonly router: Router, private readonly store: Store) {}
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store,
+  ) {}
 
   public ngOnInit(): void {
     this.store.select(selectPersonalDetailsState).subscribe((details) => {
@@ -43,7 +46,7 @@ export class NamePageComponent implements OnInit {
         fromPersonalDetailsActions.saveName({
           firstName: this.nameForm.get('firstName')?.value!,
           lastName: this.nameForm.get('lastName')?.value!,
-        })
+        }),
       );
       this.router.navigate(['email']);
     } else {

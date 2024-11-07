@@ -37,13 +37,13 @@ export const personalDetailsReducer = createReducer(
         postcode,
         line1,
       },
-    })
+    }),
   ),
 
   on(fromPersonalDetailsActions.saveAddress, (state, { address }) => ({
     ...state,
     address,
-  }))
+  })),
 );
 
 export const personalDetailsFeature = createFeature({

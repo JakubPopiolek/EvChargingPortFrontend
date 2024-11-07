@@ -83,7 +83,7 @@ describe('AddressLookupPageComponent', () => {
   it('should redurect to confirmAddress page when form is valid, continue button is clicked and there is only 1 address', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     spyOn(mockApiAddressLookupService, 'get').and.returnValue(
-      of(AddressResultDouble.prepareSuccessfulResultOneAddress())
+      of(AddressResultDouble.prepareSuccessfulResultOneAddress()),
     );
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');

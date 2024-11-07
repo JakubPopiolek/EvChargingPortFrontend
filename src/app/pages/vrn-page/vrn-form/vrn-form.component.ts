@@ -23,7 +23,10 @@ export class VrnFormComponent implements OnInit {
   public vehicleDetails?: VehicleDetails;
   public errorMessage: string = 'Enter vehicle registration number';
 
-  constructor(private router: Router, private readonly store: Store) {}
+  constructor(
+    private router: Router,
+    private readonly store: Store,
+  ) {}
 
   public ngOnInit(): void {
     this.store
@@ -42,7 +45,7 @@ export class VrnFormComponent implements OnInit {
     this.store.dispatch(
       fromVehicleEnquiryServiceActions.GetVehicleDetails({
         vehicleRegistrationNumber: this.vrn.value ? this.vrn.value : '',
-      })
+      }),
     );
     if (this.vrn.valid) {
       this.store.select(selectVehicleDetailsState).subscribe((state) => {

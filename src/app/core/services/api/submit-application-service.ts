@@ -13,12 +13,12 @@ export class ApiSubmitApplicationService {
   constructor(public readonly http: HttpClient) {}
 
   public post(
-    applicationData: ApplicationSubmission
+    applicationData: ApplicationSubmission,
   ): Observable<ApplicationSubmissionResponse> {
     const apiUrl: string = `/api/ApplicationItems`;
     return this.http.post<ApplicationSubmissionResponse>(
       apiUrl,
-      applicationData
+      applicationData,
     );
   }
 

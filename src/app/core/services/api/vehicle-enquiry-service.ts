@@ -11,7 +11,7 @@ export class ApiVehicleEnquiryService {
   constructor(public readonly http: HttpClient) {}
 
   public getByRegNumber(
-    registrationNumber: string
+    registrationNumber: string,
   ): Observable<VehicleDetails> {
     //ELECTRIC
     const mockResponse: VehicleDetails =

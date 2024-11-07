@@ -1,1 +1,1 @@
-export const SERVICE_NAME = 'Service name placeholder'
+export const SERVICE_NAME = 'Service name placeholder';
