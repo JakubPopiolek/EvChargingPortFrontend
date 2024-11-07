@@ -33,7 +33,7 @@ describe('NamePageComponent', () => {
     store = TestBed.inject(MockStore);
     mockPersonalDetailsSelector = store.overrideSelector(
       selectPersonalDetailsState,
-      initialState
+      initialState,
     );
 
     router = TestBed.inject(Router);

@@ -32,7 +32,7 @@ const vehicleDetailsReducer = createReducer(
       isLoading: false,
       isLoadingSuccess: true,
       isLoadingFailure: false,
-    })
+    }),
   ),
   on(
     fromVehicleEnquiryServiceActions.GetVehicleDetailsFailure,
@@ -41,7 +41,7 @@ const vehicleDetailsReducer = createReducer(
       isLoading: false,
       isLoadingSuccess: false,
       isLoadingFailure: true,
-    })
+    }),
   ),
   on(fromVehicleEnquiryServiceActions.ClearVehicleDetails, (state) => ({
     ...state,
@@ -49,7 +49,7 @@ const vehicleDetailsReducer = createReducer(
     isLoading: false,
     isLoadingFailure: false,
     isLoadingSuccess: false,
-  }))
+  })),
 );
 
 export const vehicleDetailsFeature = createFeature({

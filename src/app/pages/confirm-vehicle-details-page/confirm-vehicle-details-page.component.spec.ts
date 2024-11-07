@@ -31,7 +31,7 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
     store = TestBed.inject(MockStore);
     mockVehicleDetailsSelector = store.overrideSelector(
       selectVehicleDetails,
-      mockVehiceDetails
+      mockVehiceDetails,
     );
 
     fixture = TestBed.createComponent(ConfirmVehicleDetailsPageComponent);
@@ -47,7 +47,7 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
   it('should display error when radio button is not selected and not call router', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message'
+      '.govuk-error-message',
     );
     const spy = spyOn(router, 'navigate');
 

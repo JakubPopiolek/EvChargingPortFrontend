@@ -4,7 +4,7 @@ import { ApiSubmitApplicationService } from '../../../services/api/submit-applic
 
 export class ApiSubmitApplicationServiceStubFactory {
   public static prepareWithMethods(
-    methods: MethodsNames<ApiSubmitApplicationService>[]
+    methods: MethodsNames<ApiSubmitApplicationService>[],
   ): ApiSubmitApplicationService {
     const stub: Partial<ApiSubmitApplicationService> = {};
 

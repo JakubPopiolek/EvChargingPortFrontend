@@ -22,7 +22,7 @@ export const applicationSubmissionReducer = createReducer(
   on(fromApplicationSubmissionActions.saveId, (state, { id }) => ({
     ...state,
     id,
-  }))
+  })),
 );
 
 export const applicationSubmissionFeature = createFeature({

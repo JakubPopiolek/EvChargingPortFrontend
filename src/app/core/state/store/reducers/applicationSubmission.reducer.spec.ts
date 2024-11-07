@@ -14,7 +14,7 @@ describe('applicationSubmissionReducer', () => {
       });
       const state = fromApplicationSubmissionReducer.reducer(
         initialState,
-        action
+        action,
       );
       expect(state).toEqual(newState);
     });

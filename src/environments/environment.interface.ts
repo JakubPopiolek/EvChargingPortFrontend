@@ -1,4 +1,4 @@
 export interface LocalEnvironmentInterface {
-    production: boolean;
-    apiProxyUrl: string;
+  production: boolean;
+  apiProxyUrl: string;
 }

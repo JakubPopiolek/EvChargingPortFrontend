@@ -34,7 +34,7 @@ describe('EmailPageComponent', () => {
     const emailInput =
       fixture.debugElement.nativeElement.querySelector('.govuk-input');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message'
+      '.govuk-error-message',
     );
 
     btn.click();
@@ -52,7 +52,7 @@ describe('EmailPageComponent', () => {
     const emailInput =
       fixture.debugElement.nativeElement.querySelector('.govuk-input');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message'
+      '.govuk-error-message',
     );
 
     btn.click();

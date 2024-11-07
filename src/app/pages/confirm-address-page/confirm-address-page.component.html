@@ -8,15 +8,19 @@
   </p>
   <div class="govuk-inset-text">
     @if (displayAddress?.line1) {
-    {{ displayAddress?.line1 }} <br />
-    } @if (displayAddress?.line2) {
-    {{ displayAddress?.line2 }} <br />
-    } @if (displayAddress?.city) {
-    {{ displayAddress?.city }} <br />
-    } @if (displayAddress?.province) {
-    {{ displayAddress?.province }} <br />
-    }@if (displayAddress?.postcode) {
-    {{ displayAddress?.postcode }}
+      {{ displayAddress?.line1 }} <br />
+    }
+    @if (displayAddress?.line2) {
+      {{ displayAddress?.line2 }} <br />
+    }
+    @if (displayAddress?.city) {
+      {{ displayAddress?.city }} <br />
+    }
+    @if (displayAddress?.province) {
+      {{ displayAddress?.province }} <br />
+    }
+    @if (displayAddress?.postcode) {
+      {{ displayAddress?.postcode }}
     }
   </div>
   <button

@@ -6,8 +6,6 @@ import { StartPageComponent } from '../../pages/start-page/start-page.component'
   imports: [StartPageComponent],
   selector: 'app-content-wrapper',
   templateUrl: './app-content-wrapper.component.html',
-  styleUrl: './app-content-wrapper.component.scss'
+  styleUrl: './app-content-wrapper.component.scss',
 })
-export class AppContentWrapperComponent {
-
-}
+export class AppContentWrapperComponent {}

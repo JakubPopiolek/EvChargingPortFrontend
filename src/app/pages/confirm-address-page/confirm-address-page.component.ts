@@ -19,7 +19,10 @@ export class ConfirmAddressPageComponent implements OnInit {
     province: '',
     postcode: '',
   };
-  constructor(private readonly store: Store, private readonly router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.store.select(selectAddress).subscribe((address) => {

@@ -33,7 +33,7 @@ export class ChooseAddressPageComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly router: Router,
-    private readonly addressLookupService: ApiAddressLookupService
+    private readonly addressLookupService: ApiAddressLookupService,
   ) {}
 
   public ngOnInit(): void {
@@ -53,13 +53,13 @@ export class ChooseAddressPageComponent implements OnInit {
       this.formValid = true;
       let selectedAddressIndex: number | null | undefined = null;
       selectedAddressIndex = Number(
-        this.addressSelectionForm.get('selectedAddress')?.value
+        this.addressSelectionForm.get('selectedAddress')?.value,
       );
       if (selectedAddressIndex != null && selectedAddressIndex != undefined) {
         this.store.dispatch(
           fromPersonalDetailsActions.saveAddress({
             address: this.addresses[selectedAddressIndex],
-          })
+          }),
         );
         this.router.navigate(['confirmAddress']);
       }

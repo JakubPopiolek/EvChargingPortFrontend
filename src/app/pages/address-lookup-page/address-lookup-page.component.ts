@@ -37,7 +37,7 @@ export class AddressLookupPageComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly apiAddressLookupService: ApiAddressLookupService,
-    private readonly store: Store
+    private readonly store: Store,
   ) {}
 
   public ngOnInit(): void {
@@ -61,7 +61,7 @@ export class AddressLookupPageComponent implements OnInit {
         fromPersonalDetailsActions.saveInitialAddress({
           postcode,
           line1,
-        })
+        }),
       );
       this.getAddresses(postcode, line1);
     } else {
@@ -72,7 +72,7 @@ export class AddressLookupPageComponent implements OnInit {
 
   private getAddresses(
     postcode: Address['postcode'],
-    addressLineOne: Address['line1']
+    addressLineOne: Address['line1'],
   ) {
     this.apiAddressLookupService
       .get(postcode, addressLineOne)

@@ -13,7 +13,7 @@ export class VehicleNotFoundPageComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
   ) {}
 
   public ngOnInit(): void {

@@ -11,7 +11,10 @@ import * as fromVehicleEnquiryServiceActions from '../../core/state/store/action
   styleUrl: './not-electric-vehicle-page.component.scss',
 })
 export class NotElectricVehiclePageComponent {
-  constructor(private readonly router: Router, private readonly store: Store) {}
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store,
+  ) {}
 
   public onClick() {
     this.router.navigate(['vrn']);
