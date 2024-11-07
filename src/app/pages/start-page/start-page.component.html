@@ -9,41 +9,51 @@
       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
       sint occaecat cupidatat
     </p>
-    <h3 class="govuk-heading-m">Check you are eligible</h3>
+    <h2 class="govuk-heading-m">Before you start check you are eligble</h2>
+    <h3 class="govuk-heading-s">Adequate on-street parking</h3>
     <p class="govuk-body">
-      Before you start ensure you meet the
-      <a href="#" class="govuk-link">adequate on-street parking</a>
-      criteria.
-    </p>
-    <h3 class="govuk-heading-m">Subheading 2</h3>
-    <p class="govuk-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat
-    </p>
+    <ul>
+      <li>
+        <p class="govuk-body">
+          Street parking must be generally available outside or near your home
+        </p>
+      </li>
+      <li>
+        <p class="govuk-body">
+          The on-street parking is legal and does not disrupt the safety or flow of vehicles
+          and pedestrians.
+        </p>
+      </li>
+    </ul>
+    <h3 class="govuk-heading-s">Vehicle requirements</h3>
+    <ul>
+      <li>
+        <p class="govuk-body">
+          You must be the registered keeper of an eligible electric vehicle
+        </p>
+      </li>
+    </ul>
+    <h3 class="govuk-heading-s">Property requirements</h3>
+    <ul>
+      <li>
+        <p class="govuk-body">
+          Your property must be in England, Wales, Scotland or Northern Ireland.
+        </p>
+      </li>
+      <li>
+        <p class="govuk-body">
+          If your property is in the Channel Islands or the Isle of Man, you will not be
+          considered eligible
+        </p>
+      </li>
+    </ul>
+    <button (click)="onClick()" routerLinkActive="router-link-active" draggable="false"
+      class="govuk-button govuk-button--start" data-module="govuk-button">
+      Start now
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
+        viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+      </svg>
+    </button>
   </div>
 </div>
-
-<button
-  (click)="onClick()"
-  routerLinkActive="router-link-active"
-  draggable="false"
-  class="govuk-button govuk-button--start"
-  data-module="govuk-button"
->
-  Start now
-  <svg
-    class="govuk-button__start-icon"
-    xmlns="http://www.w3.org/2000/svg"
-    width="17.5"
-    height="19"
-    viewBox="0 0 33 40"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-  </svg>
-</button>
