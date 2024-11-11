@@ -13,22 +13,19 @@ export class ApiVehicleEnquiryService {
   public getByRegNumber(
     registrationNumber: string,
   ): Observable<VehicleDetails> {
-    
-    if(registrationNumber == "petrol"){
+    if (registrationNumber == 'petrol') {
       //PETROL
       const mockResponse: VehicleDetails =
-      ApiVehicleDetailsDouble.prepareSuccessfulResultPetrol();
+        ApiVehicleDetailsDouble.prepareSuccessfulResultPetrol();
       return of(mockResponse);
-    }
-    else if(registrationNumber == "testNone"){
+    } else if (registrationNumber == 'testNone') {
       return of();
-    }
-    else{
+    } else {
       //ELECTRIC
       const mockResponse: VehicleDetails =
         ApiVehicleDetailsDouble.prepareSuccessfulResultElectric();
-        return of(mockResponse);
-      }
+      return of(mockResponse);
+    }
 
     return this.http.get<VehicleDetails>('api/VehicleEnquiryService/', {
       params: { registrationNumber: registrationNumber },

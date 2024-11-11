@@ -25,7 +25,10 @@ export class VrnFormComponent implements OnInit, OnDestroy {
   public errorMessage: string = 'Enter vehicle registration number';
   private storeSubscribe: Subscription = new Subscription();
 
-  constructor(private router: Router, private readonly store: Store) {}
+  constructor(
+    private router: Router,
+    private readonly store: Store,
+  ) {}
 
   ngOnDestroy(): void {
     this.storeSubscribe.unsubscribe();
@@ -48,7 +51,7 @@ export class VrnFormComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       fromVehicleEnquiryServiceActions.GetVehicleDetails({
         vehicleRegistrationNumber: this.vrn.value ? this.vrn.value : '',
-      })
+      }),
     );
     if (this.vrn.valid) {
       this.storeSubscribe = this.store

@@ -23,7 +23,10 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
   public confirmVehicleDetails = new FormControl('yes', Validators.required);
   public isValid = true;
 
-  constructor(private readonly store: Store, private readonly router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router,
+  ) {}
 
   public ngOnInit(): void {
     this.store
@@ -31,7 +34,7 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
       .subscribe((vehicleDetailsState) => {
         this.vehicleDetails = vehicleDetailsState.vehicleDetails;
         this.confirmVehicleDetails.setValue(
-          vehicleDetailsState.isConfirmed ? 'yes' : ''
+          vehicleDetailsState.isConfirmed ? 'yes' : '',
         );
       })
       .unsubscribe();
@@ -57,7 +60,7 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
     if (this.vehicleDetails?.fuelType == fuelType.ELECTRICITY) {
       this.router.navigate(['name']);
       this.store.dispatch(
-        fromVehicleEnquiryServiceActions.ConfirmVehicleDetails()
+        fromVehicleEnquiryServiceActions.ConfirmVehicleDetails(),
       );
     } else {
       this.router.navigate(['notElectricVehicle']);

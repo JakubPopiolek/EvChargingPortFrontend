@@ -11,23 +11,23 @@ export enum ActionType {
 
 export const GetVehicleDetails = createAction(
   ActionType.GET_VEHICLE_DETAILS,
-  props<{ vehicleRegistrationNumber: string }>()
+  props<{ vehicleRegistrationNumber: string }>(),
 );
 
 export const GetVehicleDetailsSuccess = createAction(
   ActionType.GET_VEHICLE_DETAILS_SUCCESS,
-  props<{ vehicleDetails: VehicleDetails }>()
+  props<{ vehicleDetails: VehicleDetails }>(),
 );
 
 export const GetVehicleDetailsFailure = createAction(
   ActionType.GET_VEHICLE_DETAILS_FAILURE,
-  props<{ error: any }>()
+  props<{ error: any }>(),
 );
 
 export const ClearVehicleDetails = createAction(
-  ActionType.CLEAR_VEHICLE_DETAILS
+  ActionType.CLEAR_VEHICLE_DETAILS,
 );
 
 export const ConfirmVehicleDetails = createAction(
-  ActionType.CONFIRM_VEHICLE_DETAILS
+  ActionType.CONFIRM_VEHICLE_DETAILS,
 );
