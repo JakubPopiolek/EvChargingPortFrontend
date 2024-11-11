@@ -17,7 +17,7 @@ export class ApiVehicleDetailsDouble {
       colour: 'grey',
       fuelType: fuelType.PETROL,
       make: 'volkswagen',
-      registrationNumber: 'AB12 ABC',
+      registrationNumber: 'petrol',
     };
   }
 
@@ -27,6 +27,7 @@ export class ApiVehicleDetailsDouble {
       isLoading: false,
       isLoadingSuccess: false,
       isLoadingFailure: false,
+      isConfirmed: false,
     };
   }
 }

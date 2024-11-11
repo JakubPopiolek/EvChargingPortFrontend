@@ -7,6 +7,7 @@ export interface VehicleDetailsState {
   isLoading: boolean;
   isLoadingSuccess: boolean;
   isLoadingFailure: boolean;
+  isConfirmed: boolean;
 }
 
 export const initialVehicleDetailsState: VehicleDetailsState = {
@@ -14,6 +15,7 @@ export const initialVehicleDetailsState: VehicleDetailsState = {
   isLoading: false,
   isLoadingSuccess: false,
   isLoadingFailure: false,
+  isConfirmed: false,
 };
 
 const vehicleDetailsReducer = createReducer(
@@ -32,7 +34,7 @@ const vehicleDetailsReducer = createReducer(
       isLoading: false,
       isLoadingSuccess: true,
       isLoadingFailure: false,
-    }),
+    })
   ),
   on(
     fromVehicleEnquiryServiceActions.GetVehicleDetailsFailure,
@@ -41,7 +43,7 @@ const vehicleDetailsReducer = createReducer(
       isLoading: false,
       isLoadingSuccess: false,
       isLoadingFailure: true,
-    }),
+    })
   ),
   on(fromVehicleEnquiryServiceActions.ClearVehicleDetails, (state) => ({
     ...state,
@@ -49,7 +51,12 @@ const vehicleDetailsReducer = createReducer(
     isLoading: false,
     isLoadingFailure: false,
     isLoadingSuccess: false,
+    isConfirmed: false,
   })),
+  on(fromVehicleEnquiryServiceActions.ConfirmVehicleDetails, (state) => ({
+    ...state,
+    isConfirmed: true,
+  }))
 );
 
 export const vehicleDetailsFeature = createFeature({
