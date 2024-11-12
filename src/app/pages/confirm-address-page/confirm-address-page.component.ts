@@ -34,13 +34,20 @@ export class ConfirmAddressPageComponent implements OnInit {
     });
     var navigatingFromRoute: string = this.route.snapshot.queryParams['route'];
 
-    this.backLink =
-      navigatingFromRoute == 'choose-address'
-        ? '/chooseAddress'
-        : '/enterAddressManually';
+    this.backLink = this.setBackLink(navigatingFromRoute);
   }
 
   public onClick(): void {
     this.router.navigate(['checkAnswers']);
+  }
+
+  private setBackLink(route: string): string {
+    if (route == 'choose-address') {
+      return '/chooseAddress';
+    } else if (route == 'enter-manually') {
+      return '/enterAddressManually';
+    } else {
+      return '/addressLookup';
+    }
   }
 }

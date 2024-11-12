@@ -21,9 +21,19 @@ export class ApiVehicleDetailsDouble {
     };
   }
 
-  public static prepareVehicleDetailsState(): VehicleDetailsState {
+  public static prepareVehicleDetailsState_Electric(): VehicleDetailsState {
     return {
       vehicleDetails: ApiVehicleDetailsDouble.prepareSuccessfulResultElectric(),
+      isLoading: false,
+      isLoadingSuccess: false,
+      isLoadingFailure: false,
+      isConfirmed: false,
+    };
+  }
+
+  public static prepareVehicleDetailsState_Petrol(): VehicleDetailsState {
+    return {
+      vehicleDetails: ApiVehicleDetailsDouble.prepareSuccessfulResultPetrol(),
       isLoading: false,
       isLoadingSuccess: false,
       isLoadingFailure: false,

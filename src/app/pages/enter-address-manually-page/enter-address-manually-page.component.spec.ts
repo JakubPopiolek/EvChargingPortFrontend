@@ -56,6 +56,8 @@ describe('EnterAddressManuallyPageComponent', () => {
 
     btn.click();
 
-    expect(spy).toHaveBeenCalledWith(['confirmAddress']);
+    expect(spy).toHaveBeenCalledWith(['confirmAddress'], {
+      queryParams: { route: 'enter-manually' },
+    });
   });
 });

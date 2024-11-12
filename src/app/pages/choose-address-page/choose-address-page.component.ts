@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectAddress } from '../../core/state/store/reducers/personalDetails.reducer';
-import { getAddresses } from '../../core/state/store/actions/personalDetails.actions';
 import { ApiAddressLookupService } from '../../core/services/api/address-lookup-service';
 import { Address } from '../../core/interfaces/PersonalDetails.interface';
 import * as fromPersonalDetailsActions from '../../core/state/store/actions/personalDetails.actions';
@@ -45,6 +44,16 @@ export class ChooseAddressPageComponent implements OnInit {
         .subscribe((addresses) => {
           this.addresses = addresses;
         });
+    });
+    this.store.select(selectAddress).subscribe((storedAddress) => {
+      this.addresses.forEach((address, index) => {
+        console.log(index);
+        if (JSON.stringify(address) == JSON.stringify(storedAddress)) {
+          this.addressSelectionForm
+            .get('selectedAddress')
+            ?.setValue(`${index}`);
+        }
+      });
     });
   }
 

@@ -29,23 +29,20 @@
           </p>
           <form [formGroup]="addressSelectionForm">
             @for (address of this.addresses; track address.line1) {
-              <div class="govuk-radios__item">
-                <input
-                  formControlName="selectedAddress"
-                  class="govuk-radios__input"
-                  id="{{ $index }}"
-                  name="selectedAddress"
-                  type="radio"
-                  value="{{ $index }}"
-                />
-                <label
-                  class="govuk-label govuk-radios__label"
-                  for="{{ $index }}"
-                >
-                  {{ address.line1 }}, {{ address.line2 }}, {{ address.city }},
-                  {{ address.province }}, {{ address.postcode }}
-                </label>
-              </div>
+            <div class="govuk-radios__item">
+              <input
+                formControlName="selectedAddress"
+                class="govuk-radios__input"
+                id="{{ $index }}"
+                name="selectedAddress"
+                type="radio"
+                value="{{ $index }}"
+              />
+              <label class="govuk-label govuk-radios__label" for="{{ $index }}">
+                {{ address.line1 }}, {{ address.line2 }}, {{ address.city }},
+                {{ address.province }}, {{ address.postcode }}
+              </label>
+            </div>
             }
           </form>
         </div>
