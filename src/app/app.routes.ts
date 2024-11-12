@@ -14,6 +14,7 @@ import { SubmittedPageComponent } from './pages/submitted-page/submitted-page.co
 import { ServiceUnavailablePageComponent } from './pages/service-unavailable-page/service-unavailable-page.component';
 import { NoAddressFoundPageComponent } from './pages/no-address-found-page/no-address-found-page.component';
 import { VehicleNotFoundPageComponent } from './pages/vehicle-not-found-page/vehicle-not-found-page.component';
+import { AdequateParkingComponent } from './pages/adequate-parking/adequate-parking.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'start', pathMatch: 'full' },
@@ -38,4 +39,5 @@ export const routes: Routes = [
   { path: 'serviceUnavailable', component: ServiceUnavailablePageComponent },
   { path: 'noAddressFound', component: NoAddressFoundPageComponent },
   { path: 'vehicleNotFound', component: VehicleNotFoundPageComponent },
+  { path: 'adequateParking', component: AdequateParkingComponent },
 ];

@@ -55,7 +55,7 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
       fromVehicleEnquiryServiceActions.ConfirmVehicleDetails()
     );
     if (this.vehicleDetails?.fuelType == fuelType.ELECTRICITY) {
-      this.router.navigate(['name']);
+      this.router.navigate(['adequateParking']);
     } else {
       this.router.navigate(['notElectricVehicle']);
     }
