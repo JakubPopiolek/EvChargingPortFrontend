@@ -1,4 +1,5 @@
 <div class="govuk-width-container">
+  <a routerLink="{{ backLink }}" class="govuk-back-link">Back</a>
   <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
     <h1 class="govuk-fieldset__heading">Confirm address</h1>
   </legend>
@@ -8,19 +9,15 @@
   </p>
   <div class="govuk-inset-text">
     @if (displayAddress?.line1) {
-      {{ displayAddress?.line1 }} <br />
-    }
-    @if (displayAddress?.line2) {
-      {{ displayAddress?.line2 }} <br />
-    }
-    @if (displayAddress?.city) {
-      {{ displayAddress?.city }} <br />
-    }
-    @if (displayAddress?.province) {
-      {{ displayAddress?.province }} <br />
-    }
-    @if (displayAddress?.postcode) {
-      {{ displayAddress?.postcode }}
+    {{ displayAddress?.line1 }} <br />
+    } @if (displayAddress?.line2) {
+    {{ displayAddress?.line2 }} <br />
+    } @if (displayAddress?.city) {
+    {{ displayAddress?.city }} <br />
+    } @if (displayAddress?.province) {
+    {{ displayAddress?.province }} <br />
+    } @if (displayAddress?.postcode) {
+    {{ displayAddress?.postcode }}
     }
   </div>
   <button

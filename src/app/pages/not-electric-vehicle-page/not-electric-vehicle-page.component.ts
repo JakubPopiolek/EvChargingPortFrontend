@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as fromVehicleEnquiryServiceActions from '../../core/state/store/actions/api/vehicleDetailsService.actions';
 
 @Component({
   selector: 'app-not-electric-vehicle-page',
@@ -9,9 +11,10 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './not-electric-vehicle-page.component.scss',
 })
 export class NotElectricVehiclePageComponent {
-  constructor(private readonly router: Router) {}
+  constructor(private readonly router: Router, private readonly store: Store) {}
 
   public onClick() {
-    this.router.navigate(['vrn']).then(() => {});
+    this.store.dispatch(fromVehicleEnquiryServiceActions.ClearVehicleDetails());
+    this.router.navigate(['vrn']);
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectAddress } from '../../core/state/store/reducers/personalDetails.reducer';
 import { Address } from '../../core/interfaces/PersonalDetails.interface';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-confirm-address-page',
@@ -19,15 +19,25 @@ export class ConfirmAddressPageComponent implements OnInit {
     province: '',
     postcode: '',
   };
+
+  public backLink: String = '/addressLookup';
+
   constructor(
     private readonly store: Store,
     private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.store.select(selectAddress).subscribe((address) => {
       this.displayAddress = { ...address! };
     });
+    var navigatingFromRoute: string = this.route.snapshot.queryParams['route'];
+
+    this.backLink =
+      navigatingFromRoute == 'choose-address'
+        ? '/chooseAddress'
+        : '/enterAddressManually';
   }
 
   public onClick(): void {
