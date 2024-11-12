@@ -63,4 +63,21 @@ describe('vehicleDetailsServiceReducer', () => {
       expect(state).toEqual(newState);
     });
   });
+
+  describe('ConfirmVehicleDetails', () => {
+    it('should return correct state', () => {
+      const { initialVehicleDetailsState } = fromVehicleDetailsReducer;
+      const newState = {
+        ...initialVehicleDetailsState,
+        vehicleDetails: undefined,
+        isLoading: false,
+        isLoadingSuccess: false,
+        isLoadingFailure: false,
+        isConfirmed: true,
+      };
+      const action = fromVehicleDetailsActions.ConfirmVehicleDetails;
+      const state = fromVehicleDetailsReducer.reducer(undefined, action);
+      expect(state).toEqual(newState);
+    });
+  });
 });

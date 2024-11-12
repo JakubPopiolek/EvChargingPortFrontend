@@ -22,17 +22,17 @@
         <span class="govuk-visually-hidden">Error:</span> Enter the building
         name or number
       </p>
-      <div id="searchString-hint" class="govuk-hint">
+      <div id="addressLineOne-hint" class="govuk-hint">
         For example, 15 or Prospect Cottage.
       </div>
       <input
         [ngClass]="{ 'govuk-input--error': !addressLineOneValid }"
         formControlName="line1"
         class="govuk-input govuk-!-width-two-thirds"
-        id="searchString"
-        name="searchString"
+        id="addressLineOne"
+        name="addressLineOne"
         type="text"
-        aria-describedby="searchString-hint"
+        aria-describedby="addressLineOne-hint"
       />
     </div>
     <button

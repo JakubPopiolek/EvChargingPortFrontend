@@ -47,7 +47,6 @@ export class ChooseAddressPageComponent implements OnInit {
     });
     this.store.select(selectAddress).subscribe((storedAddress) => {
       this.addresses.forEach((address, index) => {
-        console.log(index);
         if (JSON.stringify(address) == JSON.stringify(storedAddress)) {
           this.addressSelectionForm
             .get('selectedAddress')

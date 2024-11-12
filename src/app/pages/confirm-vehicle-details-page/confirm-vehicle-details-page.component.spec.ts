@@ -25,7 +25,6 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ConfirmVehicleDetailsPageComponent, RouterModule.forRoot([])],
       providers: [provideMockStore({})],
-      teardown: { destroyAfterEach: false },
     }).compileComponents();
 
     router = TestBed.inject(Router);
