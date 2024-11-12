@@ -3,26 +3,40 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddressLookupPageComponent } from './address-lookup-page.component';
 import { Router, RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
+import { MemoizedSelector, Store, StoreModule } from '@ngrx/store';
 import { ApiAddressLookupService } from '../../core/services/api/address-lookup-service';
 import { AddressResultDouble } from '../../core/testing/doubles/api/address-result.double';
 import { of } from 'rxjs';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { Address } from '../../core/interfaces/PersonalDetails.interface';
+import { selectAddress } from '../../core/state/store/reducers/personalDetails.reducer';
 
 describe('AddressLookupPageComponent', () => {
   let component: AddressLookupPageComponent;
   let fixture: ComponentFixture<AddressLookupPageComponent>;
   let router: Router;
   let mockApiAddressLookupService: ApiAddressLookupService;
+  let store: MockStore;
+  let addressSelectorMock: MemoizedSelector<Address, Address | null>;
+  let addressesMock: Address[];
 
   beforeEach(async () => {
+    addressesMock = AddressResultDouble.prepareSuccessfulResultOneAddress();
+
     await TestBed.configureTestingModule({
       imports: [
         AddressLookupPageComponent,
         RouterModule.forRoot([]),
         StoreModule.forRoot(),
       ],
-      providers: [provideHttpClient()],
+      providers: [provideHttpClient(), provideMockStore({})],
     }).compileComponents();
+
+    store = TestBed.inject(MockStore);
+    addressSelectorMock = store.overrideSelector(
+      selectAddress,
+      addressesMock[0]
+    );
 
     mockApiAddressLookupService = TestBed.inject(ApiAddressLookupService);
     router = TestBed.inject(Router);
@@ -33,6 +47,30 @@ describe('AddressLookupPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should prefill input when address data is in store', () => {
+    // component.ngOnInit();
+    // fixture.detectChanges();
+    const postcodeInput =
+      fixture.debugElement.nativeElement.querySelector('#postcode');
+    const addressLineOneInput =
+      fixture.debugElement.nativeElement.querySelector('#addressLineOne');
+
+    expect(addressLineOneInput.value).toBe(addressesMock[0].line1);
+    expect(postcodeInput.value).toBe(addressesMock[0].postcode);
+  });
+
+  it('should not prefill input when address data is not in store', () => {
+    addressSelectorMock.setResult(null);
+    store.refreshState();
+    const postcodeInput =
+      fixture.debugElement.nativeElement.querySelector('#postcode');
+    const addressLineOneInput =
+      fixture.debugElement.nativeElement.querySelector('#addressLineOne');
+
+    expect(addressLineOneInput.value).toBe('');
+    expect(postcodeInput.value).toBe('');
   });
 
   it('should error when postcode is empty', () => {
@@ -54,8 +92,8 @@ describe('AddressLookupPageComponent', () => {
   it('should error when addressLineOne is empty', () => {
     component.addressLookupForm.get('line1')?.setValue('');
     const btn = fixture.debugElement.nativeElement.querySelector('button');
-    const postcodeInput =
-      fixture.debugElement.nativeElement.querySelector('#searchString');
+    const addressLineOneInput =
+      fixture.debugElement.nativeElement.querySelector('#addressLineOne');
     const errorMessage =
       fixture.debugElement.nativeElement.querySelector('#line1-error');
 
@@ -63,7 +101,7 @@ describe('AddressLookupPageComponent', () => {
     fixture.detectChanges();
 
     expect(component.addressLookupForm.valid).toBe(false);
-    expect(postcodeInput).toHaveClass('govuk-input--error');
+    expect(addressLineOneInput).toHaveClass('govuk-input--error');
     expect(errorMessage.style.display).toBe('block');
   });
 
@@ -80,10 +118,10 @@ describe('AddressLookupPageComponent', () => {
     expect(spy).toHaveBeenCalledWith(['chooseAddress']);
   });
 
-  it('should redurect to confirmAddress page when form is valid, continue button is clicked and there is only 1 address', () => {
+  it('should redirect to confirmAddress page when form is valid, continue button is clicked and there is only 1 address', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     spyOn(mockApiAddressLookupService, 'get').and.returnValue(
-      of(AddressResultDouble.prepareSuccessfulResultOneAddress()),
+      of(AddressResultDouble.prepareSuccessfulResultOneAddress())
     );
     const spy = spyOn(router, 'navigate');
     component.addressLookupForm.get('postcode')?.setValue('testPostcode');

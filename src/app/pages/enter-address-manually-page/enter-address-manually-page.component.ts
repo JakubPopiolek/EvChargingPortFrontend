@@ -36,10 +36,7 @@ export class EnterAddressManuallyPageComponent implements OnInit {
     postcode: new FormControl('', [Validators.required]),
   });
 
-  constructor(
-    private readonly router: Router,
-    private readonly store: Store,
-  ) {}
+  constructor(private readonly router: Router, private readonly store: Store) {}
 
   public ngOnInit(): void {
     this.store.select(selectAddress).subscribe((address) => {
@@ -53,7 +50,9 @@ export class EnterAddressManuallyPageComponent implements OnInit {
 
   public onClick(): void {
     if (this.addressForm.valid) {
-      this.router.navigate(['confirmAddress']);
+      this.router.navigate(['confirmAddress'], {
+        queryParams: { route: 'enter-manually' },
+      });
       this.store.dispatch(
         saveAddress({
           address: {
@@ -63,7 +62,7 @@ export class EnterAddressManuallyPageComponent implements OnInit {
             city: this.addressForm.get('city')!.value,
             province: this.addressForm.get('province')!.value,
           },
-        }),
+        })
       );
     } else {
       this.line1Valid = this.addressForm.get('line1')?.valid;

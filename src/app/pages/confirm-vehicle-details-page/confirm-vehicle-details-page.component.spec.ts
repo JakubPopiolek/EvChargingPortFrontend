@@ -3,35 +3,36 @@ import { Router, RouterModule } from '@angular/router';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { ConfirmVehicleDetailsPageComponent } from './confirm-vehicle-details-page.component';
-import { fuelType } from '../../core/enums/fuelType.enum';
-import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
-import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
+import {
+  selectVehicleDetailsState,
+  VehicleDetailsState,
+} from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { ApiVehicleDetailsDouble } from '../../core/testing/doubles/api/vehicle-details.double';
 
 describe('ConfirmVehicleDetailsPageComponent', () => {
   let component: ConfirmVehicleDetailsPageComponent;
   let fixture: ComponentFixture<ConfirmVehicleDetailsPageComponent>;
   let router: Router;
-  let mockVehiceDetails: VehicleDetails;
+  let mockVehiceDetailsState: VehicleDetailsState;
   let store: MockStore;
-  let mockVehicleDetailsSelector: MemoizedSelector<
-    VehicleDetails,
-    VehicleDetails | undefined
+  let mockVehicleDetailsStateSelector: MemoizedSelector<
+    VehicleDetailsState,
+    VehicleDetailsState | undefined
   >;
   beforeEach(async () => {
-    (mockVehiceDetails =
-      ApiVehicleDetailsDouble.prepareSuccessfulResultElectric()),
-      await TestBed.configureTestingModule({
-        imports: [ConfirmVehicleDetailsPageComponent, RouterModule.forRoot([])],
-        providers: [provideMockStore({})],
-      }).compileComponents();
+    mockVehiceDetailsState =
+      ApiVehicleDetailsDouble.prepareVehicleDetailsState_Electric();
+    await TestBed.configureTestingModule({
+      imports: [ConfirmVehicleDetailsPageComponent, RouterModule.forRoot([])],
+      providers: [provideMockStore({})],
+    }).compileComponents();
 
     router = TestBed.inject(Router);
 
     store = TestBed.inject(MockStore);
-    mockVehicleDetailsSelector = store.overrideSelector(
-      selectVehicleDetails,
-      mockVehiceDetails,
+    mockVehicleDetailsStateSelector = store.overrideSelector(
+      selectVehicleDetailsState,
+      mockVehiceDetailsState
     );
 
     fixture = TestBed.createComponent(ConfirmVehicleDetailsPageComponent);
@@ -40,14 +41,20 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    store.resetSelectors();
+    fixture.destroy();
+    TestBed.resetTestingModule();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display error when radio button is not selected and not call router', () => {
+  it('should display error and not call router  when radio button is not selected', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message',
+      '.govuk-error-message'
     );
     const spy = spyOn(router, 'navigate');
 
@@ -72,12 +79,11 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
   });
 
   it('should route to not electric vehicle page when continue button is clicked, yes is selected and vehicle is not electric', () => {
-    const petrolVehicleMock = {
-      ...mockVehiceDetails,
-      fuelType: fuelType.PETROL,
-    };
-    mockVehicleDetailsSelector.setResult(petrolVehicleMock);
+    const petrolVehicleMock: VehicleDetailsState =
+      ApiVehicleDetailsDouble.prepareVehicleDetailsState_Petrol();
+    mockVehicleDetailsStateSelector.setResult(petrolVehicleMock);
     store.refreshState();
+    component.ngOnInit();
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     component.confirmVehicleDetails.setValue('yes');

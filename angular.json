@@ -78,7 +78,7 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "codeCoverageExclude": ["src/app/core/testing/**/*"]
+            "codeCoverageExclude": ["src/app/core/testing/**/*", "src/app/core/services/api/**/*"]
           }
         }
       }

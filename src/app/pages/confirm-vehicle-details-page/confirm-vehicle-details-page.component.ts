@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { fuelType } from '../../core/enums/fuelType.enum';
 import * as fromVehicleEnquiryServiceActions from '../../core/state/store/actions/api/vehicleDetailsService.actions';
-import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
+import { selectVehicleDetailsState } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
 
 @Component({
@@ -17,18 +17,21 @@ import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
 })
 export class ConfirmVehicleDetailsPageComponent implements OnInit {
   public vehicleDetails?: VehicleDetails;
-  public confirmVehicleDetails = new FormControl('', Validators.required);
+  public confirmVehicleDetails = new FormControl('yes', Validators.required);
   public isValid = true;
 
-  constructor(
-    private readonly store: Store,
-    private readonly router: Router,
-  ) {}
+  constructor(private readonly store: Store, private readonly router: Router) {}
 
   public ngOnInit(): void {
-    this.store.select(selectVehicleDetails).subscribe((vehicleDetails) => {
-      this.vehicleDetails = vehicleDetails;
-    });
+    this.store
+      .select(selectVehicleDetailsState)
+      .subscribe((vehicleDetailsState) => {
+        this.vehicleDetails = vehicleDetailsState.vehicleDetails;
+        this.confirmVehicleDetails.setValue(
+          vehicleDetailsState.isConfirmed ? 'yes' : ''
+        );
+      })
+      .unsubscribe();
   }
 
   public onClick(): void {
@@ -48,6 +51,9 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
   }
 
   private handleYesPath() {
+    this.store.dispatch(
+      fromVehicleEnquiryServiceActions.ConfirmVehicleDetails()
+    );
     if (this.vehicleDetails?.fuelType == fuelType.ELECTRICITY) {
       this.router.navigate(['name']);
     } else {

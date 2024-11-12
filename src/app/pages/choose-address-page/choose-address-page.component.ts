@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectAddress } from '../../core/state/store/reducers/personalDetails.reducer';
-import { getAddresses } from '../../core/state/store/actions/personalDetails.actions';
 import { ApiAddressLookupService } from '../../core/services/api/address-lookup-service';
 import { Address } from '../../core/interfaces/PersonalDetails.interface';
 import * as fromPersonalDetailsActions from '../../core/state/store/actions/personalDetails.actions';
@@ -33,7 +32,7 @@ export class ChooseAddressPageComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly router: Router,
-    private readonly addressLookupService: ApiAddressLookupService,
+    private readonly addressLookupService: ApiAddressLookupService
   ) {}
 
   public ngOnInit(): void {
@@ -46,6 +45,15 @@ export class ChooseAddressPageComponent implements OnInit {
           this.addresses = addresses;
         });
     });
+    this.store.select(selectAddress).subscribe((storedAddress) => {
+      this.addresses.forEach((address, index) => {
+        if (JSON.stringify(address) == JSON.stringify(storedAddress)) {
+          this.addressSelectionForm
+            .get('selectedAddress')
+            ?.setValue(`${index}`);
+        }
+      });
+    });
   }
 
   public onClick(): void {
@@ -53,15 +61,17 @@ export class ChooseAddressPageComponent implements OnInit {
       this.formValid = true;
       let selectedAddressIndex: number | null | undefined = null;
       selectedAddressIndex = Number(
-        this.addressSelectionForm.get('selectedAddress')?.value,
+        this.addressSelectionForm.get('selectedAddress')?.value
       );
       if (selectedAddressIndex != null && selectedAddressIndex != undefined) {
         this.store.dispatch(
           fromPersonalDetailsActions.saveAddress({
             address: this.addresses[selectedAddressIndex],
-          }),
+          })
         );
-        this.router.navigate(['confirmAddress']);
+        this.router.navigate(['confirmAddress'], {
+          queryParams: { route: 'choose-address' },
+        });
       }
     } else {
       this.formValid = false;

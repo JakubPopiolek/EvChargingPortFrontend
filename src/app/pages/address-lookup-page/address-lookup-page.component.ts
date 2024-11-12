@@ -11,7 +11,10 @@ import { ApiAddressLookupService } from '../../core/services/api/address-lookup-
 import { Store } from '@ngrx/store';
 import * as fromPersonalDetailsActions from '../../core/state/store/actions/personalDetails.actions';
 import { Address } from '../../core/interfaces/PersonalDetails.interface';
-import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
+import {
+  selectAddress,
+  selectPersonalDetailsState,
+} from '../../core/state/store/reducers/personalDetails.reducer';
 import { PostcodeFormComponent } from '../../shared/postcode-form/postcode-form.component';
 
 @Component({
@@ -37,17 +40,17 @@ export class AddressLookupPageComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly apiAddressLookupService: ApiAddressLookupService,
-    private readonly store: Store,
+    private readonly store: Store
   ) {}
 
   public ngOnInit(): void {
-    this.store.select(selectPersonalDetailsState).subscribe((state) => {
+    this.store.select(selectAddress).subscribe((address) => {
       this.addressLookupForm
         .get('postcode')
-        ?.setValue(state.address ? state.address.postcode : '');
+        ?.setValue(address ? address.postcode : '');
       this.addressLookupForm
         .get('line1')
-        ?.setValue(state.address ? state.address.line1 : '');
+        ?.setValue(address ? address.line1 : '');
     });
   }
 
@@ -61,7 +64,7 @@ export class AddressLookupPageComponent implements OnInit {
         fromPersonalDetailsActions.saveInitialAddress({
           postcode,
           line1,
-        }),
+        })
       );
       this.getAddresses(postcode, line1);
     } else {
@@ -72,7 +75,7 @@ export class AddressLookupPageComponent implements OnInit {
 
   private getAddresses(
     postcode: Address['postcode'],
-    addressLineOne: Address['line1'],
+    addressLineOne: Address['line1']
   ) {
     this.apiAddressLookupService
       .get(postcode, addressLineOne)

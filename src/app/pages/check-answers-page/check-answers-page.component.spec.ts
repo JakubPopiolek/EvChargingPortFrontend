@@ -14,7 +14,7 @@ import { selectPersonalDetailsState } from '../../core/state/store/reducers/pers
 import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { ApiSubmitApplicationService } from '../../core/services/api/submit-application-service';
 import { ApiSubmitApplicationServiceStubFactory } from '../../core/testing/mocks/api/submit-application-service-stub.factory';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import {
   ApplicationSubmission,
   ApplicationSubmissionResponse,
@@ -64,17 +64,16 @@ describe('CheckAnswersPageComponent', () => {
       ],
     }).compileComponents();
 
-    // TestBed.configureTestingModule({ teardown: { destroyAfterEach: false } });
     store = TestBed.inject(MockStore);
     router = TestBed.inject(Router);
 
     mockPersonalDetailsSelector = store.overrideSelector(
       selectPersonalDetailsState,
-      mockPesonalDetails,
+      mockPesonalDetails
     );
     mockVehicleDetailsSelector = store.overrideSelector(
       selectVehicleDetails,
-      mockVehicleDetails,
+      mockVehicleDetails
     );
 
     fixture = TestBed.createComponent(CheckAnswersPageComponent);
@@ -88,23 +87,23 @@ describe('CheckAnswersPageComponent', () => {
 
   it('should prefill information from store', () => {
     const prefilledData = fixture.debugElement.queryAll(
-      By.css('.govuk-summary-list__value'),
+      By.css('.govuk-summary-list__value')
     );
 
     expect(prefilledData[0].nativeElement.innerText).toBe(
-      mockVehicleDetails.registrationNumber,
+      mockVehicleDetails.registrationNumber
     );
 
     expect(prefilledData[1].nativeElement.innerText).toBe(
-      `${mockPesonalDetails.firstName} ${mockPesonalDetails.lastName}`,
+      `${mockPesonalDetails.firstName} ${mockPesonalDetails.lastName}`
     );
 
     expect(prefilledData[2].nativeElement.innerText).toBe(
-      mockPesonalDetails.email,
+      mockPesonalDetails.email
     );
 
     expect(prefilledData[3].nativeElement.innerText).toContain(
-      `${mockPesonalDetails.address?.line1}`,
+      `${mockPesonalDetails.address?.line1}`
     );
   });
 
@@ -112,17 +111,35 @@ describe('CheckAnswersPageComponent', () => {
     const storeSpy = spyOn(store, 'dispatch').and.callThrough();
     const routerSpy = spyOn(router, 'navigate');
     spyOn(apiSubmitApplicationServiceMock, 'post').and.returnValue(
-      of(submitApplicationResponseMock),
+      of(submitApplicationResponseMock)
     );
 
     const btn = fixture.debugElement.query(
-      By.css('.govuk-button'),
+      By.css('.govuk-button')
     ).nativeElement;
 
     btn.click();
     expect(storeSpy).toHaveBeenCalledWith(
-      saveId({ id: submitApplicationResponseMock.id }),
+      saveId({ id: submitApplicationResponseMock.id })
     );
     expect(routerSpy).toHaveBeenCalledWith(['submitted']);
+  });
+
+  it('should route to [service unavailable] page when API call fails', () => {
+    const storeSpy = spyOn(store, 'dispatch').and.callThrough();
+    const routerSpy = spyOn(router, 'navigate');
+    spyOn(apiSubmitApplicationServiceMock, 'post').and.returnValue(
+      throwError(() => {
+        new Error('Api Error');
+      })
+    );
+
+    const btn = fixture.debugElement.query(
+      By.css('.govuk-button')
+    ).nativeElement;
+
+    btn.click();
+    expect(storeSpy).not.toHaveBeenCalled();
+    expect(routerSpy).toHaveBeenCalledWith(['serviceUnavailable']);
   });
 });

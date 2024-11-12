@@ -48,10 +48,9 @@ describe('ChooseAddressPageComponent', () => {
     store = TestBed.inject(MockStore);
     addressSelectorMock = store.overrideSelector(
       selectAddress,
-      addressesMock[0],
+      addressesMock[0]
     );
     router = TestBed.inject(Router);
-    // addressLookupServiceMock = TestBed.inject(ApiAddressLookupService)
 
     fixture = TestBed.createComponent(ChooseAddressPageComponent);
     component = fixture.componentInstance;
@@ -67,7 +66,7 @@ describe('ChooseAddressPageComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
     const addresses = fixture.debugElement.queryAll(
-      By.css('input[type=radio]'),
+      By.css('input[type=radio]')
     );
 
     expect(addresses).toBeTruthy();
@@ -76,10 +75,10 @@ describe('ChooseAddressPageComponent', () => {
 
   it('should show errors when continue is clicked with no address selected', () => {
     const btn = fixture.debugElement.query(
-      By.css('.govuk-button'),
+      By.css('.govuk-button')
     ).nativeElement;
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message',
+      '.govuk-error-message'
     );
     const errorBar =
       fixture.debugElement.nativeElement.querySelector('#choose-address');
@@ -98,19 +97,21 @@ describe('ChooseAddressPageComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
     const addresses = fixture.debugElement.queryAll(
-      By.css('input[type=radio]'),
+      By.css('input[type=radio]')
     );
     addresses[0].nativeElement.click();
     fixture.detectChanges();
 
     const btn = fixture.debugElement.query(
-      By.css('.govuk-button'),
+      By.css('.govuk-button')
     ).nativeElement;
 
     btn.click();
 
     expect(component.addressSelectionForm.valid).toBe(true);
     expect(storeSpy).toHaveBeenCalled();
-    expect(navigationSpy).toHaveBeenCalledWith(['confirmAddress']);
+    expect(navigationSpy).toHaveBeenCalledWith(['confirmAddress'], {
+      queryParams: { route: 'choose-address' },
+    });
   });
 });
