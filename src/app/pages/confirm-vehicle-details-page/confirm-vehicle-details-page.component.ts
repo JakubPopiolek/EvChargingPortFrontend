@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { fuelType } from '../../core/enums/fuelType.enum';
+import { FuelType } from '../../core/enums/FuelType.enum';
 import * as fromVehicleEnquiryServiceActions from '../../core/state/store/actions/api/vehicleDetailsService.actions';
 import { selectVehicleDetailsState } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
@@ -54,7 +54,7 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
     this.store.dispatch(
       fromVehicleEnquiryServiceActions.ConfirmVehicleDetails()
     );
-    if (this.vehicleDetails?.fuelType == fuelType.ELECTRICITY) {
+    if (this.vehicleDetails?.fuelType == FuelType.ELECTRICITY) {
       this.router.navigate(['adequateParking']);
     } else {
       this.router.navigate(['notElectricVehicle']);

@@ -15,10 +15,7 @@ import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicl
 import { ApiSubmitApplicationService } from '../../core/services/api/submit-application-service';
 import { ApiSubmitApplicationServiceStubFactory } from '../../core/testing/mocks/api/submit-application-service-stub.factory';
 import { of, throwError } from 'rxjs';
-import {
-  ApplicationSubmission,
-  ApplicationSubmissionResponse,
-} from '../../core/interfaces/ApplicationSubmission.interface';
+import { ApplicationSubmissionResponse } from '../../core/interfaces/ApplicationSubmission.interface';
 import { SubmitApplicationDouble } from '../../core/testing/doubles/api/submit-application.double';
 import { saveId } from '../../core/state/store/actions/applicationSubmission.actions';
 

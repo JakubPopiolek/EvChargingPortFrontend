@@ -19,14 +19,41 @@
           </p>
         </li>
       </ul>
-      <button
-        (click)="onClick()"
-        type="button"
-        class="govuk-button"
-        data-module="govuk-button"
-      >
-        Continue
-      </button>
+      <p class="govuk-body">
+        You may upload proof of fulfilling the adequate parking criteria to aid
+        your application
+      </p>
+      <form [formGroup]="uploadFilesForm">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="file-upload"> Upload a file </label>
+          <input
+            (change)="onFileSelected($event)"
+            class="govuk-file-upload"
+            id="file-upload"
+            name="fileUpload"
+            type="file"
+            multiple
+          />
+        </div>
+        <p class="govuk-body">
+          <b>Uploaded files</b>
+        </p>
+        <ul class="govuk-body">
+          @for (file of uploadFilesForm.get('files')?.value; track $index) {
+          <li>{{ file.name }}</li>
+          }
+        </ul>
+        <div>
+          <button
+            (click)="onClick()"
+            type="button"
+            class="govuk-button"
+            data-module="govuk-button"
+          >
+            Continue
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

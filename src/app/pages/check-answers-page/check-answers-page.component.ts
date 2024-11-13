@@ -23,7 +23,7 @@ export class CheckAnswersPageComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly router: Router,
-    private readonly apiSubmitApplicationService: ApiSubmitApplicationService,
+    private readonly apiSubmitApplicationService: ApiSubmitApplicationService
   ) {}
 
   public ngOnInit(): void {
@@ -47,7 +47,7 @@ export class CheckAnswersPageComponent implements OnInit {
     this.apiSubmitApplicationService.post(submission).subscribe({
       next: (res) => {
         this.store.dispatch(
-          fromApplicationSubmissionActions.saveId({ id: res.id }),
+          fromApplicationSubmissionActions.saveId({ id: res.id })
         );
       },
       error: () => {

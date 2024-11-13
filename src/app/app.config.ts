@@ -12,6 +12,8 @@ import { vehicleDetailsFeature } from './core/state/store/reducers/api/vehicleDe
 import { VehicleDetailsServiceEffects } from './core/state/store/effects/api/vehicleDetailsService.effects';
 import { personalDetailsFeature } from './core/state/store/reducers/personalDetails.reducer';
 import { applicationSubmissionFeature } from './core/state/store/reducers/applicationSubmission.reducer';
+import { fileUploadFeature } from './core/state/store/reducers/fileUpload.reducer';
+import { FileUploadEffects } from './core/state/store/effects/api/fileUpload.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,10 +24,12 @@ export const appConfig: ApplicationConfig = {
       metaReducers: metaReducers,
     }),
     provideEffects(VehicleDetailsServiceEffects),
+    provideEffects(FileUploadEffects),
     provideRouterStore(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideState(vehicleDetailsFeature),
     provideState(personalDetailsFeature),
     provideState(applicationSubmissionFeature),
+    provideState(fileUploadFeature),
   ],
 };

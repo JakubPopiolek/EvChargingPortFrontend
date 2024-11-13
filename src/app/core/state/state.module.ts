@@ -10,11 +10,13 @@ import { environment } from '../../../environments/environment';
 import * as fromVehicleEnquiryServiceReducer from './store/reducers/api/vehicleDetailsService.reducer';
 import { PersonalDetails } from '../interfaces/PersonalDetails.interface';
 import { ApplicationSubmissionResponse } from '../interfaces/ApplicationSubmission.interface';
+import { FileUploadData } from '../interfaces/FileUploadData.interface';
 
 export interface State {
   vehicleDetails: fromVehicleEnquiryServiceReducer.VehicleDetailsState;
   personalDetails: PersonalDetails;
   applicationSubmission: ApplicationSubmissionResponse;
+  uploadFile: FileUploadData;
 }
 
 const devTools: ModuleWithProviders<any>[] = [
@@ -25,7 +27,7 @@ const devTools: ModuleWithProviders<any>[] = [
 ];
 
 export function storageSyncReducer(
-  reducer: ActionReducer<State>,
+  reducer: ActionReducer<State>
 ): ActionReducer<State> {
   const metaReducer = storageSync<State>({
     features: [
@@ -33,6 +35,10 @@ export function storageSyncReducer(
       { stateKey: 'personalDetails', storageForFeature: window.sessionStorage },
       {
         stateKey: 'applicationSubmission',
+        storageForFeature: window.sessionStorage,
+      },
+      {
+        stateKey: 'uploadFile',
         storageForFeature: window.sessionStorage,
       },
     ],

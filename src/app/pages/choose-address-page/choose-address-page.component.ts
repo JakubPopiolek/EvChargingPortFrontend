@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { concatMap, exhaustMap, mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-choose-address-page',
@@ -36,15 +37,17 @@ export class ChooseAddressPageComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.store.select(selectAddress).subscribe((address) => {
-      this.postcode = address?.postcode;
-      this.line1 = address?.line1;
-      this.addressLookupService
-        .get(this.postcode, this.line1)
-        .subscribe((addresses) => {
-          this.addresses = addresses;
-        });
-    });
+    this.store
+      .select(selectAddress)
+      .pipe(
+        concatMap((address) =>
+          this.addressLookupService.get(address?.postcode, address?.line1)
+        )
+      )
+      .subscribe((addresses) => {
+        this.addresses = addresses;
+      });
+
     this.store.select(selectAddress).subscribe((storedAddress) => {
       this.addresses.forEach((address, index) => {
         if (JSON.stringify(address) == JSON.stringify(storedAddress)) {
