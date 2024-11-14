@@ -3,11 +3,11 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { ApiSubmitApplicationService } from './submit-application-service';
+import { ApiSubmitApplicationService } from './application-service';
 import {
   ApplicationSubmission,
   ApplicationSubmissionResponse,
-} from '../../interfaces/ApplicationSubmission.interface';
+} from '../../interfaces/Application.interface';
 import { SubmitApplicationDouble } from '../../testing/doubles/api/submit-application.double';
 import { HttpStatusCode } from '@angular/common/http';
 

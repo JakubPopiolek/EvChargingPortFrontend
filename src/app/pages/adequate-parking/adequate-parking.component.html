@@ -38,11 +38,26 @@
         <p class="govuk-body">
           <b>Uploaded files</b>
         </p>
-        <ul class="govuk-body">
+        <dl class="govuk-summary-list govuk-summary-list--long-key">
           @for (file of uploadFilesForm.get('files')?.value; track $index) {
-          <li>{{ file.name }}</li>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ file.name }}</dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--green"> Uploaded </strong>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a
+                style="cursor: pointer"
+                class="govuk-link"
+                (click)="onFileDelete(file.id)"
+                >Remove<span class="govuk-visually-hidden">
+                  receipt1.jpg</span
+                ></a
+              >
+            </dd>
+          </div>
           }
-        </ul>
+        </dl>
         <div>
           <button
             (click)="onClick()"

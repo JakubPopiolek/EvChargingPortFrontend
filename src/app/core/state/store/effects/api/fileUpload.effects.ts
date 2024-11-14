@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ApiFileUploadService } from '../../../../services/api/file-upload-service';
 import * as fromFileUploadActions from '../../actions/api/fileUpload.actions';
-import { catchError, concatMap, exhaustMap, map, of, takeUntil } from 'rxjs';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { catchError, map, mergeMap, of, switchMap, takeUntil } from 'rxjs';
+import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { serializeError } from 'serialize-error';
 
 @Injectable()
@@ -16,13 +16,35 @@ export class FileUploadEffects {
   uploadRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromFileUploadActions.uploadRequest),
-      concatMap((action) =>
-        this.fileUploadService.uploadFile(action.file).pipe(
+      mergeMap((action) =>
+        this.fileUploadService.uploadFile(action.file, action.id).pipe(
           takeUntil(
             this.actions$.pipe(ofType(fromFileUploadActions.uploadCancel))
           ),
           map((event) => this.getActionFromHttpEvent(event)),
           catchError((error) => of(this.handleError(error)))
+        )
+      )
+    )
+  );
+
+  deleteFile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromFileUploadActions.deleteFile),
+      switchMap((action) =>
+        this.fileUploadService.deleteFile(action.id).pipe(
+          map(() => {
+            return fromFileUploadActions.deleteFileSuccess({
+              id: action.id,
+            });
+          }),
+          catchError((error) =>
+            of(
+              fromFileUploadActions.deleteFileFailure({
+                error: serializeError(error).message,
+              })
+            )
+          )
         )
       )
     )
@@ -34,19 +56,28 @@ export class FileUploadEffects {
         return fromFileUploadActions.uploadStarted();
       }
       case HttpEventType.UploadProgress: {
+        const progress = event.total
+          ? Math.round((100 * event.loaded) / event.total)
+          : 0;
         return fromFileUploadActions.uploadProgress({
-          progress: Math.round(
-            (100 * event.loaded) / (event.total ? event.total : 1)
-          ),
+          progress,
         });
       }
       case HttpEventType.ResponseHeader:
       case HttpEventType.Response: {
-        if (event.status === 200) {
-          return fromFileUploadActions.uploadCompleted();
+        if (event instanceof HttpResponse) {
+          if (event.status === 200) {
+            return fromFileUploadActions.uploadCompleted({
+              newFiles: event.body,
+            });
+          } else {
+            return fromFileUploadActions.uploadFailure({
+              error: event.statusText,
+            });
+          }
         } else {
           return fromFileUploadActions.uploadFailure({
-            error: event.statusText,
+            error: `Unexpected response type: ${event.constructor.name}`,
           });
         }
       }

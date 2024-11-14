@@ -1,4 +1,4 @@
-import * as Actions from './applicationSubmission.actions';
+import * as Actions from './application.actions';
 
 describe('vehicleDetailsService actions', () => {
   it('should create an action - [ saveId ]', () => {

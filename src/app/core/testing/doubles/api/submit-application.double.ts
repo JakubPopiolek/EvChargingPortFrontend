@@ -1,7 +1,7 @@
 import {
   ApplicationSubmission,
   ApplicationSubmissionResponse,
-} from '../../../interfaces/ApplicationSubmission.interface';
+} from '../../../interfaces/Application.interface';
 
 export class SubmitApplicationDouble {
   public static prepareApplicationSubmissionResponse(): ApplicationSubmissionResponse {

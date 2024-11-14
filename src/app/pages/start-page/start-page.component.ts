@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { SERVICE_NAME } from '../../consts/config';
 import { Router } from '@angular/router';
-import { ApiSubmitApplicationService } from '../../core/services/api/submit-application-service';
+import { ApiApplicationService } from '../../core/services/api/application-service';
+import { Store } from '@ngrx/store';
+import * as fromApplicationActions from '../../core/state/store/actions/application.actions';
 
 @Component({
   selector: 'app-start-page',
@@ -15,17 +17,25 @@ export class StartPageComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly apiSubmitApplicationService: ApiSubmitApplicationService,
+    private readonly apiApplicationService: ApiApplicationService,
+    private readonly store: Store
   ) {}
 
   public onClick() {
-    this.apiSubmitApplicationService.ping().subscribe({
+    this.apiApplicationService.ping().subscribe({
       next: () => {
+        this.beginApplication();
         this.router.navigate(['vrn']);
       },
       error: () => {
         this.router.navigate(['serviceUnavailable']);
       },
+    });
+  }
+
+  private beginApplication(): void {
+    this.apiApplicationService.startApplication().subscribe((res) => {
+      this.store.dispatch(fromApplicationActions.saveId({ id: res }));
     });
   }
 }

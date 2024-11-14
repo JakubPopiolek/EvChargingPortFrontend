@@ -1,6 +1,7 @@
 import { Address } from './PersonalDetails.interface';
 
-export interface ApplicationSubmission {
+export interface Application {
+  referenceNumber: string | null;
   firstName?: string | null;
   lastName?: string | null;
   email?: string | null;

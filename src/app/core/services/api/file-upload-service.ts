@@ -1,6 +1,7 @@
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { FileUploadResponse } from '../../interfaces/FileUpload.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class ApiFileUploadService {
   constructor(public readonly http: HttpClient) {}
 
-  public uploadFile(file: File): Observable<HttpEvent<{}>> {
+  public uploadFile(file: File, id: string): Observable<HttpEvent<{}>> {
     const formData = new FormData();
     formData.append('files', file, file.name);
 
@@ -16,11 +17,20 @@ export class ApiFileUploadService {
       reportProgress: true,
     };
 
-    const apiUrl: string = `/api/FileUpload`;
+    const apiUrl: string = `/api/FileUpload/${id}`;
 
     const req = new HttpRequest('POST', apiUrl, formData, options);
-    console.log(req);
 
     return this.http.request(req);
+  }
+
+  public getFiles(id: string): Observable<FileUploadResponse[]> {
+    const apiUrl: string = `/api/FileUpload/${id}`;
+    return this.http.get<FileUploadResponse[]>(apiUrl);
+  }
+
+  public deleteFile(id: number): Observable<any> {
+    const apiUrl: string = `/api/FileUpload/${id}`;
+    return this.http.delete<any>(apiUrl);
   }
 }

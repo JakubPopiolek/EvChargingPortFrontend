@@ -1,5 +1,5 @@
-import * as fromApplicationSubmissionReducer from '../reducers/applicationSubmission.reducer';
-import * as fromApplicationSubmissionActions from '../actions/applicationSubmission.actions';
+import * as fromApplicationSubmissionReducer from './application.reducer';
+import * as fromApplicationSubmissionActions from '../actions/application.actions';
 
 describe('applicationSubmissionReducer', () => {
   describe('SaveId', () => {
@@ -14,7 +14,7 @@ describe('applicationSubmissionReducer', () => {
       });
       const state = fromApplicationSubmissionReducer.reducer(
         initialState,
-        action,
+        action
       );
       expect(state).toEqual(newState);
     });

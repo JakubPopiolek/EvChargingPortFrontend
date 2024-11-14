@@ -1,12 +1,13 @@
-import { Action, createFeature, createReducer, on } from '@ngrx/store';
-import * as fromFileUploadActions from '../actions/api/fileUpload.actions';
-import { UploadStatus } from '../../../enums/UploadStatus.enum';
-import { FileUploadData } from '../../../interfaces/FileUploadData.interface';
+import { createFeature, createReducer, on } from '@ngrx/store';
+import * as fromFileUploadActions from '../../actions/api/fileUpload.actions';
+import { UploadStatus } from '../../../../enums/UploadStatus.enum';
+import { FileUpload } from '../../../../interfaces/FileUpload.interface';
 
-export const initialState: FileUploadData = {
+export const initialState: FileUpload = {
   status: UploadStatus.Ready,
   error: null,
   progress: null,
+  files: [],
 };
 
 export const fileUploadReducer = createReducer(
@@ -50,11 +51,17 @@ export const fileUploadReducer = createReducer(
     progress: progress,
   })),
 
-  on(fromFileUploadActions.uploadCompleted, (state) => ({
+  on(fromFileUploadActions.uploadCompleted, (state, { newFiles }) => ({
     ...state,
     status: UploadStatus.Completed,
     progress: 100,
     error: null,
+    files: [...state.files, ...newFiles],
+  })),
+
+  on(fromFileUploadActions.deleteFile, (state, { id }) => ({
+    ...state,
+    files: state.files.filter((file) => file.id !== id),
   }))
 );
 

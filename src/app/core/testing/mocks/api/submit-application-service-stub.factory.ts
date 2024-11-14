@@ -1,10 +1,10 @@
 import { of } from 'rxjs';
 import { MethodsNames } from '../../../types/utility.types';
-import { ApiSubmitApplicationService } from '../../../services/api/submit-application-service';
+import { ApiSubmitApplicationService } from '../../../services/api/application-service';
 
 export class ApiSubmitApplicationServiceStubFactory {
   public static prepareWithMethods(
-    methods: MethodsNames<ApiSubmitApplicationService>[],
+    methods: MethodsNames<ApiSubmitApplicationService>[]
   ): ApiSubmitApplicationService {
     const stub: Partial<ApiSubmitApplicationService> = {};
 
