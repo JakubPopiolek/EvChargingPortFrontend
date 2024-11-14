@@ -66,7 +66,7 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('should route to name page when continue button is clicked, yes is selected and vehicle is electric', () => {
+  it('should route to adequate parking page when continue button is clicked, yes is selected and vehicle is electric', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     component.confirmVehicleDetails.setValue('yes');
@@ -75,7 +75,7 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
     btn.click();
 
     expect(component.isValid).toBe(true);
-    expect(spy).toHaveBeenCalledWith(['name']);
+    expect(spy).toHaveBeenCalledWith(['adequateParking']);
   });
 
   it('should route to not electric vehicle page when continue button is clicked, yes is selected and vehicle is not electric', () => {

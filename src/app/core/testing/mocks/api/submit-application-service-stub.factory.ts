@@ -1,18 +1,18 @@
 import { of } from 'rxjs';
 import { MethodsNames } from '../../../types/utility.types';
-import { ApiSubmitApplicationService } from '../../../services/api/application-service';
+import { ApiApplicationService } from '../../../services/api/application-service';
 
-export class ApiSubmitApplicationServiceStubFactory {
+export class ApiApplicationServiceStubFactory {
   public static prepareWithMethods(
-    methods: MethodsNames<ApiSubmitApplicationService>[]
-  ): ApiSubmitApplicationService {
-    const stub: Partial<ApiSubmitApplicationService> = {};
+    methods: MethodsNames<ApiApplicationService>[]
+  ): ApiApplicationService {
+    const stub: Partial<ApiApplicationService> = {};
 
     for (const method of methods) {
       stub[method] = () => {
         return of();
       };
     }
-    return stub as ApiSubmitApplicationService;
+    return stub as ApiApplicationService;
   }
 }

@@ -1,5 +1,5 @@
 import {
-  ApplicationSubmission,
+  Application,
   ApplicationSubmissionResponse,
 } from '../../../interfaces/Application.interface';
 
@@ -21,8 +21,9 @@ export class SubmitApplicationDouble {
     };
   }
 
-  public static prepareApplicationSubmission(): ApplicationSubmission {
+  public static prepareApplicationSubmission(): Application {
     return {
+      referenceNumber: 'testRefNumber',
       firstName: 'testFirstName',
       lastName: 'testLastName',
       email: 'testEmail',

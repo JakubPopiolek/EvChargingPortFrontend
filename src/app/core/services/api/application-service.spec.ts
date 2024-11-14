@@ -3,30 +3,29 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { ApiSubmitApplicationService } from './application-service';
 import {
-  ApplicationSubmission,
+  Application,
   ApplicationSubmissionResponse,
 } from '../../interfaces/Application.interface';
 import { SubmitApplicationDouble } from '../../testing/doubles/api/submit-application.double';
 import { HttpStatusCode } from '@angular/common/http';
+import { ApiApplicationService } from './application-service';
 
-describe('ApiSubmitApplicationService', () => {
-  let service: ApiSubmitApplicationService;
-  let mockApplicationSubmission: ApplicationSubmission;
+describe('ApiApplicationService', () => {
+  let service: ApiApplicationService;
+  let mockApplication: Application;
   let mockApplicationSubmissionResponse: ApplicationSubmissionResponse;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
-    mockApplicationSubmission =
-      SubmitApplicationDouble.prepareApplicationSubmission();
+    mockApplication = SubmitApplicationDouble.prepareApplicationSubmission();
     mockApplicationSubmissionResponse =
       SubmitApplicationDouble.prepareApplicationSubmissionResponse();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
 
-    service = TestBed.inject(ApiSubmitApplicationService);
+    service = TestBed.inject(ApiApplicationService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
@@ -34,14 +33,14 @@ describe('ApiSubmitApplicationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should call post and return the submitted event', async () => {
-    service.post(mockApplicationSubmission).subscribe((res) => {
+  it('should call put and return the submitted event', async () => {
+    service.submitApplication(mockApplication).subscribe((res) => {
       expect(res).toEqual(mockApplicationSubmissionResponse);
     });
 
     const req = httpTestingController.expectOne({
-      method: 'POST',
-      url: `/api/ApplicationItems`,
+      method: 'PUT',
+      url: `/api/ApplicationItems/submitApplication`,
     });
     req.flush(mockApplicationSubmissionResponse);
   });
