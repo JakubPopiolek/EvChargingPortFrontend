@@ -12,15 +12,11 @@ import { ApiVehicleDetailsDouble } from '../../core/testing/doubles/api/vehicle-
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
 import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
-import { ApiSubmitApplicationService } from '../../core/services/api/submit-application-service';
-import { ApiSubmitApplicationServiceStubFactory } from '../../core/testing/mocks/api/submit-application-service-stub.factory';
-import { of, throwError } from 'rxjs';
-import {
-  ApplicationSubmission,
-  ApplicationSubmissionResponse,
-} from '../../core/interfaces/ApplicationSubmission.interface';
-import { SubmitApplicationDouble } from '../../core/testing/doubles/api/submit-application.double';
-import { saveId } from '../../core/state/store/actions/applicationSubmission.actions';
+import { throwError } from 'rxjs';
+import { ApplicationSubmissionResponse } from '../../core/interfaces/Application.interface';
+import { ApiApplicationService } from '../../core/services/api/application-service';
+import { ApiApplicationServiceStubFactory } from '../../core/testing/mocks/api/submit-application-service-stub.factory';
+import { ApplicationDouble } from '../../core/testing/doubles/api/application.double';
 
 describe('CheckAnswersPageComponent', () => {
   let component: CheckAnswersPageComponent;
@@ -36,18 +32,20 @@ describe('CheckAnswersPageComponent', () => {
   >;
   let mockVehicleDetails: VehicleDetails;
   let store: MockStore;
-  let apiSubmitApplicationServiceMock: ApiSubmitApplicationService;
+  let apiApplicationServiceMock: ApiApplicationService;
   let submitApplicationResponseMock: ApplicationSubmissionResponse;
   let router: Router;
 
   beforeEach(async () => {
-    apiSubmitApplicationServiceMock =
-      ApiSubmitApplicationServiceStubFactory.prepareWithMethods(['post']);
+    apiApplicationServiceMock =
+      ApiApplicationServiceStubFactory.prepareWithMethods([
+        'submitApplication',
+      ]);
     mockPesonalDetails = PersonalDetailsDouble.preparePersonalDetails();
     mockVehicleDetails =
       ApiVehicleDetailsDouble.prepareSuccessfulResultElectric();
     submitApplicationResponseMock =
-      SubmitApplicationDouble.prepareApplicationSubmissionResponse();
+      ApplicationDouble.prepareApplicationSubmissionResponse();
     await TestBed.configureTestingModule({
       imports: [
         CheckAnswersPageComponent,
@@ -58,8 +56,8 @@ describe('CheckAnswersPageComponent', () => {
       providers: [
         provideMockStore({}),
         {
-          provide: ApiSubmitApplicationService,
-          useValue: apiSubmitApplicationServiceMock,
+          provide: ApiApplicationService,
+          useValue: apiApplicationServiceMock,
         },
       ],
     }).compileComponents();
@@ -107,28 +105,10 @@ describe('CheckAnswersPageComponent', () => {
     );
   });
 
-  it('should dispatch saveId action when submit button is clicked', () => {
-    const storeSpy = spyOn(store, 'dispatch').and.callThrough();
-    const routerSpy = spyOn(router, 'navigate');
-    spyOn(apiSubmitApplicationServiceMock, 'post').and.returnValue(
-      of(submitApplicationResponseMock)
-    );
-
-    const btn = fixture.debugElement.query(
-      By.css('.govuk-button')
-    ).nativeElement;
-
-    btn.click();
-    expect(storeSpy).toHaveBeenCalledWith(
-      saveId({ id: submitApplicationResponseMock.id })
-    );
-    expect(routerSpy).toHaveBeenCalledWith(['submitted']);
-  });
-
   it('should route to [service unavailable] page when API call fails', () => {
     const storeSpy = spyOn(store, 'dispatch').and.callThrough();
     const routerSpy = spyOn(router, 'navigate');
-    spyOn(apiSubmitApplicationServiceMock, 'post').and.returnValue(
+    spyOn(apiApplicationServiceMock, 'submitApplication').and.returnValue(
       throwError(() => {
         new Error('Api Error');
       })

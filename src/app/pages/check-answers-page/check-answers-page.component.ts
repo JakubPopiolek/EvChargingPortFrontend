@@ -5,9 +5,10 @@ import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicl
 import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
 import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
 import { PersonalDetails } from '../../core/interfaces/PersonalDetails.interface';
-import { ApiSubmitApplicationService } from '../../core/services/api/submit-application-service';
-import { ApplicationSubmission } from '../../core/interfaces/ApplicationSubmission.interface';
-import * as fromApplicationSubmissionActions from '../../core/state/store/actions/applicationSubmission.actions';
+import * as fromApplicationActions from '../../core/state/store/actions/application.actions';
+import { ApiApplicationService } from '../../core/services/api/application-service';
+import { Application } from '../../core/interfaces/Application.interface';
+import { selectId } from '../../core/state/store/reducers/application.reducer';
 
 @Component({
   selector: 'app-check-answers-page',
@@ -19,11 +20,12 @@ import * as fromApplicationSubmissionActions from '../../core/state/store/action
 export class CheckAnswersPageComponent implements OnInit {
   public vehicleDetails?: VehicleDetails;
   public personalDetails?: PersonalDetails;
+  private referenceNumber: string = '';
 
   constructor(
     private readonly store: Store,
     private readonly router: Router,
-    private readonly apiSubmitApplicationService: ApiSubmitApplicationService,
+    private readonly apiApplicationService: ApiApplicationService
   ) {}
 
   public ngOnInit(): void {
@@ -33,10 +35,14 @@ export class CheckAnswersPageComponent implements OnInit {
     this.store.select(selectPersonalDetailsState).subscribe((details) => {
       this.personalDetails = details;
     });
+    this.store.select(selectId).subscribe((refNumber) => {
+      this.referenceNumber = refNumber;
+    });
   }
 
   public onClick(): void {
-    const submission: ApplicationSubmission = {
+    const submission: Application = {
+      referenceNumber: this.referenceNumber,
       firstName: this.personalDetails?.firstName,
       lastName: this.personalDetails?.lastName,
       email: this.personalDetails?.email,
@@ -44,12 +50,8 @@ export class CheckAnswersPageComponent implements OnInit {
       vrn: this.vehicleDetails?.registrationNumber,
     };
 
-    this.apiSubmitApplicationService.post(submission).subscribe({
-      next: (res) => {
-        this.store.dispatch(
-          fromApplicationSubmissionActions.saveId({ id: res.id }),
-        );
-      },
+    this.apiApplicationService.submitApplication(submission).subscribe({
+      next: () => {},
       error: () => {
         this.router.navigate(['serviceUnavailable']);
       },

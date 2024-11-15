@@ -9,12 +9,14 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../../environments/environment';
 import * as fromVehicleEnquiryServiceReducer from './store/reducers/api/vehicleDetailsService.reducer';
 import { PersonalDetails } from '../interfaces/PersonalDetails.interface';
-import { ApplicationSubmissionResponse } from '../interfaces/ApplicationSubmission.interface';
+import { ApplicationSubmissionResponse } from '../interfaces/Application.interface';
+import { FileUpload } from '../interfaces/FileUpload.interface';
 
 export interface State {
   vehicleDetails: fromVehicleEnquiryServiceReducer.VehicleDetailsState;
   personalDetails: PersonalDetails;
-  applicationSubmission: ApplicationSubmissionResponse;
+  application: ApplicationSubmissionResponse;
+  fileUpload: FileUpload;
 }
 
 const devTools: ModuleWithProviders<any>[] = [
@@ -25,14 +27,18 @@ const devTools: ModuleWithProviders<any>[] = [
 ];
 
 export function storageSyncReducer(
-  reducer: ActionReducer<State>,
+  reducer: ActionReducer<State>
 ): ActionReducer<State> {
   const metaReducer = storageSync<State>({
     features: [
       { stateKey: 'vehicleDetails', storageForFeature: window.sessionStorage },
       { stateKey: 'personalDetails', storageForFeature: window.sessionStorage },
       {
-        stateKey: 'applicationSubmission',
+        stateKey: 'application',
+        storageForFeature: window.sessionStorage,
+      },
+      {
+        stateKey: 'fileUpload',
         storageForFeature: window.sessionStorage,
       },
     ],

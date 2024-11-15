@@ -1,0 +1,72 @@
+<div class="govuk-width-container">
+  <a routerLink="/confirmVehicleDetails" class="govuk-back-link">Back</a>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      <h1 class="govuk-heading-l">
+        Ensure you fulfill the adequate parking criteria
+      </h1>
+      <ul>
+        <li>
+          <p class="govuk-body">
+            Street parking must be generally available outside or near your
+            home.
+          </p>
+        </li>
+        <li>
+          <p class="govuk-body">
+            The on-street parking must be legal and not disrupt the safety or
+            flow of vehicles and pedestrians.
+          </p>
+        </li>
+      </ul>
+      <p class="govuk-body">
+        You may upload proof of fulfilling the adequate parking criteria to aid
+        your application
+      </p>
+      <form [formGroup]="uploadFilesForm">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="file-upload"> Upload a file </label>
+          <input
+            (change)="onFileSelected($event)"
+            class="govuk-file-upload"
+            id="file-upload"
+            name="fileUpload"
+            type="file"
+            multiple
+          />
+        </div>
+        <p class="govuk-body">
+          <b>Uploaded files</b>
+        </p>
+        <dl class="govuk-summary-list govuk-summary-list--long-key">
+          @for (file of uploadFilesForm.get('files')?.value; track $index) {
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">{{ file.name }}</dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--green"> Uploaded </strong>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a
+                style="cursor: pointer"
+                class="govuk-link delete-file"
+                (click)="onFileDelete(file.id)"
+                >Remove</a
+              >
+            </dd>
+          </div>
+          }
+        </dl>
+        <div>
+          <button
+            (click)="onClick()"
+            type="button"
+            class="govuk-button"
+            data-module="govuk-button"
+          >
+            Continue
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

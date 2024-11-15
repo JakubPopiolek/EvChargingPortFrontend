@@ -1,4 +1,4 @@
-import { fuelType } from '../../../enums/fuelType.enum';
+import { FuelType } from '../../../enums/FuelType.enum';
 import { VehicleDetails } from '../../../interfaces/VehicleDetails.interface';
 import { VehicleDetailsState } from '../../../state/store/reducers/api/vehicleDetailsService.reducer';
 
@@ -6,7 +6,7 @@ export class ApiVehicleDetailsDouble {
   public static prepareSuccessfulResultElectric(): VehicleDetails {
     return {
       colour: 'grey',
-      fuelType: fuelType.ELECTRICITY,
+      fuelType: FuelType.ELECTRICITY,
       make: 'volkswagen',
       registrationNumber: 'AB12 ABC',
     };
@@ -15,7 +15,7 @@ export class ApiVehicleDetailsDouble {
   public static prepareSuccessfulResultPetrol(): VehicleDetails {
     return {
       colour: 'grey',
-      fuelType: fuelType.PETROL,
+      fuelType: FuelType.PETROL,
       make: 'volkswagen',
       registrationNumber: 'petrol',
     };

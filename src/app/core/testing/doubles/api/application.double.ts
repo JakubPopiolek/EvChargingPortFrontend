@@ -1,9 +1,9 @@
 import {
-  ApplicationSubmission,
+  Application,
   ApplicationSubmissionResponse,
-} from '../../../interfaces/ApplicationSubmission.interface';
+} from '../../../interfaces/Application.interface';
 
-export class SubmitApplicationDouble {
+export class ApplicationDouble {
   public static prepareApplicationSubmissionResponse(): ApplicationSubmissionResponse {
     return {
       id: 'testId',
@@ -21,8 +21,9 @@ export class SubmitApplicationDouble {
     };
   }
 
-  public static prepareApplicationSubmission(): ApplicationSubmission {
+  public static prepareApplication(): Application {
     return {
+      referenceNumber: 'testRefNumber',
       firstName: 'testFirstName',
       lastName: 'testLastName',
       email: 'testEmail',
@@ -34,6 +35,23 @@ export class SubmitApplicationDouble {
         city: 'testTownOrCity',
       },
       vrn: 'testVRN',
+    };
+  }
+
+  public static prepareApplication_onlyId(): Application {
+    return {
+      referenceNumber: 'testRefNumber',
+      firstName: null,
+      lastName: null,
+      email: null,
+      address: {
+        postcode: null,
+        line1: null,
+        line2: null,
+        province: null,
+        city: null,
+      },
+      vrn: null,
     };
   }
 }

@@ -7,25 +7,25 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { ApiSubmitApplicationService } from '../../core/services/api/submit-application-service';
-import { ApiSubmitApplicationServiceStubFactory } from '../../core/testing/mocks/api/submit-application-service-stub.factory';
 import { of, throwError } from 'rxjs';
 import {
   HttpErrorResponse,
   HttpResponse,
   HttpStatusCode,
 } from '@angular/common/http';
+import { ApiApplicationService } from '../../core/services/api/application-service';
+import { ApiApplicationServiceStubFactory } from '../../core/testing/mocks/api/submit-application-service-stub.factory';
 
 describe('StartPageComponent', () => {
   let component: StartPageComponent;
   let fixture: ComponentFixture<StartPageComponent>;
-  let apiSubmitApplicationServiceMock: ApiSubmitApplicationService;
+  let apiApplicationServiceMock: ApiApplicationService;
   let router: Router;
   let httpMock: HttpTestingController;
 
   beforeEach(async () => {
-    apiSubmitApplicationServiceMock =
-      ApiSubmitApplicationServiceStubFactory.prepareWithMethods(['ping']);
+    apiApplicationServiceMock =
+      ApiApplicationServiceStubFactory.prepareWithMethods(['ping']);
     await TestBed.configureTestingModule({
       imports: [
         RouterModule.forRoot([]),
@@ -37,9 +37,7 @@ describe('StartPageComponent', () => {
 
     router = TestBed.inject(Router);
     httpMock = TestBed.inject(HttpTestingController);
-    apiSubmitApplicationServiceMock = TestBed.inject(
-      ApiSubmitApplicationService,
-    );
+    apiApplicationServiceMock = TestBed.inject(ApiApplicationService);
     fixture = TestBed.createComponent(StartPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -53,8 +51,8 @@ describe('StartPageComponent', () => {
     let mockApiResponse = new HttpResponse({
       body: '2024-10-29T13:23:47.143615+00:00',
     });
-    spyOn(apiSubmitApplicationServiceMock, 'ping').and.returnValue(
-      of(mockApiResponse),
+    spyOn(apiApplicationServiceMock, 'ping').and.returnValue(
+      of(mockApiResponse)
     );
     const routerSpy = spyOn(router, 'navigate');
 
@@ -66,8 +64,8 @@ describe('StartPageComponent', () => {
   });
 
   it('should navigate to serviceUnavailable page when api returns error', () => {
-    spyOn(apiSubmitApplicationServiceMock, 'ping').and.returnValue(
-      throwError(() => 'error'),
+    spyOn(apiApplicationServiceMock, 'ping').and.returnValue(
+      throwError(() => 'error')
     );
     const routerSpy = spyOn(router, 'navigate');
 
