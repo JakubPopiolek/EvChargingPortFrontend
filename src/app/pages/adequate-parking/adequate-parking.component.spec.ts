@@ -18,6 +18,10 @@ import {
   deleteFile,
   uploadRequest,
 } from '../../core/state/store/actions/api/fileUpload.actions';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ApiFileUploadService } from '../../core/services/api/file-upload-service';
+import { ApiFileUploadServiceStubFactory } from '../../core/testing/mocks/api/file-upload-service-stub.factory';
+import { of } from 'rxjs';
 
 describe('AdequateParkingComponent', () => {
   let component: AdequateParkingComponent;
@@ -28,22 +32,31 @@ describe('AdequateParkingComponent', () => {
   let mockApplicationState: Application;
   let mockIdSelector: MemoizedSelector<Application, string>;
   let router: Router;
+  let mockApiFileUploadService: ApiFileUploadService;
 
   beforeEach(async () => {
     mockFileUploadState = ApiFileUploadStateDouble.prepareFileUploadCompleted();
     mockApplicationState = ApplicationDouble.prepareApplication_onlyId();
+    mockApiFileUploadService =
+      ApiFileUploadServiceStubFactory.prepareWithMethods(['getFileExtensions']);
 
     await TestBed.configureTestingModule({
       imports: [
         AdequateParkingComponent,
         StoreModule.forRoot(fileUploadReducer),
         RouterModule.forRoot([]),
+        HttpClientTestingModule,
       ],
-      providers: [provideMockStore()],
+      providers: [
+        provideMockStore(),
+        {
+          provide: ApiFileUploadService,
+          useValue: mockApiFileUploadService,
+        },
+      ],
     }).compileComponents();
 
     router = TestBed.inject(Router);
-
     store = TestBed.inject(MockStore);
     mockFileUploadStateSelector = store.overrideSelector(
       selectFileUploadState,
@@ -62,6 +75,17 @@ describe('AdequateParkingComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should load file extensions when the page loads', () => {
+    const mockAllowedExtensions = ['.png', '.pdf'];
+    spyOn(mockApiFileUploadService, 'getFileExtensions').and.returnValue(
+      of(mockAllowedExtensions)
+    );
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(component.allowedExtensions).toBe(mockAllowedExtensions);
   });
 
   it('should load already uploaded files when the page loads', () => {
@@ -125,6 +149,27 @@ describe('AdequateParkingComponent', () => {
     expect(routerSpy).toHaveBeenCalledWith(['name']);
   });
 
-  //TODO
-  it('should show error when upload failed with relevant error message', () => {});
+  it('should show error when upload failed with relevant error message', () => {
+    mockFileUploadStateSelector.setResult({
+      ...mockFileUploadState,
+      error: 'test-error',
+    });
+    store.refreshState();
+
+    const dataTransfer = new DataTransfer();
+    const testFile = new File([''], 'test-file.pdf');
+    dataTransfer.items.add(testFile);
+
+    const fileUploadEl = fixture.debugElement.query(
+      By.css('.govuk-file-upload')
+    );
+    fileUploadEl.nativeElement.files = dataTransfer.files;
+
+    fileUploadEl.nativeElement.dispatchEvent(new InputEvent('change'));
+
+    fixture.detectChanges();
+
+    expect(component.uploadError).toBe(true);
+    expect(component.uploadErrorMessage).toBe('test-error');
+  });
 });

@@ -23,9 +23,28 @@
         You may upload proof of fulfilling the adequate parking criteria to aid
         your application
       </p>
+      <p class="govuk-body">The following file types are supported</p>
+      <p class="govuk-body">
+        @for (extension of allowedExtensions; track $index) {
+        <strong>
+          {{ extension }}
+        </strong>
+        }
+      </p>
       <form [formGroup]="uploadFilesForm">
-        <div class="govuk-form-group">
+        <div
+          class="govuk-form-group"
+          [ngClass]="{ 'govuk-form-group--error': uploadError }"
+        >
           <label class="govuk-label" for="file-upload"> Upload a file </label>
+          <p
+            [style.display]="!uploadError ? 'none' : 'block'"
+            id="file-upload-1-error"
+            class="govuk-error-message"
+          >
+            <span class="govuk-visually-hidden">Error:</span>
+            {{ uploadErrorMessage }}
+          </p>
           <input
             (change)="onFileSelected($event)"
             class="govuk-file-upload"

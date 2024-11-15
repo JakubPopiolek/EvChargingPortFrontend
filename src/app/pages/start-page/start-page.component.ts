@@ -34,8 +34,13 @@ export class StartPageComponent {
   }
 
   private beginApplication(): void {
-    this.apiApplicationService.startApplication().subscribe((res) => {
-      this.store.dispatch(fromApplicationActions.saveId({ id: res }));
+    this.apiApplicationService.startApplication().subscribe({
+      next: (res) => {
+        this.store.dispatch(fromApplicationActions.saveId({ id: res }));
+      },
+      error: () => {
+        this.router.navigate(['serviceUnavailable']);
+      },
     });
   }
 }
