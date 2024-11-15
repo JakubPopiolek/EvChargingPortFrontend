@@ -20,7 +20,7 @@ import { selectId } from '../../core/state/store/reducers/application.reducer';
 export class CheckAnswersPageComponent implements OnInit {
   public vehicleDetails?: VehicleDetails;
   public personalDetails?: PersonalDetails;
-  private referenceNumber: string | null = null;
+  private referenceNumber: string = '';
 
   constructor(
     private readonly store: Store,

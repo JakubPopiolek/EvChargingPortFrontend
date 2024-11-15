@@ -22,19 +22,6 @@ export const uploadRequest = createAction(
   }>()
 );
 
-export const uploadCancel = createAction(ActionType.UPLOAD_CANCEL);
-
-export const uploadReset = createAction(ActionType.UPLOAD_RESET);
-
-export const uploadStarted = createAction(ActionType.UPLOAD_STARTED);
-
-export const uploadProgress = createAction(
-  ActionType.UPLOAD_PROGRESS,
-  props<{
-    progress: number;
-  }>()
-);
-
 export const uploadFailure = createAction(
   ActionType.UPLOAD_FAILURE,
   props<{

@@ -50,8 +50,6 @@ describe('AddressLookupPageComponent', () => {
   });
 
   it('should prefill input when address data is in store', () => {
-    // component.ngOnInit();
-    // fixture.detectChanges();
     const postcodeInput =
       fixture.debugElement.nativeElement.querySelector('#postcode');
     const addressLineOneInput =

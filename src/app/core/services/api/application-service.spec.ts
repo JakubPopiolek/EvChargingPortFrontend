@@ -7,9 +7,9 @@ import {
   Application,
   ApplicationSubmissionResponse,
 } from '../../interfaces/Application.interface';
-import { SubmitApplicationDouble } from '../../testing/doubles/api/submit-application.double';
 import { HttpStatusCode } from '@angular/common/http';
 import { ApiApplicationService } from './application-service';
+import { ApplicationDouble } from '../../testing/doubles/api/application.double';
 
 describe('ApiApplicationService', () => {
   let service: ApiApplicationService;
@@ -18,9 +18,9 @@ describe('ApiApplicationService', () => {
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
-    mockApplication = SubmitApplicationDouble.prepareApplicationSubmission();
+    mockApplication = ApplicationDouble.prepareApplication();
     mockApplicationSubmissionResponse =
-      SubmitApplicationDouble.prepareApplicationSubmissionResponse();
+      ApplicationDouble.prepareApplicationSubmissionResponse();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });

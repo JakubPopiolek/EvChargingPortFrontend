@@ -19,36 +19,11 @@ export const fileUploadReducer = createReducer(
     error: null,
   })),
 
-  on(fromFileUploadActions.uploadCancel, (state) => ({
-    ...state,
-    status: UploadStatus.Ready,
-    progress: null,
-    error: null,
-  })),
-
-  on(fromFileUploadActions.uploadReset, (state) => ({
-    ...state,
-    status: UploadStatus.Ready,
-    progress: null,
-    error: null,
-  })),
-
   on(fromFileUploadActions.uploadFailure, (state, { error }) => ({
     ...state,
     status: UploadStatus.Failed,
     progress: null,
     error: error,
-  })),
-
-  on(fromFileUploadActions.uploadStarted, (state) => ({
-    ...state,
-    status: UploadStatus.Started,
-    progress: 0,
-  })),
-
-  on(fromFileUploadActions.uploadProgress, (state, { progress }) => ({
-    ...state,
-    progress: progress,
   })),
 
   on(fromFileUploadActions.uploadCompleted, (state, { newFiles }) => ({

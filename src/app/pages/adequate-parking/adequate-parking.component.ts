@@ -4,11 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromFileUploadActions from '../../core/state/store/actions/api/fileUpload.actions';
 import { selectId } from '../../core/state/store/reducers/application.reducer';
-import { ApiFileUploadService } from '../../core/services/api/file-upload-service';
-import {
-  FileMetaData,
-  FileUploadResponse,
-} from '../../core/interfaces/FileUpload.interface';
+import { FileMetaData } from '../../core/interfaces/FileUpload.interface';
 import { selectFileUploadState } from '../../core/state/store/reducers/api/fileUpload.reducer';
 
 @Component({
@@ -25,11 +21,7 @@ export class AdequateParkingComponent implements OnInit {
   private files: Array<FileMetaData> = [];
   private id: string = '';
 
-  constructor(
-    private readonly router: Router,
-    private readonly store: Store,
-    private readonly fileUploadService: ApiFileUploadService
-  ) {}
+  constructor(private readonly router: Router, private readonly store: Store) {}
 
   public ngOnInit(): void {
     this.store
@@ -39,12 +31,7 @@ export class AdequateParkingComponent implements OnInit {
       })
       .unsubscribe();
 
-    this.fileUploadService
-      .getFiles(this.id)
-      .subscribe((files: FileUploadResponse[]) => {
-        this.files = files;
-        this.uploadFilesForm.get('files')?.setValue(files);
-      });
+    this.loadFilesFromStore();
   }
 
   public onClick(): void {
@@ -56,12 +43,6 @@ export class AdequateParkingComponent implements OnInit {
     if (element.files) {
       const files: FileList = element.files;
       Array.from(files).forEach((file) => {
-        const fileUploadResponse: FileMetaData = {
-          name: file.name,
-          id: Number(this.id),
-        };
-
-        this.files.push(fileUploadResponse);
         this.store.dispatch(
           fromFileUploadActions.uploadRequest({
             file: file,
@@ -70,7 +51,7 @@ export class AdequateParkingComponent implements OnInit {
         );
       });
 
-      this.uploadFilesForm.get('files')?.setValue(this.files);
+      this.loadFilesFromStore();
     }
   }
 
@@ -80,6 +61,10 @@ export class AdequateParkingComponent implements OnInit {
         id: fileId,
       })
     );
+    this.loadFilesFromStore();
+  }
+
+  private loadFilesFromStore() {
     this.store.select(selectFileUploadState).subscribe((fileState) => {
       this.uploadFilesForm.get('files')?.setValue(fileState.files);
     });

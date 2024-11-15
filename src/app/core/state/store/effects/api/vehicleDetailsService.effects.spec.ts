@@ -1,12 +1,10 @@
-import { Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { VehicleDetailsServiceEffects } from './vehicleDetailsService.effects';
-import { fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { ApiVehicleEnquiryService } from '../../../../services/api/vehicle-enquiry-service';
 import { ApiVehicleDetailsServiceStubFactory } from '../../../../testing/mocks/api/vehicle-details-service-stub.factory';
 import * as fromVehicleDetailsServiceActions from '../../actions/api/vehicleDetailsService.actions';
-import { cold } from 'jasmine-marbles';
-import { Actions } from '@ngrx/effects';
 
 describe('vehicleDetailsServiceEffects', () => {
   let actions$: Observable<any>;
@@ -34,7 +32,7 @@ describe('vehicleDetailsServiceEffects', () => {
   it('should get vehicle details', () => {
     const spy = spyOn(
       vehicleDetailsServiceMock,
-      'getByRegNumber',
+      'getByRegNumber'
     ).and.callThrough();
 
     actions$ = of(fromVehicleDetailsServiceActions.GetVehicleDetails);
