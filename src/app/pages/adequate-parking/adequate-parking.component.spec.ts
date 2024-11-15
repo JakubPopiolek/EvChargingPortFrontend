@@ -18,6 +18,10 @@ import {
   deleteFile,
   uploadRequest,
 } from '../../core/state/store/actions/api/fileUpload.actions';
+import {
+  HttpClientTestingModule,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 
 describe('AdequateParkingComponent', () => {
   let component: AdequateParkingComponent;
@@ -38,6 +42,7 @@ describe('AdequateParkingComponent', () => {
         AdequateParkingComponent,
         StoreModule.forRoot(fileUploadReducer),
         RouterModule.forRoot([]),
+        HttpClientTestingModule,
       ],
       providers: [provideMockStore()],
     }).compileComponents();
