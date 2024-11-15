@@ -3,9 +3,6 @@ import { FileMetaData } from '../../../../interfaces/FileUpload.interface';
 
 export enum ActionType {
   UPLOAD_REQUEST = '[File Upload Form] Request',
-  UPLOAD_CANCEL = '[File Upload Form] Cancel',
-  UPLOAD_RESET = '[File Upload Form] Reset',
-  UPLOAD_STARTED = '[File Upload API] Started',
   UPLOAD_PROGRESS = '[File Upload API] Progress',
   UPLOAD_FAILURE = '[File Upload API] Failure',
   UPLOAD_COMPLETED = '[File Upload API] Success',
@@ -28,6 +25,8 @@ export const uploadFailure = createAction(
     error: string;
   }>()
 );
+
+export const uploadProgress = createAction(ActionType.UPLOAD_PROGRESS);
 
 export const uploadCompleted = createAction(
   ActionType.UPLOAD_COMPLETED,

@@ -33,4 +33,9 @@ export class ApiFileUploadService {
     const apiUrl: string = `/api/FileUpload/${id}`;
     return this.http.delete<any>(apiUrl);
   }
+
+  public getFileExtensions(): Observable<string[]> {
+    const apiurl: string = `/api/FileUpload/getFileExtensions`;
+    return this.http.get<string[]>(apiurl);
+  }
 }

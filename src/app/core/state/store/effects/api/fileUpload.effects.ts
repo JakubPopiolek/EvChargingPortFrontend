@@ -68,17 +68,15 @@ export class FileUploadEffects {
         }
       }
       default: {
-        return fromFileUploadActions.uploadFailure({
-          error: `Unknown Event: ${JSON.stringify(event)}`,
-        });
+        return fromFileUploadActions.uploadProgress();
       }
     }
   }
 
   private handleError(error: any) {
-    const friendlyErrorMessage = serializeError(error).message;
+    let errorMessage: string = error.error;
     return fromFileUploadActions.uploadFailure({
-      error: friendlyErrorMessage,
+      error: errorMessage,
     });
   }
 }
