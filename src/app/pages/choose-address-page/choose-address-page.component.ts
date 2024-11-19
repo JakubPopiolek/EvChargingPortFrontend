@@ -40,9 +40,14 @@ export class ChooseAddressPageComponent implements OnInit {
     this.store
       .select(selectAddress)
       .pipe(
-        concatMap((address) =>
-          this.addressLookupService.get(address?.postcode, address?.line1)
-        )
+        concatMap((address) => {
+          this.postcode = address?.postcode;
+          this.line1 = address?.line1;
+          return this.addressLookupService.get(
+            address?.postcode,
+            address?.line1
+          );
+        })
       )
       .subscribe((addresses) => {
         this.addresses = addresses;
