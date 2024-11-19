@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromFileUploadActions from '../../core/state/store/actions/api/fileUpload.actions';
 import { selectId } from '../../core/state/store/reducers/application.reducer';
@@ -28,11 +28,12 @@ export class AdequateParkingComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly store: Store,
-    private readonly ApiFileUploadService: ApiFileUploadService
+    private readonly apiFileUploadService: ApiFileUploadService,
+    private readonly activatedRoute: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
-    this.ApiFileUploadService.getFileExtensions().subscribe((ext) => {
+    this.apiFileUploadService.getFileExtensions().subscribe((ext) => {
       this.allowedExtensions = ext;
     });
 
@@ -47,7 +48,13 @@ export class AdequateParkingComponent implements OnInit {
   }
 
   public onClick(): void {
-    this.router.navigate(['name']);
+    var isChangeAnswer: boolean =
+      this.activatedRoute.snapshot.queryParams['change'];
+    if (isChangeAnswer) {
+      this.router.navigate(['checkAnswers']);
+    } else {
+      this.router.navigate(['name']);
+    }
   }
 
   public onFileSelected(event: Event): void {

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+`   `;
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { ConfirmVehicleDetailsPageComponent } from './confirm-vehicle-details-page.component';
@@ -13,6 +14,7 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
   let component: ConfirmVehicleDetailsPageComponent;
   let fixture: ComponentFixture<ConfirmVehicleDetailsPageComponent>;
   let router: Router;
+  let route: ActivatedRoute;
   let mockVehiceDetailsState: VehicleDetailsState;
   let store: MockStore;
   let mockVehicleDetailsStateSelector: MemoizedSelector<
@@ -28,7 +30,7 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
     }).compileComponents();
 
     router = TestBed.inject(Router);
-
+    route = TestBed.inject(ActivatedRoute);
     store = TestBed.inject(MockStore);
     mockVehicleDetailsStateSelector = store.overrideSelector(
       selectVehicleDetailsState,
@@ -92,10 +94,12 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
     btn.click();
 
     expect(component.isValid).toBe(true);
-    expect(spy).toHaveBeenCalledWith(['notElectricVehicle']);
+    expect(spy).toHaveBeenCalledWith(['notElectricVehicle'], {
+      queryParams: { change: undefined },
+    });
   });
 
-  it('should route to vrn when continue button is clicked and no is selected', () => {
+  it('should route to vrn page when continue button is clicked and no is selected', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
     component.confirmVehicleDetails.setValue('no');
@@ -104,6 +108,25 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
     btn.click();
 
     expect(component.isValid).toBe(true);
-    expect(spy).toHaveBeenCalledWith(['vrn']);
+    expect(spy).toHaveBeenCalledWith(['vrn'], {
+      queryParams: { change: undefined },
+    });
+  });
+
+  it('should route to checkAnswers page when form is valid and route has change=true', () => {
+    TestBed.inject(ActivatedRoute).snapshot.queryParams = {
+      change: true,
+    };
+    component.ngOnInit();
+
+    const btn = fixture.debugElement.nativeElement.querySelector('button');
+    const spy = spyOn(router, 'navigate');
+    component.confirmVehicleDetails.setValue('yes');
+    fixture.detectChanges();
+
+    btn.click();
+
+    expect(component.isValid).toBe(true);
+    expect(spy).toHaveBeenCalledWith(['checkAnswers']);
   });
 });

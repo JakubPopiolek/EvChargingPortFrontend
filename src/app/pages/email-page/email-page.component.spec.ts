@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmailPageComponent } from './email-page.component';
 import { StoreModule } from '@ngrx/store';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 describe('EmailPageComponent', () => {
   let component: EmailPageComponent;
@@ -34,7 +34,7 @@ describe('EmailPageComponent', () => {
     const emailInput =
       fixture.debugElement.nativeElement.querySelector('.govuk-input');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message',
+      '.govuk-error-message'
     );
 
     btn.click();
@@ -52,7 +52,7 @@ describe('EmailPageComponent', () => {
     const emailInput =
       fixture.debugElement.nativeElement.querySelector('.govuk-input');
     const errorMessage = fixture.debugElement.nativeElement.querySelector(
-      '.govuk-error-message',
+      '.govuk-error-message'
     );
 
     btn.click();
@@ -74,5 +74,20 @@ describe('EmailPageComponent', () => {
 
     expect(component.email.valid).toBe(true);
     expect(spy).toHaveBeenCalledWith(['addressLookup']);
+  });
+
+  it('should route to checkAnswers page when form is valid and route has change=true', () => {
+    TestBed.inject(ActivatedRoute).snapshot.queryParams = {
+      change: true,
+    };
+    const btn = fixture.debugElement.nativeElement.querySelector('button');
+    const spy = spyOn(router, 'navigate');
+    component.email.setValue('test@email.com');
+    fixture.detectChanges();
+
+    btn.click();
+
+    expect(component.email.valid).toBe(true);
+    expect(spy).toHaveBeenCalledWith(['checkAnswers']);
   });
 });

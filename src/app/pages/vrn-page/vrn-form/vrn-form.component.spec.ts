@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VrnFormComponent } from './vrn-form.component';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MemoizedSelector } from '@ngrx/store';
 import { VehicleDetails } from '../../../core/interfaces/VehicleDetails.interface';
@@ -34,7 +34,7 @@ describe('VrnFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VrnFormComponent],
+      imports: [VrnFormComponent, RouterModule.forRoot([])],
       providers: [provideMockStore()],
     }).compileComponents();
 
@@ -90,7 +90,9 @@ describe('VrnFormComponent', () => {
     btn.click();
 
     expect(component.isValid).toBe(true);
-    expect(spy).toHaveBeenCalledWith(['confirmVehicleDetails']);
+    expect(spy).toHaveBeenCalledWith(['confirmVehicleDetails'], {
+      queryParams: { change: undefined },
+    });
   });
 
   it('should route to serviceUnavilable page when api call fails', () => {

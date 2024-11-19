@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CheckAnswersPageComponent } from './check-answers-page.component';
 import { MemoizedSelector, StoreModule } from '@ngrx/store';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -13,10 +12,11 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
 import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicleDetailsService.reducer';
 import { throwError } from 'rxjs';
-import { ApplicationSubmissionResponse } from '../../core/interfaces/Application.interface';
 import { ApiApplicationService } from '../../core/services/api/application-service';
 import { ApiApplicationServiceStubFactory } from '../../core/testing/mocks/api/submit-application-service-stub.factory';
-import { ApplicationDouble } from '../../core/testing/doubles/api/application.double';
+import { selectFileUploadState } from '../../core/state/store/reducers/api/fileUpload.reducer';
+import { FileUpload } from '../../core/interfaces/FileUpload.interface';
+import { ApiFileUploadStateDouble } from '../../core/testing/doubles/api/file-upload-state.double';
 
 describe('CheckAnswersPageComponent', () => {
   let component: CheckAnswersPageComponent;
@@ -30,10 +30,14 @@ describe('CheckAnswersPageComponent', () => {
     VehicleDetails,
     VehicleDetails | undefined
   >;
+  let mockFileUploadStateSelector: MemoizedSelector<
+    FileUpload,
+    FileUpload | undefined
+  >;
+  let mockFileUploadState: FileUpload;
   let mockVehicleDetails: VehicleDetails;
   let store: MockStore;
   let apiApplicationServiceMock: ApiApplicationService;
-  let submitApplicationResponseMock: ApplicationSubmissionResponse;
   let router: Router;
 
   beforeEach(async () => {
@@ -41,11 +45,10 @@ describe('CheckAnswersPageComponent', () => {
       ApiApplicationServiceStubFactory.prepareWithMethods([
         'submitApplication',
       ]);
+    mockFileUploadState = ApiFileUploadStateDouble.prepareFileUploadCompleted();
     mockPesonalDetails = PersonalDetailsDouble.preparePersonalDetails();
     mockVehicleDetails =
       ApiVehicleDetailsDouble.prepareSuccessfulResultElectric();
-    submitApplicationResponseMock =
-      ApplicationDouble.prepareApplicationSubmissionResponse();
     await TestBed.configureTestingModule({
       imports: [
         CheckAnswersPageComponent,
@@ -69,9 +72,15 @@ describe('CheckAnswersPageComponent', () => {
       selectPersonalDetailsState,
       mockPesonalDetails
     );
+
     mockVehicleDetailsSelector = store.overrideSelector(
       selectVehicleDetails,
       mockVehicleDetails
+    );
+
+    mockFileUploadStateSelector = store.overrideSelector(
+      selectFileUploadState,
+      mockFileUploadState
     );
 
     fixture = TestBed.createComponent(CheckAnswersPageComponent);
@@ -88,19 +97,31 @@ describe('CheckAnswersPageComponent', () => {
       By.css('.govuk-summary-list__value')
     );
 
+    var mockFileUploadInnerText: string = '';
+    mockFileUploadState.files.forEach((file, index, array) => {
+      mockFileUploadInnerText += file.name;
+      if (index < array.length - 1) {
+        mockFileUploadInnerText += '\n';
+      }
+    });
+
     expect(prefilledData[0].nativeElement.innerText).toBe(
       mockVehicleDetails.registrationNumber
     );
 
     expect(prefilledData[1].nativeElement.innerText).toBe(
-      `${mockPesonalDetails.firstName} ${mockPesonalDetails.lastName}`
+      mockFileUploadInnerText
     );
 
     expect(prefilledData[2].nativeElement.innerText).toBe(
+      `${mockPesonalDetails.firstName} ${mockPesonalDetails.lastName}`
+    );
+
+    expect(prefilledData[3].nativeElement.innerText).toBe(
       mockPesonalDetails.email
     );
 
-    expect(prefilledData[3].nativeElement.innerText).toContain(
+    expect(prefilledData[4].nativeElement.innerText).toContain(
       `${mockPesonalDetails.address?.line1}`
     );
   });
@@ -121,5 +142,71 @@ describe('CheckAnswersPageComponent', () => {
     btn.click();
     expect(storeSpy).not.toHaveBeenCalled();
     expect(routerSpy).toHaveBeenCalledWith(['serviceUnavailable']);
+  });
+
+  it('should route to [vrn] page when [change-vrn] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(By.css('#change-vrn')).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['vrn'], {
+      queryParams: { change: true },
+    });
+  });
+
+  it('should route to [adequateParking] page when [change-uploaded-files] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(
+      By.css('#change-uploaded-files')
+    ).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['adequateParking'], {
+      queryParams: { change: true },
+    });
+  });
+
+  it('should route to [name] page when [change-name] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(
+      By.css('#change-name')
+    ).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['name'], {
+      queryParams: { change: true },
+    });
+  });
+
+  it('should route to [email] page when [change-email-address] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(
+      By.css('#change-email-address')
+    ).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['email'], {
+      queryParams: { change: true },
+    });
+  });
+
+  it('should route to [addressLookup] page when [change-address] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(
+      By.css('#change-address')
+    ).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['addressLookup']);
   });
 });
