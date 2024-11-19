@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FuelType } from '../../core/enums/FuelType.enum';
@@ -19,8 +19,14 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
   public vehicleDetails?: VehicleDetails;
   public confirmVehicleDetails = new FormControl('yes', Validators.required);
   public isValid = true;
+  private isChangeAnswer: boolean =
+    this.activatedRoute.snapshot.queryParams['change'];
 
-  constructor(private readonly store: Store, private readonly router: Router) {}
+  constructor(
+    private readonly store: Store,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute
+  ) {}
 
   public ngOnInit(): void {
     this.store
@@ -55,14 +61,22 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
       fromVehicleEnquiryServiceActions.ConfirmVehicleDetails()
     );
     if (this.vehicleDetails?.fuelType == FuelType.ELECTRICITY) {
-      this.router.navigate(['adequateParking']);
+      if (this.isChangeAnswer) {
+        this.router.navigate(['checkAnswers']);
+      } else {
+        this.router.navigate(['adequateParking']);
+      }
     } else {
-      this.router.navigate(['notElectricVehicle']);
+      this.router.navigate(['notElectricVehicle'], {
+        queryParams: { change: this.isChangeAnswer },
+      });
     }
   }
 
   private handleNoPath() {
     this.store.dispatch(fromVehicleEnquiryServiceActions.ClearVehicleDetails());
-    this.router.navigate(['vrn']);
+    this.router.navigate(['vrn'], {
+      queryParams: { change: true },
+    });
   }
 }

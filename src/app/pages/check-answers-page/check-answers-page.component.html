@@ -15,7 +15,32 @@
             </p>
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" routerLink="/vrn"
+            <a
+              style="cursor: pointer"
+              (click)="changeAnswer($event)"
+              id="change-vrn"
+              class="govuk-link"
+              >Change<span class="govuk-visually-hidden">
+                vehicle registration number</span
+              ></a
+            >
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Uploaded Files</dt>
+          <dd class="govuk-summary-list__value">
+            <p class="govuk-body">
+              @for (file of uploadedFiles; track $index) {
+                <div>{{file.name}}</div>
+              }
+            </p>
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <a
+              style="cursor: pointer"
+              (click)="changeAnswer($event)"
+              id="change-uploaded-files"
+              class="govuk-link"
               >Change<span class="govuk-visually-hidden">
                 vehicle registration number</span
               ></a
@@ -29,7 +54,11 @@
             {{ this.personalDetails?.lastName }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" routerLink="/name"
+            <a
+              style="cursor: pointer"
+              (click)="changeAnswer($event)"
+              id="change-name"
+              class="govuk-link"
               >Change<span class="govuk-visually-hidden"> name</span></a
             >
           </dd>
@@ -40,7 +69,11 @@
             {{ this.personalDetails?.email }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" routerLink="/email"
+            <a
+              style="cursor: pointer"
+              (click)="changeAnswer($event)"
+              id="change-email-address"
+              class="govuk-link"
               >Change<span class="govuk-visually-hidden">
                 email address</span
               ></a
@@ -57,7 +90,11 @@
             {{ this.personalDetails?.address?.postcode }}
           </dd>
           <dd class="govuk-summary-list__actions">
-            <a class="govuk-link" href="/addressLookup"
+            <a
+              style="cursor: pointer"
+              (click)="changeAnswer($event)"
+              id="change-address"
+              class="govuk-link"
               >Change<span class="govuk-visually-hidden"> address</span></a
             >
           </dd>

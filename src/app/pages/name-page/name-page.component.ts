@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromPersonalDetailsActions from '../../core/state/store/actions/personalDetails.actions';
 import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
@@ -29,6 +29,7 @@ export class NamePageComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly store: Store,
+    private readonly activatedRoute: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
@@ -46,9 +47,15 @@ export class NamePageComponent implements OnInit {
         fromPersonalDetailsActions.saveName({
           firstName: this.nameForm.get('firstName')?.value!,
           lastName: this.nameForm.get('lastName')?.value!,
-        }),
+        })
       );
-      this.router.navigate(['email']);
+      const isChangeAnswer: boolean =
+        this.activatedRoute.snapshot.queryParams['change'];
+      if (isChangeAnswer) {
+        this.router.navigate(['checkAnswers']);
+      } else {
+        this.router.navigate(['email']);
+      }
     } else {
       this.firstNameValid = this.nameForm.get('firstName')?.valid;
       this.lastNameValid = this.nameForm.get('lastName')?.valid;

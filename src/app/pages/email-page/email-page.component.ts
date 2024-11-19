@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   selectEmail,
@@ -27,6 +27,7 @@ export class EmailPageComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly store: Store,
+    private readonly activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -42,10 +43,16 @@ export class EmailPageComponent implements OnInit {
       this.store.dispatch(
         fromPersonalDetailsActions.saveEmail({
           email: this.email.value,
-        }),
+        })
       );
-      this.router.navigate(['addressLookup']);
       this.isValid = true;
+      const isChangeAnswer: boolean =
+        this.activatedRoute.snapshot.queryParams['change'];
+      if (isChangeAnswer) {
+        this.router.navigate(['checkAnswers']);
+      } else {
+        this.router.navigate(['addressLookup']);
+      }
     } else if (this.email.value) {
       this.errorMessage = 'Enter a valid email address';
       this.isValid = false;

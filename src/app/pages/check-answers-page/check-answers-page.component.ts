@@ -5,10 +5,11 @@ import { selectVehicleDetails } from '../../core/state/store/reducers/api/vehicl
 import { VehicleDetails } from '../../core/interfaces/VehicleDetails.interface';
 import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
 import { PersonalDetails } from '../../core/interfaces/PersonalDetails.interface';
-import * as fromApplicationActions from '../../core/state/store/actions/application.actions';
 import { ApiApplicationService } from '../../core/services/api/application-service';
 import { Application } from '../../core/interfaces/Application.interface';
 import { selectId } from '../../core/state/store/reducers/application.reducer';
+import { FileMetaData } from '../../core/interfaces/FileUpload.interface';
+import { selectFileUploadState } from '../../core/state/store/reducers/api/fileUpload.reducer';
 
 @Component({
   selector: 'app-check-answers-page',
@@ -21,6 +22,7 @@ export class CheckAnswersPageComponent implements OnInit {
   public vehicleDetails?: VehicleDetails;
   public personalDetails?: PersonalDetails;
   private referenceNumber: string = '';
+  public uploadedFiles: FileMetaData[] = [];
 
   constructor(
     private readonly store: Store,
@@ -37,6 +39,9 @@ export class CheckAnswersPageComponent implements OnInit {
     });
     this.store.select(selectId).subscribe((refNumber) => {
       this.referenceNumber = refNumber;
+    });
+    this.store.select(selectFileUploadState).subscribe((state) => {
+      this.uploadedFiles = state.files;
     });
   }
 
@@ -57,5 +62,40 @@ export class CheckAnswersPageComponent implements OnInit {
       },
     });
     this.router.navigate(['submitted']);
+  }
+
+  public changeAnswer(event: Event): void {
+    const changeLink: string = (event.target as Element).id;
+
+    switch (changeLink) {
+      case 'change-vrn': {
+        this.router.navigate(['vrn'], {
+          queryParams: { change: true },
+        });
+        break;
+      }
+      case 'change-uploaded-files': {
+        this.router.navigate(['adequateParking'], {
+          queryParams: { change: true },
+        });
+        break;
+      }
+      case 'change-name': {
+        this.router.navigate(['name'], {
+          queryParams: { change: true },
+        });
+        break;
+      }
+      case 'change-email-address': {
+        this.router.navigate(['email'], {
+          queryParams: { change: true },
+        });
+        break;
+      }
+      case 'change-address': {
+        this.router.navigate(['addressLookup']);
+        break;
+      }
+    }
   }
 }
