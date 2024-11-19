@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { NamePageComponent } from './name-page.component';
 import { MemoizedSelector, StoreModule } from '@ngrx/store';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { PersonalDetails } from '../../core/interfaces/PersonalDetails.interface';
 import { selectPersonalDetailsState } from '../../core/state/store/reducers/personalDetails.reducer';
@@ -33,7 +32,7 @@ describe('NamePageComponent', () => {
     store = TestBed.inject(MockStore);
     mockPersonalDetailsSelector = store.overrideSelector(
       selectPersonalDetailsState,
-      initialState,
+      initialState
     );
 
     router = TestBed.inject(Router);
@@ -101,5 +100,21 @@ describe('NamePageComponent', () => {
 
     expect(firstNameInputBox.value).toBe(initialState.firstName);
     expect(lastNameInputBox.value).toBe(initialState.lastName);
+  });
+
+  it('should route to checkAnswers page when form is valid and route has change=true', () => {
+    TestBed.inject(ActivatedRoute).snapshot.queryParams = {
+      change: true,
+    };
+    const btn = fixture.debugElement.nativeElement.querySelector('button');
+    const spy = spyOn(router, 'navigate');
+    component.nameForm.get('firstName')?.setValue('testFirstName');
+    component.nameForm.get('lastName')?.setValue('testLastName');
+    fixture.detectChanges();
+
+    btn.click();
+
+    expect(component.nameForm.valid).toBe(true);
+    expect(spy).toHaveBeenCalledWith(['checkAnswers']);
   });
 });

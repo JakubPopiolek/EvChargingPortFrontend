@@ -143,4 +143,70 @@ describe('CheckAnswersPageComponent', () => {
     expect(storeSpy).not.toHaveBeenCalled();
     expect(routerSpy).toHaveBeenCalledWith(['serviceUnavailable']);
   });
+
+  it('should route to [vrn] page when [change-vrn] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(By.css('#change-vrn')).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['vrn'], {
+      queryParams: { change: true },
+    });
+  });
+
+  it('should route to [adequateParking] page when [change-uploaded-files] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(
+      By.css('#change-uploaded-files')
+    ).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['adequateParking'], {
+      queryParams: { change: true },
+    });
+  });
+
+  it('should route to [name] page when [change-name] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(
+      By.css('#change-name')
+    ).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['name'], {
+      queryParams: { change: true },
+    });
+  });
+
+  it('should route to [email] page when [change-email-address] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(
+      By.css('#change-email-address')
+    ).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['email'], {
+      queryParams: { change: true },
+    });
+  });
+
+  it('should route to [addressLookup] page when [change-address] link is clicked', () => {
+    const routerSpy = spyOn(router, 'navigate');
+
+    const btn = fixture.debugElement.query(
+      By.css('#change-address')
+    ).nativeElement;
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['addressLookup']);
+  });
 });

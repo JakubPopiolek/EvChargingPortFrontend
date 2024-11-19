@@ -56,7 +56,6 @@ export class CheckAnswersPageComponent implements OnInit {
     };
 
     this.apiApplicationService.submitApplication(submission).subscribe({
-      next: () => {},
       error: () => {
         this.router.navigate(['serviceUnavailable']);
       },

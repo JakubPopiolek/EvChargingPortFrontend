@@ -112,4 +112,21 @@ describe('ConfirmVehicleDetailsPageComponent', () => {
       queryParams: { change: undefined },
     });
   });
+
+  it('should route to checkAnswers page when form is valid and route has change=true', () => {
+    TestBed.inject(ActivatedRoute).snapshot.queryParams = {
+      change: true,
+    };
+    component.ngOnInit();
+
+    const btn = fixture.debugElement.nativeElement.querySelector('button');
+    const spy = spyOn(router, 'navigate');
+    component.confirmVehicleDetails.setValue('yes');
+    fixture.detectChanges();
+
+    btn.click();
+
+    expect(component.isValid).toBe(true);
+    expect(spy).toHaveBeenCalledWith(['checkAnswers']);
+  });
 });

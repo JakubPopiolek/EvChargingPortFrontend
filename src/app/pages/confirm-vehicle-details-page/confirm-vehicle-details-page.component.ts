@@ -19,8 +19,7 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
   public vehicleDetails?: VehicleDetails;
   public confirmVehicleDetails = new FormControl('yes', Validators.required);
   public isValid = true;
-  private isChangeAnswer: boolean =
-    this.activatedRoute.snapshot.queryParams['change'];
+  private isChangeAnswer: boolean = false;
 
   constructor(
     private readonly store: Store,
@@ -38,6 +37,8 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
         );
       })
       .unsubscribe();
+
+    this.isChangeAnswer = this.activatedRoute.snapshot.queryParams['change'];
   }
 
   public onClick(): void {

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AdequateParkingComponent } from './adequate-parking.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MemoizedSelector, StoreModule } from '@ngrx/store';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FileUpload } from '../../core/interfaces/FileUpload.interface';
 import { ApiFileUploadStateDouble } from '../../core/testing/doubles/api/file-upload-state.double';
 import {
@@ -171,5 +171,17 @@ describe('AdequateParkingComponent', () => {
 
     expect(component.uploadError).toBe(true);
     expect(component.uploadErrorMessage).toBe('test-error');
+  });
+
+  it('should route to checkAnswers page when form is valid and route has change=true', () => {
+    TestBed.inject(ActivatedRoute).snapshot.queryParams = {
+      change: true,
+    };
+    const routerSpy = spyOn(router, 'navigate');
+    const btn = fixture.debugElement.nativeElement.querySelector('button');
+
+    btn.click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['checkAnswers']);
   });
 });
