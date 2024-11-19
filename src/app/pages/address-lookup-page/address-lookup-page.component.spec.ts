@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddressLookupPageComponent } from './address-lookup-page.component';
 import { Router, RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-import { MemoizedSelector, Store, StoreModule } from '@ngrx/store';
+import { MemoizedSelector, StoreModule } from '@ngrx/store';
 import { ApiAddressLookupService } from '../../core/services/api/address-lookup-service';
 import { AddressResultDouble } from '../../core/testing/doubles/api/address-result.double';
 import { of } from 'rxjs';

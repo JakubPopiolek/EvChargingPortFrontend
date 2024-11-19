@@ -31,13 +31,15 @@ describe('NotElectricVehiclePageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should navigate to vrn when continue button is clicked', () => {
+  it('should navigate to vrn when continue button is clicked and change in route is undefined', () => {
     const btn = fixture.debugElement.nativeElement.querySelector('button');
     const spy = spyOn(router, 'navigate');
 
     btn.click();
 
-    expect(spy).toHaveBeenCalledWith(['vrn']);
+    expect(spy).toHaveBeenCalledWith(['vrn'], {
+      queryParams: { change: undefined },
+    });
   });
 
   it('should call [vehicleEnquiryServiceActions -> ClearVehicleDetails] when continue button is clicked', () => {

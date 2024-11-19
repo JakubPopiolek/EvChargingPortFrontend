@@ -76,7 +76,7 @@ export class ConfirmVehicleDetailsPageComponent implements OnInit {
   private handleNoPath() {
     this.store.dispatch(fromVehicleEnquiryServiceActions.ClearVehicleDetails());
     this.router.navigate(['vrn'], {
-      queryParams: { change: true },
+      queryParams: { change: this.isChangeAnswer },
     });
   }
 }
