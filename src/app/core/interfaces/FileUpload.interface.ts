@@ -7,13 +7,6 @@ export interface FileUpload {
   files: FileMetaData[];
 }
 
-export interface FileUploadResponse {
-  id: number | null;
-  name: string | null;
-  data: string | null;
-  applicationReferenceNumber: string | null;
-}
-
 export interface FileMetaData {
   id: number | null;
   name: string | null;

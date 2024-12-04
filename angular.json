@@ -78,8 +78,11 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "codeCoverageExclude": ["src/app/core/testing/**/*", "src/app/core/services/api/**/*"]
+            "codeCoverageExclude": ["src/app/core/testing/**/*"]
           }
+        },
+        "deploy": {
+          "builder": "@jefiozie/ngx-aws-deploy:deploy"
         }
       }
     }

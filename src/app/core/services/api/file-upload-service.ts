@@ -1,7 +1,7 @@
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FileUploadResponse } from '../../interfaces/FileUpload.interface';
+import { FileMetaData } from '../../interfaces/FileUpload.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +24,9 @@ export class ApiFileUploadService {
     return this.http.request(req);
   }
 
-  public getFiles(id: string): Observable<FileUploadResponse[]> {
+  public getFiles(id: string): Observable<FileMetaData[]> {
     const apiUrl: string = `/api/FileUpload/${id}`;
-    return this.http.get<FileUploadResponse[]>(apiUrl);
+    return this.http.get<FileMetaData[]>(apiUrl);
   }
 
   public deleteFile(id: number): Observable<any> {
